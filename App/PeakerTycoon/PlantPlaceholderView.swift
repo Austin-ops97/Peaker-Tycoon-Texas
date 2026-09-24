@@ -14,7 +14,7 @@ struct PlantPlaceholderView: View {
                         Text("Plant")
                             .font(.title3.weight(.semibold))
                             .foregroundStyle(ControlGlass.textPrimary(scheme))
-                        Text("Read-only unit status. You’ll see state, power output, and fuel flow when live data is connected.")
+                        Text("State, power output, and fuel flow stay blank until a reading is connected.")
                             .font(.body)
                             .foregroundStyle(ControlGlass.textPrimary(scheme))
                             .fixedSize(horizontal: false, vertical: true)

@@ -146,3 +146,7 @@ The Desk sample card still shows the settlement code and adds Houston, North, So
 ### Desk plan button opens the selected sample (not trading)
 
 Review today’s plan still uses that title. It opens a read-only sheet for the hub row currently on the strip: friendly name, settlement code, delivery date, hour ending, and the sample price. The sheet says “Retained sample — not live.” Done, the drag indicator, and a swipe dismiss it and return to Desk. Reduce Motion turns off the present animation. The six-row cycle is unchanged. Nothing on the sheet confirms, trades, or submits. `claims_complete_source_coverage` stays false.
+
+### Fuel, Plant, and Settle empty lines (not trading)
+
+Each tab keeps one thumb button and a shorter lead. Fuel: “Nomination isn’t open right now, so this screen only shows the day’s timeline.” The four gas-day markers and the closed verdict stay, and Confirm stays off. Plant: “State, power output, and fuel flow stay blank until a reading is connected.” Those three fields stay blank. Settle: “Statements show up here after the day settles.” The empty line is still “No statements yet.” and the sheet is still “How settlement works.” Settings → Your local time zone still opens the time zone picker.

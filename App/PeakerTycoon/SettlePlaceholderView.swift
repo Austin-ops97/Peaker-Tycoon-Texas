@@ -12,7 +12,7 @@ struct SettlePlaceholderView: View {
                     Text("Settlement")
                         .font(.title3.weight(.semibold))
                         .foregroundStyle(ControlGlass.textPrimary(scheme))
-                    Text("Statements and the audit trail land here after the day settles.")
+                    Text("Statements show up here after the day settles.")
                         .font(.body)
                         .foregroundStyle(ControlGlass.textPrimary(scheme))
                         .fixedSize(horizontal: false, vertical: true)

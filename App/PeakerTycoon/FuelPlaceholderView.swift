@@ -14,7 +14,7 @@ struct FuelPlaceholderView: View {
                             .font(.title3.weight(.semibold))
                             .foregroundStyle(ControlGlass.textPrimary(scheme))
                             .accessibilityLabel("Fuel tab. Nomination not open.")
-                        Text("Nomination isn’t open right now. You can still see the day’s timeline so clocks stay clear.")
+                        Text("Nomination isn’t open right now, so this screen only shows the day’s timeline.")
                             .font(.body)
                             .foregroundStyle(ControlGlass.textPrimary(scheme))
                             .fixedSize(horizontal: false, vertical: true)
