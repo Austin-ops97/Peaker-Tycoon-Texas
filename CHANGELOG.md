@@ -170,3 +170,7 @@ Settings home groups the existing rows under Local time, Tips, and Evidence. The
 ### Fuel closed timeline (not a nomination)
 
 Fuel says the tab is waiting and nomination isn’t open yet. The four gas-day markers and the button See gas day timeline stay. Confirm stays off. The old “Verdict unavailable” line is now “No result yet — nomination is still closed.”
+
+### Plant waiting for a reading (not dispatch)
+
+Plant says it is waiting for a connected reading, and that this is not a live dispatch. State, MW, and fuel flow stay blank. The button stays View unit status. The card still has no prices.

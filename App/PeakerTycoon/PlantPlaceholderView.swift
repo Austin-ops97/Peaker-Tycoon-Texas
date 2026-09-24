@@ -14,7 +14,8 @@ struct PlantPlaceholderView: View {
                         Text("Plant")
                             .font(.title3.weight(.semibold))
                             .foregroundStyle(ControlGlass.textPrimary(scheme))
-                        Text("State, power output, and fuel flow stay blank until a reading is connected.")
+                            .accessibilityLabel("Plant tab. Waiting for a connected reading. Not a live dispatch.")
+                        Text("This plant is waiting for a connected reading. State, power output, and fuel flow stay blank, and this is not a live dispatch.")
                             .font(.body)
                             .foregroundStyle(ControlGlass.textPrimary(scheme))
                             .fixedSize(horizontal: false, vertical: true)
@@ -43,7 +44,7 @@ struct PlantPlaceholderView: View {
             telemetryRow(title: "Fuel flow", value: "—")
             EvidenceTag(
                 label: .game,
-                provenance: "GAME placeholder. State, power output, and fuel flow are not connected. This card has no prices."
+                provenance: "GAME. Waiting for a connected reading. Not a live dispatch. This card has no prices."
             )
         }
         .padding(12)
@@ -64,7 +65,7 @@ struct PlantPlaceholderView: View {
             Text(value)
                 .font(.body.monospacedDigit())
                 .foregroundStyle(ControlGlass.textSecondary(scheme))
-                .accessibilityLabel("\(title) unavailable")
+                .accessibilityLabel("\(title), waiting for a connected reading.")
         }
     }
 
