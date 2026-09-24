@@ -150,3 +150,7 @@ Review today’s plan still uses that title. It opens a read-only sheet for the 
 ### Fuel, Plant, and Settle empty lines (not trading)
 
 Each tab keeps one thumb button and a shorter lead. Fuel: “Nomination isn’t open right now, so this screen only shows the day’s timeline.” The four gas-day markers and the closed verdict stay, and Confirm stays off. Plant: “State, power output, and fuel flow stay blank until a reading is connected.” Those three fields stay blank. Settle: “Statements show up here after the day settles.” The empty line is still “No statements yet.” and the sheet is still “How settlement works.” Settings → Your local time zone still opens the time zone picker.
+
+### First-launch coach (not trading)
+
+The three tips under the clock now teach the four tabs, the Desk sample arrows, and the read-only plan sheet. Got it advances. Not now dismisses the current tip and holds the rest of the session. Settings → Show navigation tips plays them again. The local-time tip still comes first. The card stays in the chrome band.

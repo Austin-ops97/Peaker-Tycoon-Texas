@@ -1,6 +1,7 @@
 import SwiftUI
 
 /// Three short tips in the chrome band under the clock. Not a cover over the tab scroll.
+/// Beat 1 names the four tabs. Beat 2 is the Desk sample cycle. Beat 3 is the read-only plan sheet.
 /// Dismissal keys are `coachBeat1Dismissed`, `coachBeat2Dismissed`, and `coachBeat3Dismissed`.
 struct NavigationCoachCard: View {
     let beat: Int
@@ -38,11 +39,11 @@ struct NavigationCoachCard: View {
     private var message: String {
         switch beat {
         case 1:
-            return "This is your desk. Start with today’s plan."
+            return "Four tabs sit along the bottom: Desk, Fuel, Plant, and Settle."
         case 2:
-            return "Fuel shows the gas-day clock. Confirm only when nomination is open."
+            return "On Desk, the arrows cycle retained hub samples. Those prices are not live."
         default:
-            return "After the day, statements show up here."
+            return "Review today’s plan opens that sample to read. Dismiss it and you are back on Desk."
         }
     }
 }
