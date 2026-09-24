@@ -91,6 +91,10 @@ Fourteen more price zips verified and landed in `Data/archives/ercot/2026-09-24/
 
 `RetainedSampleInventory` reads verified batch2–batch5 price zips and lists CSV delivery dates per NP4-190-CD and NP6-905-CD. The list is written to `Data/archives/ercot/2026-09-24/retained-sample-inventory.json` and `.md`. It does not fetch, does not publish, and does not fill proxy `covered_local_dates`. Live From/To stays empty for 2021-04-15, 2022-07-15, 2023-01-15, and 2023-04-15. NP4-180-ER and NP6-785-ER stay absent. `claims_complete_source_coverage` stays false.
 
+### Batch 6 retain (still not coverage complete)
+
+Twenty-five more price zips verified and landed in `Data/archives/ercot/2026-09-24/batch6/` (14 NP4 archive posts 2021-04-14 through 2024-01-14, and 11 NP6 intervals). `source_batch_count` moved from 63 to 88. No zip was excluded. Live From/To is empty for 2022-11-15 on both products. Archive delivery dates in this drop include 2021-04-15, 2022-07-15, 2023-01-15, and 2023-04-15. Each NP6 file is one interval. `claims_complete_source_coverage` stays false. The read path still opens batch2–batch5 only. ER products stay GATE.
+
 ### Settings sample stub (not coverage complete)
 
 Settings → Evidence shows a read-only row, Saved price samples, and a detail page with day-ahead and real-time file counts from the bundled inventory. The row says coverage is incomplete. Real-time dates are described as short samples. Empty live-fetch days and reports missing from the public catalog are one sentence each. There is no new thumb-zone button. `claims_complete_source_coverage` stays false.
