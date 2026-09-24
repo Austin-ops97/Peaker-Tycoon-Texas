@@ -7,12 +7,13 @@ private let retainedIngestedAt = "2026-09-24T00:00:00Z"
 @Test func retainedBatchesExposeOnlyVerifiedPriceZips() throws {
     let root = retainRoot()
     let zips = try RetainedSettlementArchive.priceZipURLs(in: root)
-    #expect(zips.count == 57)
+    #expect(zips.count == 82)
     #expect(zips.allSatisfy { $0.pathExtension == "zip" })
     #expect(zips.filter { $0.path.contains("/batch2/") }.count == 6)
     #expect(zips.filter { $0.path.contains("/batch3/") }.count == 13)
     #expect(zips.filter { $0.path.contains("/batch4/") }.count == 24)
     #expect(zips.filter { $0.path.contains("/batch5/") }.count == 14)
+    #expect(zips.filter { $0.path.contains("/batch6/") }.count == 25)
     #expect(zips.allSatisfy {
         RetainedSettlementArchive.product(forZipFileName: $0.lastPathComponent) != nil
     })
@@ -74,6 +75,23 @@ private let retainedIngestedAt = "2026-09-24T00:00:00Z"
     #expect(houston.sourcePublishedAt == nil)
     #expect(houston.qualityFlags.isEmpty)
     #expect(read.verifiedSHA256 == "6616c68bd41419e804a2ce65608d8d3d34cdd5a1198d62f82415f6c3e783a137")
+}
+
+@Test func retainedBatch6NP4ZipParsesHoustonHubAfterSidecarCheck() throws {
+    let url = retainRoot().appendingPathComponent(
+        "batch6/np4-190-cd__inst1_20210414_768484164_DAMSPNP4190_csv.zip"
+    )
+    let read = try RetainedSettlementArchive.readZip(at: url, ingestedAt: retainedIngestedAt)
+    #expect(read.product == .dayAheadNP4190CD)
+    #expect(read.result.errors.isEmpty)
+    let houston = try #require(read.result.observations.first {
+        $0.sourcePointId == "HB_HOUSTON" && $0.hourEndingRaw == "01:00"
+    })
+    #expect(houston.pointType == "hub_spp")
+    #expect(houston.valueDecimal == "20.35")
+    #expect(houston.sourceLocalDate == "2021-04-15")
+    #expect(houston.sourcePublishedAt == nil)
+    #expect(read.verifiedSHA256 == "7c3ef076e8f01ad619359691f80b3e407f74fd02e55995a99b274ccdd5375d7f")
 }
 
 @Test func januaryFifteenthStaysAnEmptyGateOnTheReadPath() throws {

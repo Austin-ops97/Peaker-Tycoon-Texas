@@ -93,7 +93,11 @@ Fourteen more price zips verified and landed in `Data/archives/ercot/2026-09-24/
 
 ### Batch 6 retain (still not coverage complete)
 
-Twenty-five more price zips verified and landed in `Data/archives/ercot/2026-09-24/batch6/` (14 NP4 archive posts 2021-04-14 through 2024-01-14, and 11 NP6 intervals). `source_batch_count` moved from 63 to 88. No zip was excluded. Live From/To is empty for 2022-11-15 on both products. Archive delivery dates in this drop include 2021-04-15, 2022-07-15, 2023-01-15, and 2023-04-15. Each NP6 file is one interval. `claims_complete_source_coverage` stays false. The read path still opens batch2–batch5 only. ER products stay GATE.
+Twenty-five more price zips verified and landed in `Data/archives/ercot/2026-09-24/batch6/` (14 NP4 archive posts 2021-04-14 through 2024-01-14, and 11 NP6 intervals). `source_batch_count` moved from 63 to 88. No zip was excluded. Live From/To is empty for 2022-11-15 on both products. Archive delivery dates in this drop include 2021-04-15, 2022-07-15, 2023-01-15, and 2023-04-15. Each NP6 file is one interval. `claims_complete_source_coverage` stays false. ER products stay GATE.
+
+### Batch 6 on the retained read path (not coverage complete)
+
+`RetainedSettlementArchive` now opens verified price zips in `batch6` as well as `batch2` through `batch5`. The path still checks the `.sha256` sidecar, inflates the CSV member, and parses it. It does not fetch and does not publish. The batch 6 NP4 zip posted 2021-04-14 has DeliveryDate 04/15/2021. `claims_complete_source_coverage` stays false.
 
 ### Settings sample stub (not coverage complete)
 

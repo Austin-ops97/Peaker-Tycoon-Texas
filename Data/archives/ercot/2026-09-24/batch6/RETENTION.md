@@ -71,4 +71,4 @@ Live `deliveryDateFrom` / `deliveryDateTo` pages. Only pages 1–3 were kept whe
 
 ## Not claimed
 
-No zip was excluded. Five-year coverage is not complete. Proxy `covered_local_dates` stay empty. `source_point_id` stays null. Settlement point names inside the CSVs were not mapped to fictional sites. NP4-180-ER and NP6-785-ER stay absent. No Public API path is invented for them. `RetainedSettlementArchive` still opens batch2 through batch5 only. This folder is retained bytes, not yet on that read path.
+No zip was excluded. Five-year coverage is not complete. Proxy `covered_local_dates` stay empty. `source_point_id` stays null. Settlement point names inside the CSVs were not mapped to fictional sites. NP4-180-ER and NP6-785-ER stay absent. No Public API path is invented for them. `RetainedSettlementArchive` opens these zips the same way as batch2 through batch5: sidecar check, then inflate, then parse. That read does not fill proxy coverage.
