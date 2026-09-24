@@ -122,6 +122,55 @@ private let retainedIngestedAt = "2026-09-24T00:00:00Z"
     #expect(er.allSatisfy { $0.pinnedApiPath == nil && $0.status == "absent_from_public_reports_catalog" })
 }
 
+@Test func retainedSampleInventoryListsDeliveryDatesWithoutClaimingCoverage() throws {
+    let inventory = try RetainedSampleInventory.scan(retainRoot: retainRoot(), ingestedAt: retainedIngestedAt)
+    #expect(inventory.claimsCompleteSourceCoverage == false)
+    #expect(inventory.retainFolders == ["batch2", "batch3", "batch4", "batch5"])
+    #expect(inventory.campaignEraStart == "2021-02-01")
+    #expect(inventory.campaignEraEnd == "2025-12-31")
+    #expect(inventory.products.map(\.sourceProductId) == ["NP4-190-CD", "NP6-905-CD"])
+    let np4 = try #require(inventory.products.first { $0.sourceProductId == "NP4-190-CD" })
+    let np6 = try #require(inventory.products.first { $0.sourceProductId == "NP6-905-CD" })
+    #expect(np4.zipCount == 28)
+    #expect(np6.zipCount == 29)
+    #expect(np4.deliveryDates.allSatisfy { $0.insideCampaignEra })
+    #expect(np6.deliveryDates.allSatisfy { $0.insideCampaignEra })
+    let february = try #require(np4.deliveryDates.first { $0.sourceLocalDate == "2021-02-15" })
+    #expect(february.hourEndings.contains("01:00"))
+    #expect(february.zipFileNames.contains {
+        $0.hasSuffix("np4-190-cd__inst1_20210214_758641836_DAMSPNP4190_csv.zip")
+    })
+    let aprilInterval = try #require(np6.deliveryDates.first { $0.sourceLocalDate == "2021-04-15" })
+    #expect(aprilInterval.hourEndings == ["12:3"])
+    #expect(np4.deliveryDates.contains { $0.sourceLocalDate == "2021-04-15" } == false)
+    for day in ["2022-07-15", "2023-01-15", "2023-04-15"] {
+        #expect(np4.deliveryDates.contains { $0.sourceLocalDate == day } == false)
+        #expect(np6.deliveryDates.contains { $0.sourceLocalDate == day } == false)
+    }
+    #expect(inventory.emptyLiveFromToGates.map(\.sourceLocalDate) == RetainedSampleInventory.emptyLiveFromToLocalDates)
+    #expect(inventory.absentProducts.map(\.productId) == ["NP4-180-ER", "NP6-785-ER"])
+    #expect(inventory.absentProducts.allSatisfy { $0.status == "absent_from_public_reports_catalog" })
+    let text = inventory.markdown()
+    #expect(text.contains("not complete coverage"))
+    #expect(text.contains("covered_local_dates` are not filled"))
+    let repo = repoRootForRetain()
+    let jsonURL = repo.appendingPathComponent(RetainedSampleInventory.jsonRelativePath)
+    let markdownURL = repo.appendingPathComponent(RetainedSampleInventory.markdownRelativePath)
+    let json = try inventory.jsonUTF8()
+    if ProcessInfo.processInfo.environment["PEAKER_REFRESH_RETAINED_INVENTORY"] == "1" {
+        try json.write(to: jsonURL)
+        try Data(text.utf8).write(to: markdownURL)
+    }
+    #expect(try Data(contentsOf: jsonURL) == json)
+    #expect(try String(contentsOf: markdownURL, encoding: .utf8) == text)
+    let manifest = try CoverageManifest.load(
+        from: repo.appendingPathComponent(CoverageManifest.publishedRelativePath)
+    )
+    #expect(manifest.claimsCompleteSourceCoverage == false)
+    #expect(manifest.sourceBatchCount == 63)
+    #expect(manifest.selectedProxyPoints.allSatisfy { $0.sourcePointId == nil && $0.coveredLocalDates.isEmpty })
+}
+
 private func retainRoot() -> URL {
     repoRootForRetain().appendingPathComponent("Data/archives/ercot/2026-09-24")
 }

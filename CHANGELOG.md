@@ -86,3 +86,7 @@ Fourteen more price zips verified and landed in `Data/archives/ercot/2026-09-24/
 ### Batch 5 on the retained read path (not coverage complete)
 
 `RetainedSettlementArchive` now opens verified price zips in `batch5` as well as `batch2`, `batch3`, and `batch4`. The path still checks the `.sha256` sidecar, inflates the CSV member, and parses it. It does not fetch and does not publish. The batch 5 NP4 zip posted 2021-02-14 covers DeliveryDate 02/15/2021, not a live From/To fill of an empty day. `claims_complete_source_coverage` stays false.
+
+### Retained sample inventory (not coverage complete)
+
+`RetainedSampleInventory` reads verified batch2–batch5 price zips and lists CSV delivery dates per NP4-190-CD and NP6-905-CD. The list is written to `Data/archives/ercot/2026-09-24/retained-sample-inventory.json` and `.md`. It does not fetch, does not publish, and does not fill proxy `covered_local_dates`. Live From/To stays empty for 2021-04-15, 2022-07-15, 2023-01-15, and 2023-04-15. NP4-180-ER and NP6-785-ER stay absent. `claims_complete_source_coverage` stays false.
