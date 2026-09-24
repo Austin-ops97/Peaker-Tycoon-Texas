@@ -103,13 +103,14 @@ struct DeskPlaceholderView: View {
             Text("Sample prices from retained SOURCE archives")
                 .font(.caption.weight(.semibold))
                 .foregroundStyle(ControlGlass.textTertiary(scheme))
-            Text("Nothing to submit. This is one retained archive row, not a live price and not the whole day. Coverage is incomplete.")
-                .font(.caption)
-                .foregroundStyle(ControlGlass.textTertiary(scheme))
             MarketSampleCard(row: row, position: "\(index + 1) of \(samples.count)")
             if samples.count > 1 {
                 sampleCycle(index: index)
             }
+            Text("These are retained historical samples, not a live market.")
+                .font(.caption)
+                .foregroundStyle(ControlGlass.textTertiary(scheme))
+                .fixedSize(horizontal: false, vertical: true)
         }
     }
 
@@ -181,7 +182,7 @@ private struct MarketSampleCard: View {
         .background(ControlGlass.surfaceRecessed(scheme))
         .clipShape(RoundedRectangle(cornerRadius: 8))
         .accessibilityElement(children: .combine)
-        .accessibilityLabel("\(accessibleName), \(deliveryStamp), \(row.valueDecimal) \(row.unit). Sample \(position). Retained source sample. Coverage is incomplete.")
+        .accessibilityLabel("\(accessibleName), \(deliveryStamp), \(row.valueDecimal) \(row.unit). Sample \(position). Retained historical sample, not a live market.")
     }
 
     private var deliveryStamp: String {
@@ -190,7 +191,7 @@ private struct MarketSampleCard: View {
     }
 
     private var provenance: String {
-        "SOURCE row from a retained day-ahead archive sample. \(accessibleName), delivery \(row.sourceLocalDate), hour ending \(row.hourEndingRaw ?? ""), \(row.valueDecimal) \(row.unit). Not a live fetch, not a proxy site mapping, and not a complete day. Coverage is incomplete."
+        "SOURCE row from a retained day-ahead archive sample. \(accessibleName), delivery \(row.sourceLocalDate), hour ending \(row.hourEndingRaw ?? ""), \(row.valueDecimal) \(row.unit). Retained historical sample, not a live market, and not a proxy site mapping. Not the whole day."
     }
 
     private var accessibleName: String {
@@ -260,7 +261,7 @@ private struct RetainedSampleSheet: View {
             Text("Retained sample — not live.")
                 .font(.body)
                 .foregroundStyle(ControlGlass.textPrimary(scheme))
-            Text("Not the whole day. Coverage is incomplete.")
+            Text("Not the whole day.")
                 .font(.caption)
                 .foregroundStyle(ControlGlass.textTertiary(scheme))
         }

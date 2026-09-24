@@ -158,3 +158,7 @@ The three tips under the clock now teach the four tabs, the Desk sample arrows, 
 ### Evidence copy for a new player (not a coverage claim)
 
 Settings → Evidence now says saved samples are a partial history and the campaign is not fully filled. The row still shows the delivery-date span, and it adds that some settlement reports are not available yet. The detail page still lists the day-ahead and real-time file counts. A real-time date is still a short sample, not a full day. `claims_complete_source_coverage` stays false.
+
+### Desk sample caption (not a live market)
+
+Under the Desk hub arrows, a muted line says “These are retained historical samples, not a live market.” It stays in the scroll content while the hubs cycle. The thumb button is unchanged. `claims_complete_source_coverage` stays false.
