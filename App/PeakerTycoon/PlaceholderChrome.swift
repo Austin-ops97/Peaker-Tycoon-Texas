@@ -14,6 +14,7 @@ struct InterruptCard: Identifiable, Equatable {
 struct PlaceholderChrome: Equatable {
     var speed: PresentationSpeed = .pause
     var clock: GameInstant = GameDefaults.placeholderMorningBrief
-    var localTwinNote: String = "Local twin unset. Labels stay on Central time until a player timezone is chosen."
+    /// One-line clock chip. The explanation lives in Settings, not under the clock.
+    var localTwinChip: String = "Local twin"
     var interrupts: [InterruptCard] = []
 }

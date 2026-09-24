@@ -30,8 +30,9 @@ struct RootShellView: View {
             .safeAreaInset(edge: .top, spacing: 0) {
                 GameClockBar(
                     clock: chrome.clock,
-                    localTwinNote: chrome.localTwinNote,
-                    speed: $chrome.speed
+                    localTwinChip: chrome.localTwinChip,
+                    speed: $chrome.speed,
+                    onOpenPlayerTimezone: { showSettings = true }
                 )
             }
             .sheet(isPresented: $showSettings) {

@@ -43,6 +43,10 @@ Control Glass v1 is committed at `Design/Peaker-Tycoon-Texas/02-phase1-shell-pol
 
 Six verified price-instance zips, two artifact schemas, and two archive listings are under `Data/archives/ercot/2026-09-24/`, with sha256 sidecars and `RETENTION.md`. That commit set `source_batch_count` to 6. NP4-190-CD and NP6-905-CD status is `partial_batches_retained`. `claims_complete_source_coverage` stays false. The three RT zips are 2026-09-24 posts and are pipeline proof, not campaign days. ER products stay GATE.
 
+### Clock bar no longer covers the desk
+
+The long “local twin unset” caption is gone from `GameClockBar`. The bar is the Central clock, a one-line Local twin chip that opens Settings, the speed chip, and the evidence tag. The explanation is a Settings section. No timezone list is stored.
+
 ### Batch 2 retain (still not coverage complete)
 
 Six more NP6 price zips verified and landed in `Data/archives/ercot/2026-09-24/batch2/`. `source_batch_count` moved from 6 to 12. Working artifact query is `deliveryDateFrom` and `deliveryDateTo` (`page` for later pages). Bare `deliveryDate` returned 400. 2021-02-15 is empty on both artifact endpoints. NP6 archive page 26 is the first probed page at or before 2025-12-31; page 197 is still in February 2021. The new zips’ delivery stamps are 2025-12-15, 2025-12-31 (three intervals), 2025-02-16, and 2021-02-09. They are samples, not proxy coverage. Point IDs stay null. ER products stay GATE.
