@@ -15,27 +15,26 @@ struct RootShellView: View {
     @AppStorage("coachBeat3Dismissed") private var coachBeat3Dismissed = false
     @State private var coachHeld = false
     @Environment(\.colorScheme) private var scheme
+    @Environment(\.dynamicTypeSize) private var dynamicTypeSize
 
     var body: some View {
         NavigationStack {
-            VStack(spacing: 0) {
-                GameClockBar(
-                    clock: chrome.clock,
-                    zoneIdentifier: zoneIdentifier,
-                    speed: $chrome.speed
-                )
-                if showCoach, let beat = nextCoachBeat {
-                    NavigationCoachCard(
-                        beat: beat,
-                        onGotIt: { dismissCoach(beat: beat, advance: true) },
-                        onNotNow: { dismissCoach(beat: beat, advance: false) }
-                    )
-                }
-                TabView(selection: $tab) {
-                    tabPage(DeskPlaceholderView(daLocalClock: daLocalClock), tab: .desk)
-                    tabPage(FuelPlaceholderView(), tab: .fuel)
-                    tabPage(PlantPlaceholderView(), tab: .plant)
-                    tabPage(SettlePlaceholderView(), tab: .settle)
+            Group {
+                if dynamicTypeSize.isAccessibilitySize {
+                    GeometryReader { proxy in
+                        VStack(spacing: 0) {
+                            ScrollView {
+                                chromeStack
+                            }
+                            .frame(maxHeight: proxy.size.height * 0.45)
+                            tabPages
+                        }
+                    }
+                } else {
+                    VStack(spacing: 0) {
+                        chromeStack
+                        tabPages
+                    }
                 }
             }
             .background(ControlGlass.surfaceBase(scheme).ignoresSafeArea())
@@ -128,6 +127,32 @@ struct RootShellView: View {
         coachBeat3Dismissed = false
         coachHeld = false
         showSettings = false
+    }
+
+    private var chromeStack: some View {
+        VStack(spacing: 0) {
+            GameClockBar(
+                clock: chrome.clock,
+                zoneIdentifier: zoneIdentifier,
+                speed: $chrome.speed
+            )
+            if showCoach, let beat = nextCoachBeat {
+                NavigationCoachCard(
+                    beat: beat,
+                    onGotIt: { dismissCoach(beat: beat, advance: true) },
+                    onNotNow: { dismissCoach(beat: beat, advance: false) }
+                )
+            }
+        }
+    }
+
+    private var tabPages: some View {
+        TabView(selection: $tab) {
+            tabPage(DeskPlaceholderView(daLocalClock: daLocalClock), tab: .desk)
+            tabPage(FuelPlaceholderView(), tab: .fuel)
+            tabPage(PlantPlaceholderView(), tab: .plant)
+            tabPage(SettlePlaceholderView(), tab: .settle)
+        }
     }
 
     @ViewBuilder

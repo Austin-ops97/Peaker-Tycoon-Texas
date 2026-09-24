@@ -46,7 +46,8 @@ private struct SettlementExplainerSheet: View {
 
     var body: some View {
         NavigationStack {
-            VStack(alignment: .leading, spacing: 12) {
+            ScrollView {
+                VStack(alignment: .leading, spacing: 12) {
                 Text("Settlement is the money in and the money out for the day. This isn’t a live settle.")
                     .font(.body)
                     .foregroundStyle(ControlGlass.textPrimary(scheme))
@@ -55,10 +56,10 @@ private struct SettlementExplainerSheet: View {
                     .font(.body)
                     .foregroundStyle(ControlGlass.textSecondary(scheme))
                     .fixedSize(horizontal: false, vertical: true)
-                Spacer()
+                }
+                .padding(16)
+                .frame(maxWidth: .infinity, alignment: .leading)
             }
-            .padding(16)
-            .frame(maxWidth: .infinity, alignment: .leading)
             .background(ControlGlass.surfaceBase(scheme).ignoresSafeArea())
             .navigationTitle("How settlement works")
             .navigationBarTitleDisplayMode(.inline)

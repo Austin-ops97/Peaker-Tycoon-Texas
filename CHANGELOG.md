@@ -182,3 +182,7 @@ Settle says the tab is waiting, statements aren’t ready yet, and this isn’t 
 ### VoiceOver hints on the shell (not a copy change)
 
 Tab names stay Desk, Fuel, Plant, and Settle, with a short hint after each name. The hub arrows, the sample caption, the four thumb buttons, the Fuel, Plant, and Settle leads, the Settings tip rows, and the coach buttons Got it and Not now now have hints. Visible sentences are unchanged. Got it and Not now are separate VoiceOver controls.
+
+### Larger text reflow (not a copy change)
+
+At accessibility text sizes the clock and coach scroll in a band above the tabs, so they do not cover Desk or the thumb button. The clock and speed chip stack, thumb-button titles wrap, hub dots can drop under the arrows, and the plan and settlement sheets scroll. Default text size keeps the clock on one row beside the speed chip. Visible sentences are unchanged.

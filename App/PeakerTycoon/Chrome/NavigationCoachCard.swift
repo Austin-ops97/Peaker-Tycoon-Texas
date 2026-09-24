@@ -16,14 +16,15 @@ struct NavigationCoachCard: View {
                 .foregroundStyle(ControlGlass.textPrimary(scheme))
                 .fixedSize(horizontal: false, vertical: true)
                 .accessibilityLabel("Navigation tip. \(message)")
-            HStack(spacing: 16) {
-                Button("Got it", action: onGotIt)
-                    .font(.subheadline.weight(.semibold))
-                    .accessibilityHint("Dismisses this tip and shows the next one.")
-                Button("Not now", action: onNotNow)
-                    .font(.subheadline)
-                    .foregroundStyle(ControlGlass.textSecondary(scheme))
-                    .accessibilityHint("Dismisses this tip and hides the rest of this session.")
+            ViewThatFits(in: .horizontal) {
+                HStack(spacing: 16) {
+                    gotItButton
+                    notNowButton
+                }
+                VStack(alignment: .leading, spacing: 8) {
+                    gotItButton
+                    notNowButton
+                }
             }
         }
         .padding(.horizontal, 16)
@@ -35,6 +36,19 @@ struct NavigationCoachCard: View {
                 .fill(ControlGlass.hairline(scheme))
                 .frame(height: 1)
         }
+    }
+
+    private var gotItButton: some View {
+        Button("Got it", action: onGotIt)
+            .font(.subheadline.weight(.semibold))
+            .accessibilityHint("Dismisses this tip and shows the next one.")
+    }
+
+    private var notNowButton: some View {
+        Button("Not now", action: onNotNow)
+            .font(.subheadline)
+            .foregroundStyle(ControlGlass.textSecondary(scheme))
+            .accessibilityHint("Dismisses this tip and hides the rest of this session.")
     }
 
     private var message: String {

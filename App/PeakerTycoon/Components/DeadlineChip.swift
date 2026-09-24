@@ -16,6 +16,7 @@ struct DeadlineChip: View {
                 .font(.subheadline.weight(.semibold))
             Text(timeLine)
                 .font(.body)
+                .fixedSize(horizontal: false, vertical: true)
                 .accessibilityLabel("\(title). \(timeLine).")
             EvidenceTag(label: evidence, provenance: provenance)
         }

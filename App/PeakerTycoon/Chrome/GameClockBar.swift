@@ -8,27 +8,21 @@ struct GameClockBar: View {
     @Binding var speed: PresentationSpeed
     @Environment(\.colorScheme) private var scheme
     @Environment(\.accessibilityReduceTransparency) private var reduceTransparency
+    @Environment(\.dynamicTypeSize) private var dynamicTypeSize
 
     var body: some View {
         VStack(alignment: .leading, spacing: 4) {
-            HStack(alignment: .center, spacing: 8) {
-                VStack(alignment: .leading, spacing: 2) {
-                    Text(clock.centralLabel)
-                        .font(.system(.headline, design: .monospaced))
-                        .foregroundStyle(ControlGlass.textPrimary(scheme))
-                        .lineLimit(1)
-                        .minimumScaleFactor(0.75)
-                    if let caption = LocalTwinClock.localCaption(for: clock, identifier: zoneIdentifier) {
-                        Text(caption)
-                            .font(.caption)
-                            .foregroundStyle(ControlGlass.textSecondary(scheme))
-                            .lineLimit(1)
-                    }
+            if dynamicTypeSize.isAccessibilitySize {
+                VStack(alignment: .leading, spacing: 8) {
+                    clockReadout
+                    SpeedChip(speed: $speed)
                 }
-                .accessibilityElement(children: .ignore)
-                .accessibilityLabel(LocalTwinClock.accessibility(for: clock, identifier: zoneIdentifier))
-                Spacer(minLength: 8)
-                SpeedChip(speed: $speed)
+            } else {
+                HStack(alignment: .center, spacing: 8) {
+                    clockReadout
+                    Spacer(minLength: 8)
+                    SpeedChip(speed: $speed)
+                }
             }
             EvidenceTag(
                 label: .game,
@@ -45,5 +39,25 @@ struct GameClockBar: View {
                 .fill(ControlGlass.hairline(scheme))
                 .frame(height: 1)
         }
+    }
+
+    private var clockReadout: some View {
+        VStack(alignment: .leading, spacing: 2) {
+            Text(clock.centralLabel)
+                .font(.system(.headline, design: .monospaced))
+                .foregroundStyle(ControlGlass.textPrimary(scheme))
+                .lineLimit(dynamicTypeSize.isAccessibilitySize ? nil : 1)
+                .minimumScaleFactor(dynamicTypeSize.isAccessibilitySize ? 1 : 0.75)
+                .fixedSize(horizontal: false, vertical: true)
+            if let caption = LocalTwinClock.localCaption(for: clock, identifier: zoneIdentifier) {
+                Text(caption)
+                    .font(.caption)
+                    .foregroundStyle(ControlGlass.textSecondary(scheme))
+                    .lineLimit(dynamicTypeSize.isAccessibilitySize ? nil : 1)
+                    .fixedSize(horizontal: false, vertical: true)
+            }
+        }
+        .accessibilityElement(children: .ignore)
+        .accessibilityLabel(LocalTwinClock.accessibility(for: clock, identifier: zoneIdentifier))
     }
 }

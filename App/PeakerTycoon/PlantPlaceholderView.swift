@@ -61,11 +61,12 @@ struct PlantPlaceholderView: View {
     }
 
     private func telemetryRow(title: String, value: String) -> some View {
-        HStack {
+        HStack(alignment: .firstTextBaseline, spacing: 8) {
             Text(title)
                 .font(.headline)
                 .foregroundStyle(ControlGlass.textPrimary(scheme))
-            Spacer()
+                .fixedSize(horizontal: false, vertical: true)
+            Spacer(minLength: 8)
             Text(value)
                 .font(.body.monospacedDigit())
                 .foregroundStyle(ControlGlass.textSecondary(scheme))

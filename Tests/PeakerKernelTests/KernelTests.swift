@@ -300,6 +300,8 @@ import Testing
     #expect(shell.contains("coachBeat3Dismissed"))
     #expect(shell.contains("coachHeld"))
     #expect(shell.contains("local-time tip"))
+    #expect(shell.contains("dynamicTypeSize.isAccessibilitySize"))
+    #expect(shell.contains("proxy.size.height * 0.45"))
     let picker = try String(contentsOf: root.appendingPathComponent("App/PeakerTycoon/TimeZonePickerView.swift"), encoding: .utf8)
     #expect(picker.contains("Use my phone’s time zone"))
     let rootTab = try String(contentsOf: root.appendingPathComponent("App/PeakerTycoon/RootTab.swift"), encoding: .utf8)

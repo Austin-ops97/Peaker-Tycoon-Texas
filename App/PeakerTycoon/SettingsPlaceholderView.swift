@@ -22,9 +22,11 @@ struct SettingsPlaceholderView: View {
                         VStack(alignment: .leading, spacing: 2) {
                             Text("Your local time zone")
                                 .foregroundStyle(ControlGlass.textPrimary(scheme))
+                                .fixedSize(horizontal: false, vertical: true)
                             Text(valueText)
                                 .font(.subheadline)
                                 .foregroundStyle(ControlGlass.textSecondary(scheme))
+                                .fixedSize(horizontal: false, vertical: true)
                         }
                     }
                     .accessibilityElement(children: .combine)

@@ -116,6 +116,16 @@ struct DeskPlaceholderView: View {
     }
 
     private func sampleCycle(index: Int) -> some View {
+        ViewThatFits(in: .horizontal) {
+            cycleRow(index: index, dotsBesideArrows: true)
+            VStack(alignment: .leading, spacing: 4) {
+                cycleRow(index: index, dotsBesideArrows: false)
+                sampleDots(index: index)
+            }
+        }
+    }
+
+    private func cycleRow(index: Int, dotsBesideArrows: Bool) -> some View {
         HStack(spacing: 8) {
             cycleButton(
                 systemName: "chevron.left",
@@ -125,15 +135,10 @@ struct DeskPlaceholderView: View {
                 moveSample(by: -1)
             }
             Spacer(minLength: 0)
-            HStack(spacing: 6) {
-                ForEach(samples.indices, id: \.self) { dot in
-                    Circle()
-                        .fill(dot == index ? ControlGlass.accentTeal : ControlGlass.textTertiary(scheme))
-                        .frame(width: 6, height: 6)
-                }
+            if dotsBesideArrows {
+                sampleDots(index: index)
+                Spacer(minLength: 0)
             }
-            .accessibilityHidden(true)
-            Spacer(minLength: 0)
             cycleButton(
                 systemName: "chevron.right",
                 label: "Next sample",
@@ -142,6 +147,17 @@ struct DeskPlaceholderView: View {
                 moveSample(by: 1)
             }
         }
+    }
+
+    private func sampleDots(index: Int) -> some View {
+        HStack(spacing: 6) {
+            ForEach(samples.indices, id: \.self) { dot in
+                Circle()
+                    .fill(dot == index ? ControlGlass.accentTeal : ControlGlass.textTertiary(scheme))
+                    .frame(width: 6, height: 6)
+            }
+        }
+        .accessibilityHidden(true)
     }
 
     private func cycleButton(systemName: String, label: String, hint: String, action: @escaping () -> Void) -> some View {
@@ -220,21 +236,22 @@ private struct RetainedSampleSheet: View {
 
     var body: some View {
         NavigationStack {
-            VStack(alignment: .leading, spacing: 12) {
-                if let row {
-                    sampleBody(row)
-                } else {
-                    Text("No retained sample is loaded.")
-                        .font(.body)
-                        .foregroundStyle(ControlGlass.textPrimary(scheme))
-                    Text("Retained sample — not live.")
-                        .font(.body)
-                        .foregroundStyle(ControlGlass.textSecondary(scheme))
+            ScrollView {
+                VStack(alignment: .leading, spacing: 12) {
+                    if let row {
+                        sampleBody(row)
+                    } else {
+                        Text("No retained sample is loaded.")
+                            .font(.body)
+                            .foregroundStyle(ControlGlass.textPrimary(scheme))
+                        Text("Retained sample — not live.")
+                            .font(.body)
+                            .foregroundStyle(ControlGlass.textSecondary(scheme))
+                    }
                 }
-                Spacer()
+                .padding(16)
+                .frame(maxWidth: .infinity, alignment: .leading)
             }
-            .padding(16)
-            .frame(maxWidth: .infinity, alignment: .leading)
             .background(ControlGlass.surfaceBase(scheme).ignoresSafeArea())
             .navigationTitle("Today’s plan")
             .navigationBarTitleDisplayMode(.inline)
