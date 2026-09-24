@@ -1,0 +1,16 @@
+{
+  "config_id": "GAME_DEFAULTS_V3",
+  "config_version": "3.0.0",
+  "evidence": "GAME",
+  "note": "Changing a default requires a new configuration version and a migration note. These values are simulation rules, not OEM specifications, contracts, or ERCOT requirements.",
+  "campaign_era": {
+    "start": "2021-02-01",
+    "end": "2025-12-31",
+    "chronology": "continuous_strictly_increasing_civil_days"
+  },
+  "bootstrap_retirement_completed_days": 90,
+  "bootstrap_archive_id": "TX_TRAIN_2019_2020",
+  "area_basket_weights": ["0.50", "0.30", "0.20"],
+  "placeholder_morning_brief_ct": "08:00",
+  "presentation_speeds": ["pause", "1x", "8x", "32x", "until_next_decision"]
+}

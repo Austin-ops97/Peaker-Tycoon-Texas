@@ -1,0 +1,16 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://peaker.tycoon.texas/schemas/phase0/save-envelope.schema.json",
+  "title": "SaveEnvelope",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schema_version", "campaign_seed", "input_log", "migration_log", "replay_digest"],
+  "properties": {
+    "schema_version": { "type": "string", "pattern": "^[0-9]+\\.[0-9]+\\.[0-9]+$" },
+    "campaign_seed": { "type": "integer", "minimum": 0 },
+    "input_log": { "type": "array" },
+    "migration_log": { "type": "array" },
+    "replay_digest": { "type": "string" }
+  },
+  "description": "Phase 0 save skeleton (§24.4). Major versions below 3 are rejected. No v2 migration is provided."
+}

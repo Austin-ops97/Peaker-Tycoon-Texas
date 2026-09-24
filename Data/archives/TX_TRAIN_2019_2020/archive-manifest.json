@@ -1,0 +1,15 @@
+{
+  "archive_id": "TX_TRAIN_2019_2020",
+  "label": "training-only",
+  "evidence": "GATE",
+  "schema_version": "0.1.0",
+  "purpose": "Disclosed training-only hub-level DA/RT SPP archive for 2019-01-01 through 2020-12-31. Supplements forecasts until 90 completed campaign days, then retires (§2.1, §7).",
+  "period_start": "2019-01-01",
+  "period_end": "2020-12-31",
+  "completeness": "incomplete",
+  "source_batch_count": 0,
+  "claims_complete_source_coverage": false,
+  "rows": [],
+  "rights_status": "unresolved",
+  "notes": "No SOURCE prices are stored in this scaffold. The retirement rule is implemented in PeakerKernel.BootstrapPolicy and does not require the archive bytes."
+}

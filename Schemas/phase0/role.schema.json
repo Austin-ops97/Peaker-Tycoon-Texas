@@ -1,0 +1,22 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://peaker.tycoon.texas/schemas/phase0/role.schema.json",
+  "title": "Role",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["role_id"],
+  "properties": {
+    "role_id": {
+      "enum": [
+        "powerTrader",
+        "gasScheduler",
+        "controlRoomOperator",
+        "reliabilityEngineer",
+        "assetManager",
+        "fundManager",
+        "riskCompliance"
+      ]
+    }
+  },
+  "description": "Domain identity only (§25 Role). No firewall rules and no UI until Phase 3b."
+}

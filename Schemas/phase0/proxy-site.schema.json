@@ -1,0 +1,18 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://peaker.tycoon.texas/schemas/phase0/proxy-site.schema.json",
+  "title": "ProxySite",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["site_id", "display_name", "proxy_grade", "evidence"],
+  "properties": {
+    "site_id": { "type": "string" },
+    "display_name": { "type": "string" },
+    "approximate_setting": { "type": "string" },
+    "starter_price_family": { "type": "string" },
+    "proxy_grade": { "type": "string" },
+    "source_point_id": { "type": ["string", "null"] },
+    "evidence": { "const": "PROXY" }
+  },
+  "description": "Fictional site (§6). source_point_id stays null until a validated SOURCE identity exists."
+}

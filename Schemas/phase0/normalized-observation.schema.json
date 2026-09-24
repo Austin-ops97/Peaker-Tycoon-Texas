@@ -1,0 +1,43 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://peaker.tycoon.texas/schemas/phase0/normalized-observation.schema.json",
+  "title": "NormalizedObservation",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "dataset_id",
+    "source_product_id",
+    "source_point_id",
+    "point_type",
+    "interval_start_utc",
+    "interval_end_utc",
+    "source_local_date",
+    "value_decimal",
+    "unit",
+    "ingested_at",
+    "revision_id",
+    "source_hash",
+    "quality_flags"
+  ],
+  "properties": {
+    "dataset_id": { "type": "string" },
+    "source_product_id": { "type": "string" },
+    "source_point_id": { "type": "string" },
+    "point_type": { "type": "string" },
+    "interval_start_utc": { "type": "string" },
+    "interval_end_utc": { "type": "string" },
+    "source_local_date": { "type": "string" },
+    "hour_ending_raw": { "type": ["string", "null"] },
+    "dst_flag_raw": { "type": ["string", "null"] },
+    "value_decimal": { "type": "string" },
+    "unit": { "type": "string" },
+    "source_published_at": { "type": ["string", "null"] },
+    "ingested_at": { "type": "string" },
+    "available_at": { "type": ["string", "null"] },
+    "revision_id": { "type": "string" },
+    "source_hash": { "type": "string" },
+    "quality_flags": { "type": "array", "items": { "type": "string" } },
+    "issued_at": { "type": ["string", "null"] },
+    "forecast_for": { "type": ["string", "null"] }
+  }
+}

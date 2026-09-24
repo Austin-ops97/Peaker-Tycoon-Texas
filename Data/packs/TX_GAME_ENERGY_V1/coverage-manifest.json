@@ -1,0 +1,109 @@
+{
+  "pack_id": "TX_GAME_ENERGY_V1",
+  "schema_version": "0.1.0",
+  "evidence": "GATE",
+  "claims_complete_source_coverage": false,
+  "completeness": "incomplete",
+  "source_batch_count": 0,
+  "rights_status": "unresolved",
+  "quality_grade": "blocked",
+  "source_period": {
+    "start": "2021-02-01",
+    "end": "2025-12-31"
+  },
+  "operating_days": [],
+  "selected_proxy_points": [
+    {
+      "site_id": "fictional.bayou-bend",
+      "display_name": "Bayou Bend Energy",
+      "evidence": "PROXY",
+      "approximate_setting": "Inland Gulf Coast near the Houston area",
+      "starter_price_family": "Houston-associated proxy",
+      "proxy_grade": "hub_fallback_unassigned",
+      "source_point_id": null,
+      "covered_local_dates": []
+    },
+    {
+      "site_id": "fictional.prairie-junction",
+      "display_name": "Prairie Junction Power",
+      "evidence": "PROXY",
+      "approximate_setting": "North Texas outside the Dallas area",
+      "starter_price_family": "North-associated proxy",
+      "proxy_grade": "hub_fallback_unassigned",
+      "source_point_id": null,
+      "covered_local_dates": []
+    },
+    {
+      "site_id": "fictional.mesquite-ridge",
+      "display_name": "Mesquite Ridge Generation",
+      "evidence": "PROXY",
+      "approximate_setting": "Inland South Texas",
+      "starter_price_family": "South-associated proxy",
+      "proxy_grade": "hub_fallback_unassigned",
+      "source_point_id": null,
+      "covered_local_dates": []
+    },
+    {
+      "site_id": "fictional.red-mesa",
+      "display_name": "Red Mesa Peaking",
+      "evidence": "PROXY",
+      "approximate_setting": "West Texas",
+      "starter_price_family": "West-associated proxy",
+      "proxy_grade": "hub_fallback_unassigned",
+      "source_point_id": null,
+      "covered_local_dates": []
+    }
+  ],
+  "ancillary_service_price_families": [],
+  "ancillary_service_selection": {
+    "selected": false,
+    "reason": "Release 1 is the energy-only module. No ancillary-service price family is selected. The coverage gate checks every selected family; it does not invent an AS series (§4, §20, §28.2)."
+  },
+  "gap_report": {
+    "status": "blocked",
+    "reason": "DA and RT settlement coverage for the selected proxy points has not been ingested for 2021-02-01 through 2025-12-31. This repository does not contain SOURCE prices, settlement point IDs, pinned API paths, or publication timestamps. No commercial redistribution permission is claimed."
+  },
+  "training_archive": {
+    "archive_id": "TX_TRAIN_2019_2020",
+    "label": "training-only",
+    "period_start": "2019-01-01",
+    "period_end": "2020-12-31",
+    "completeness": "incomplete",
+    "source_batch_count": 0
+  },
+  "source_products": [
+    {
+      "product_id": "NP4-190-CD",
+      "role": "dam_settlement_point_prices",
+      "status": "not_ingested",
+      "pinned_api_path": null
+    },
+    {
+      "product_id": "NP6-905-CD",
+      "role": "rt_settlement_point_prices",
+      "status": "not_ingested",
+      "pinned_api_path": null
+    },
+    {
+      "product_id": "NP4-180-ER",
+      "role": "annual_hub_load_zone_da_archive",
+      "status": "not_ingested",
+      "pinned_api_path": null
+    },
+    {
+      "product_id": "NP6-785-ER",
+      "role": "annual_hub_load_zone_rt_archive",
+      "status": "not_ingested",
+      "pinned_api_path": null
+    }
+  ],
+  "content_hash": null,
+  "collection_time": null,
+  "effective_rule_profiles": ["TX_GAME_ENERGY_V1"],
+  "point_manifest_hash": null,
+  "proxy_mapping_hash": null,
+  "available_features": [],
+  "settlement_revision_policy": "unspecified_until_ingest",
+  "reconstructed_inputs": [],
+  "training_cutoff": null
+}
