@@ -120,6 +120,28 @@ public enum PackPublisher {
 }
 
 public enum IngestionPipeline {
+    /// Parse retained NP4-190-CD or NP6-905-CD CSV bytes and validate them.
+    /// Does not publish. Any later `PackPublisher` call for these rows must pass `requestComplete: false`
+    /// until publication times and coverage actually exist. `sourcePublishedAt` stays null here.
+    public static func parseRetainedSettlementCSV(
+        csv: Data,
+        product: ERCOTSettlementProduct,
+        ingestedAt: String,
+        revisionId: String = "final"
+    ) -> ERCOTSettlementParseResult {
+        let parsed = ERCOTSettlementCSV.parse(
+            csv: csv,
+            product: product,
+            ingestedAt: ingestedAt,
+            revisionId: revisionId
+        )
+        let validation = ObservationValidator.validate(parsed.observations)
+        return ERCOTSettlementParseResult(
+            observations: parsed.observations,
+            errors: parsed.errors + validation
+        )
+    }
+
     /// Fixture path: retain bytes, validate, reconcile, publish as incomplete.
     public static func runFixture(bytes: [UInt8], observations: [NormalizedObservation]) throws -> PackDraft {
         let retained = RawRetain.retain(RawBytes(bytes: bytes, label: "fixture"))

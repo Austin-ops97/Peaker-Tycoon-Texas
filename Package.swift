@@ -27,6 +27,7 @@ let package = Package(
         .testTarget(
             name: "PeakerDataTests",
             dependencies: ["PeakerData"],
+            exclude: ["Fixtures"],
             swiftSettings: [.swiftLanguageMode(.v5)]
         ),
         .testTarget(

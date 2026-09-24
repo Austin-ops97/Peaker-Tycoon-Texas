@@ -58,3 +58,7 @@ Six more NP6 price zips verified and landed in `Data/archives/ercot/2026-09-24/b
 ### Batch 3 retain (still not coverage complete)
 
 Thirteen more price zips verified and landed in `Data/archives/ercot/2026-09-24/batch3/` (6 NP6 Uri-window posts 2021-02-09 through 2021-02-19, and 7 NP4 archive posts 2021-02-09 through 2023-06-15). `source_batch_count` moved from 12 to 25. No zip was excluded. Live From/To is empty for 2021-08-15, 2022-02-15, and 2023-08-15 on both products. 2024-07-15 page samples are not full days. `claims_complete_source_coverage` stays false. ER products stay GATE.
+
+### Settlement CSV parse (not coverage complete)
+
+`ERCOTSettlementCSV` and `IngestionPipeline.parseRetainedSettlementCSV` turn retained NP4-190-CD and NP6-905-CD CSV bytes into `NormalizedObservation`. Settlement point names stay verbatim. `sourcePublishedAt` stays null. The helper validates and does not publish; a complete publish still requires `requestComplete: false` to succeed while publication times are missing. Zip inflate stays caller-owned. `claims_complete_source_coverage` stays false. `source_batch_count` stays 25. Proxy point ids and `covered_local_dates` stay empty.
