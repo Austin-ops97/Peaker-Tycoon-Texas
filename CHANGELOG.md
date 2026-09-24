@@ -74,3 +74,7 @@ Pause still holds the displayed GAME instant at the morning-brief anchor. 1×, 8
 ### Batch 4 retain (still not coverage complete)
 
 Twenty-four more price zips verified and landed in `Data/archives/ercot/2026-09-24/batch4/` (10 NP6 mid-campaign landmarks, each one interval, and 14 NP4 archive posts 2021-05-16 through 2025-09-15). `source_batch_count` moved from 25 to 49. No zip was excluded. Live From/To is empty for 2023-01-15 on both products. Page samples for 2025-06-15, 2024-10-15, and 2024-01-15 are not full days. `claims_complete_source_coverage` stays false. ER products stay GATE.
+
+### Retained zip read path (not coverage complete)
+
+`RetainedSettlementArchive` opens verified price zips in `batch2`, `batch3`, and `batch4`, checks the `.sha256` sidecar, inflates the CSV member, and parses it with the existing NP4/NP6 parser. It does not fetch and does not publish. 2023-01-15 stays an empty live From/To day. `claims_complete_source_coverage` stays false.

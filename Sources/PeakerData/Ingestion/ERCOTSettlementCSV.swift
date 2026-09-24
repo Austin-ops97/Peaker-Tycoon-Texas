@@ -19,7 +19,7 @@ import PeakerKernel
 /// - `sourceHash`: SHA-256 hex of the CSV bytes passed in, shared by every row from that buffer.
 /// - `qualityFlags`: empty. Real SOURCE rows do not get `fixture_not_source`.
 ///
-/// Zip members are caller-owned. This module does not inflate zip bytes (no zip library on the Linux test host). Pass the CSV member.
+/// This parser takes CSV bytes. `RetainedSettlementArchive` inflates a retained zip member and then calls it. There is no network fetch.
 public enum ERCOTSettlementProduct: String, Sendable, Equatable {
     case dayAheadNP4190CD = "NP4-190-CD"
     case realtimeNP6905CD = "NP6-905-CD"
