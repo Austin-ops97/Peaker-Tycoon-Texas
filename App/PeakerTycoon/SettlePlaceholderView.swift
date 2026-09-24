@@ -12,14 +12,15 @@ struct SettlePlaceholderView: View {
                     Text("Settlement")
                         .font(.title3.weight(.semibold))
                         .foregroundStyle(ControlGlass.textPrimary(scheme))
-                    Text("Statements show up here after the day settles.")
+                        .accessibilityLabel("Settle tab. Statements aren’t ready yet. This isn’t a live settle.")
+                    Text("This tab is waiting. Statements aren’t ready yet, and this isn’t a live settle.")
                         .font(.body)
                         .foregroundStyle(ControlGlass.textPrimary(scheme))
                         .fixedSize(horizontal: false, vertical: true)
                     Text("No statements yet.")
                         .font(.body)
                         .foregroundStyle(ControlGlass.textSecondary(scheme))
-                        .accessibilityLabel("Settle empty. No statements.")
+                        .accessibilityLabel("No statements yet. This isn’t a live settle.")
                 }
                 .padding(16)
                 .frame(maxWidth: .infinity, alignment: .leading)
@@ -42,11 +43,11 @@ private struct SettlementExplainerSheet: View {
     var body: some View {
         NavigationStack {
             VStack(alignment: .leading, spacing: 12) {
-                Text("Settlement is the money in and the money out for the day.")
+                Text("Settlement is the money in and the money out for the day. This isn’t a live settle.")
                     .font(.body)
                     .foregroundStyle(ControlGlass.textPrimary(scheme))
                     .fixedSize(horizontal: false, vertical: true)
-                Text("When a statement is ready, tap a line to see why that amount is there.")
+                Text("When a statement is ready, you can read why an amount is there. None is ready yet.")
                     .font(.body)
                     .foregroundStyle(ControlGlass.textSecondary(scheme))
                     .fixedSize(horizontal: false, vertical: true)

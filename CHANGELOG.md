@@ -174,3 +174,7 @@ Fuel says the tab is waiting and nomination isn’t open yet. The four gas-day m
 ### Plant waiting for a reading (not dispatch)
 
 Plant says it is waiting for a connected reading, and that this is not a live dispatch. State, MW, and fuel flow stay blank. The button stays View unit status. The card still has no prices.
+
+### Settle waiting for a statement (not a live settle)
+
+Settle says the tab is waiting, statements aren’t ready yet, and this isn’t a live settle. The empty line is still “No statements yet.” The sheet still explains money in and money out, and it says none is ready yet. The button stays How settlement works.
