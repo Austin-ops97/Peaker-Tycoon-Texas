@@ -7,9 +7,9 @@ import Foundation
 /// into the sentences. Real-time delivery dates are not described as full days.
 public struct RetainedSamplePlayerSummary: Equatable, Sendable {
     public static let rowTitle = "Saved price samples"
-    public static let incompleteSentence = "Coverage is incomplete."
-    public static let emptyLiveFetchSentence = "Some early days are still empty on the live fetch."
-    public static let missingReportsSentence = "Some reports are not in the public catalog."
+    public static let incompleteSentence = "Saved samples are a partial history, and the campaign is not fully filled."
+    public static let emptyLiveFetchSentence = "Some days in this set still have no saved prices."
+    public static let missingReportsSentence = "Some settlement reports are not available yet."
 
     public let fileSentence: String
     public let dateSentence: String
@@ -39,7 +39,7 @@ public struct RetainedSamplePlayerSummary: Equatable, Sendable {
         }
         return RetainedSamplePlayerSummary(
             fileSentence: "\(dayAheadFiles) day-ahead price files and \(realtimeFiles) real-time price files are saved with this build.",
-            dateSentence: "Those files mention \(dayAheadDates) day-ahead delivery dates and \(realtimeDates) real-time delivery dates. A real-time date here is a short sample, not a full day, and it does not fill an empty day.",
+            dateSentence: "Those files list \(dayAheadDates) day-ahead delivery dates and \(realtimeDates) real-time delivery dates. A real-time date here is a short sample, not a full day.",
             spanSentence: spanSentence,
             showsEmptyLiveFetch: !inventory.emptyLiveFromToGates.isEmpty,
             showsMissingReports: !inventory.absentProducts.isEmpty

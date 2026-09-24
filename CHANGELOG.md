@@ -154,3 +154,7 @@ Each tab keeps one thumb button and a shorter lead. Fuel: “Nomination isn’t 
 ### First-launch coach (not trading)
 
 The three tips under the clock now teach the four tabs, the Desk sample arrows, and the read-only plan sheet. Got it advances. Not now dismisses the current tip and holds the rest of the session. Settings → Show navigation tips plays them again. The local-time tip still comes first. The card stays in the chrome band.
+
+### Evidence copy for a new player (not a coverage claim)
+
+Settings → Evidence now says saved samples are a partial history and the campaign is not fully filled. The row still shows the delivery-date span, and it adds that some settlement reports are not available yet. The detail page still lists the day-ahead and real-time file counts. A real-time date is still a short sample, not a full day. `claims_complete_source_coverage` stays false.

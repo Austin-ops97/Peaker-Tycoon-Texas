@@ -111,6 +111,11 @@ struct SettingsPlaceholderView: View {
                     .font(.subheadline)
                     .foregroundStyle(ControlGlass.textSecondary(scheme))
             }
+            if summary?.showsMissingReports == true {
+                Text(RetainedSamplePlayerSummary.missingReportsSentence)
+                    .font(.subheadline)
+                    .foregroundStyle(ControlGlass.textSecondary(scheme))
+            }
         }
         .accessibilityElement(children: .combine)
         .accessibilityLabel(coverageAccessibility(summary))
@@ -123,6 +128,9 @@ struct SettingsPlaceholderView: View {
         ]
         if let span = summary?.spanSentence {
             parts.append(span)
+        }
+        if summary?.showsMissingReports == true {
+            parts.append(RetainedSamplePlayerSummary.missingReportsSentence)
         }
         return parts.joined(separator: " ")
     }
@@ -185,5 +193,5 @@ private struct CoverageSamplePage: View {
         .tint(ControlGlass.accentTeal)
     }
 
-    private static let gateProvenance = "GATE. Saved price files are samples only. Coverage is incomplete. Some early days are still empty on the live fetch. Some reports are not in the public catalog."
+    private static let gateProvenance = "GATE. Saved samples are a partial history, and the campaign is not fully filled. Some settlement reports are not available yet."
 }
