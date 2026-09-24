@@ -127,6 +127,10 @@ The Desk SOURCE strip shows one retained day-ahead hub row at a time. Chevron bu
 
 Thirty-two more price zips verified and landed in `Data/archives/ercot/2026-09-24/batch8/` (12 NP4 archive posts 2022-06-13 through 2025-05-14, and 20 NP6 intervals). `source_batch_count` moved from 112 to 144. No zip was excluded. This drop recorded no new empty live From/To day. Five NP6 zips have DeliveryDate 2023-10-15. The filename stamp 2023-10-15 00:00 has DeliveryDate 2023-10-14, hour 24 interval 4. Each NP6 file is one interval. `claims_complete_source_coverage` stays false. ER products stay GATE. The read path still opens batch2 through batch7 only.
 
+### Sample inventory includes batch 8 (not coverage complete)
+
+`RetainedSampleInventory` now scans batch8 with batch2–batch7. The JSON and markdown artifacts list 66 day-ahead files and 72 real-time files (66 and 53 delivery dates). The latest retain recorded no new empty live From/To day. 2023-10-15 moves to the earlier-empty list because archive samples now include real-time intervals on that delivery date (hour 12 intervals 3 and 4, hour 7 interval 3, hour 17 interval 3, and hour 24 interval 3). The filename stamp 2023-10-15 00:00 stays on 2023-10-14. Settings → Evidence reads the bundled copy. `claims_complete_source_coverage` stays false.
+
 ### Batch 8 on the retained read path (not coverage complete)
 
 `RetainedSettlementArchive` now opens verified price zips in `batch8` as well as `batch2` through `batch7`. The path still checks the `.sha256` sidecar, inflates the CSV member, and parses it. It does not fetch and does not publish. The batch 8 NP6 zip posted 2023-10-15 11:45 has DeliveryDate 10/15/2023, hour 12, interval 3 (`HB_SOUTH` -3.31). `claims_complete_source_coverage` stays false.

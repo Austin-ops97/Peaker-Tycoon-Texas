@@ -1,7 +1,7 @@
 import Foundation
 import PeakerKernel
 
-/// Inventory of CSV delivery dates in the retained batch2–batch7 price zips.
+/// Inventory of CSV delivery dates in the retained batch2–batch8 price zips.
 ///
 /// Built only through `RetainedSettlementArchive` (sidecar, inflate, parse).
 /// This is a sample list. It does not publish, does not set proxy `covered_local_dates`,
@@ -11,10 +11,12 @@ public struct RetainedSampleInventory: Codable, Equatable, Sendable {
     public static let markdownRelativePath = "Data/archives/ercot/2026-09-24/retained-sample-inventory.md"
     /// Live artifact From/To days that returned `totalRecords` 0 on both price products in the latest drop.
     /// A retained file on one of these days is still not a live From/To fill.
-    public static let emptyLiveFromToLocalDates = ["2023-10-15"]
+    /// Latest drop recorded no new live From/To day with `totalRecords` 0.
+    /// 2023-10-15 was empty on the live fetch in batch 7 and now has archive samples.
+    public static let emptyLiveFromToLocalDates: [String] = []
     /// Days whose earlier live From/To was empty and that now have archive CSV delivery dates.
     public static let earlierEmptyLiveDaysWithArchiveSamples = [
-        "2021-04-15", "2022-07-15", "2022-11-15", "2023-01-15", "2023-04-15",
+        "2021-04-15", "2022-07-15", "2022-11-15", "2023-01-15", "2023-04-15", "2023-10-15",
     ]
 
     public let label: String
@@ -105,7 +107,7 @@ public struct RetainedSampleInventory: Codable, Equatable, Sendable {
 
         return RetainedSampleInventory(
             label: "retained_sample_inventory",
-            statement: "Inventory of CSV DeliveryDate values in verified batch2-batch7 price zips. Not complete coverage. Dates are not proxy covered_local_dates.",
+            statement: "Inventory of CSV DeliveryDate values in verified batch2-batch8 price zips. Not complete coverage. Dates are not proxy covered_local_dates.",
             claimsCompleteSourceCoverage: false,
             campaignEraStart: CampaignCalendar.start.iso,
             campaignEraEnd: CampaignCalendar.end.iso,
@@ -134,7 +136,7 @@ public struct RetainedSampleInventory: Codable, Equatable, Sendable {
         var lines: [String] = []
         lines.append("# Retained sample inventory")
         lines.append("")
-        lines.append("This file lists CSV `DeliveryDate` values found by `RetainedSettlementArchive` in verified price zips under `batch2`, `batch3`, `batch4`, `batch5`, `batch6`, and `batch7`. It is an inventory of retained samples. It is not complete coverage.")
+        lines.append("This file lists CSV `DeliveryDate` values found by `RetainedSettlementArchive` in verified price zips under `batch2` through `batch8`. It is an inventory of retained samples. It is not complete coverage.")
         lines.append("")
         lines.append("`claims_complete_source_coverage` is false. Proxy `source_point_id` and `covered_local_dates` are not filled from this list.")
         lines.append("")
@@ -159,16 +161,21 @@ public struct RetainedSampleInventory: Codable, Equatable, Sendable {
         }
         lines.append("## EMPTY GATE — live From/To")
         lines.append("")
-        lines.append("These days returned `totalRecords` 0 for live `deliveryDateFrom` / `deliveryDateTo` on both NP4-190-CD and NP6-905-CD. A retained hour or interval on that date does not close the gate.")
-        lines.append("")
-        lines.append("| Day | NP4-190-CD retained hours | NP6-905-CD retained hours |")
-        lines.append("| --- | --- | --- |")
-        for gate in emptyLiveFromToGates {
-            let np4 = gate.retainedHourEndingsByProduct["NP4-190-CD"] ?? []
-            let np6 = gate.retainedHourEndingsByProduct["NP6-905-CD"] ?? []
-            lines.append("| \(gate.sourceLocalDate) | \(np4.isEmpty ? "none" : hourEndingSummary(np4)) | \(np6.isEmpty ? "none" : hourEndingSummary(np6)) |")
+        if emptyLiveFromToGates.isEmpty {
+            lines.append("The latest retain recorded no new live `deliveryDateFrom` / `deliveryDateTo` day with `totalRecords` 0. A retained archive file is not a live From/To fill.")
+            lines.append("")
+        } else {
+            lines.append("These days returned `totalRecords` 0 for live `deliveryDateFrom` / `deliveryDateTo` on both NP4-190-CD and NP6-905-CD. A retained hour or interval on that date does not close the gate.")
+            lines.append("")
+            lines.append("| Day | NP4-190-CD retained hours | NP6-905-CD retained hours |")
+            lines.append("| --- | --- | --- |")
+            for gate in emptyLiveFromToGates {
+                let np4 = gate.retainedHourEndingsByProduct["NP4-190-CD"] ?? []
+                let np6 = gate.retainedHourEndingsByProduct["NP6-905-CD"] ?? []
+                lines.append("| \(gate.sourceLocalDate) | \(np4.isEmpty ? "none" : hourEndingSummary(np4)) | \(np6.isEmpty ? "none" : hourEndingSummary(np6)) |")
+            }
+            lines.append("")
         }
-        lines.append("")
         lines.append("Earlier live From/To days \(earlierEmptyLiveDaysWithArchiveSamples.joined(separator: ", ")) now have archive CSV delivery dates in the retained zips. Those files are samples. A real-time file is still one interval. They are not proxy `covered_local_dates`, and this list does not say the live endpoint started returning rows.")
         lines.append("")
         lines.append("## ER ABSENT GATE")
