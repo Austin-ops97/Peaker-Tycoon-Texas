@@ -99,6 +99,10 @@ Twenty-five more price zips verified and landed in `Data/archives/ercot/2026-09-
 
 `RetainedSettlementArchive` now opens verified price zips in `batch6` as well as `batch2` through `batch5`. The path still checks the `.sha256` sidecar, inflates the CSV member, and parses it. It does not fetch and does not publish. The batch 6 NP4 zip posted 2021-04-14 has DeliveryDate 04/15/2021. `claims_complete_source_coverage` stays false.
 
+### Sample inventory includes batch 6 (not coverage complete)
+
+`RetainedSampleInventory` now scans batch6 with batch2–batch5. The JSON and markdown artifacts list 42 day-ahead files and 40 real-time files. Live From/To empty in this drop is 2022-11-15. Archive samples now include 2021-04-15, 2022-07-15, 2023-01-15, and 2023-04-15. Settings → Evidence reads the bundled copy, so the saved-price counts follow those files. `claims_complete_source_coverage` stays false.
+
 ### Settings sample stub (not coverage complete)
 
 Settings → Evidence shows a read-only row, Saved price samples, and a detail page with day-ahead and real-time file counts from the bundled inventory. The row says coverage is incomplete. Real-time dates are described as short samples. Empty live-fetch days and reports missing from the public catalog are one sentence each. There is no new thumb-zone button. `claims_complete_source_coverage` stays false.
