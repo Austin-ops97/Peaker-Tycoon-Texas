@@ -166,3 +166,7 @@ Under the Desk hub arrows, a muted line says “These are retained historical sa
 ### Settings section headers (not a behavior change)
 
 Settings home groups the existing rows under Local time, Tips, and Evidence. The time-zone picker, the two tip buttons, and the saved-sample sentences are unchanged. Closing Settings still returns to Desk with no extra banner.
+
+### Fuel closed timeline (not a nomination)
+
+Fuel says the tab is waiting and nomination isn’t open yet. The four gas-day markers and the button See gas day timeline stay. Confirm stays off. The old “Verdict unavailable” line is now “No result yet — nomination is still closed.”
