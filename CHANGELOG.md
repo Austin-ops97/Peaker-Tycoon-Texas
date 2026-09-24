@@ -53,4 +53,8 @@ The clock bar is a `VStack` sibling above `TabView`, not a top `safeAreaInset`. 
 
 ### Batch 2 retain (still not coverage complete)
 
-Six more NP6 price zips verified and landed in `Data/archives/ercot/2026-09-24/batch2/`. `source_batch_count` moved from 6 to 12. Working artifact query is `deliveryDateFrom` and `deliveryDateTo` (`page` for later pages). Bare `deliveryDate` returned 400. 2021-02-15 is empty on both artifact endpoints. NP6 archive page 26 is the first probed page at or before 2025-12-31; page 197 is still in February 2021. The new zips’ delivery stamps are 2025-12-15, 2025-12-31 (three intervals), 2025-02-16, and 2021-02-09. They are samples, not proxy coverage. Point IDs stay null. ER products stay GATE.
+Six more NP6 price zips verified and landed in `Data/archives/ercot/2026-09-24/batch2/`. That commit moved `source_batch_count` from 6 to 12. Working artifact query is `deliveryDateFrom` and `deliveryDateTo` (`page` for later pages). Bare `deliveryDate` returned 400. 2021-02-15 is empty on both artifact endpoints. NP6 archive page 26 is the first probed page at or before 2025-12-31; page 197 is still in February 2021. The new zips’ delivery stamps are 2025-12-15, 2025-12-31 (three intervals), 2025-02-16, and 2021-02-09. They are samples, not proxy coverage. Point IDs stay null. ER products stay GATE.
+
+### Batch 3 retain (still not coverage complete)
+
+Thirteen more price zips verified and landed in `Data/archives/ercot/2026-09-24/batch3/` (6 NP6 Uri-window posts 2021-02-09 through 2021-02-19, and 7 NP4 archive posts 2021-02-09 through 2023-06-15). `source_batch_count` moved from 12 to 25. No zip was excluded. Live From/To is empty for 2021-08-15, 2022-02-15, and 2023-08-15 on both products. 2024-07-15 page samples are not full days. `claims_complete_source_coverage` stays false. ER products stay GATE.
