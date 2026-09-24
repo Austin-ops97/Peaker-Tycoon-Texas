@@ -111,6 +111,10 @@ Settings → Evidence shows a read-only row, Saved price samples, and a detail p
 
 Twenty-four more price zips verified and landed in `Data/archives/ercot/2026-09-24/batch7/` (12 NP4 archive posts 2021-10-14 through 2024-08-14, and 12 NP6 intervals). `source_batch_count` moved from 88 to 112. No zip was excluded. Live From/To is empty for 2023-10-15 on both products. Two NP6 intervals have DeliveryDate 2022-11-15 (hour 12, intervals 3 and 4). The NP4 zip posted 2023-10-14 covers DeliveryDate 10/15/2023. The NP4 zip posted 2023-10-15 covers 10/16/2023. Each NP6 file is one interval. `claims_complete_source_coverage` stays false. ER products stay GATE. The read path still opens batch2 through batch6 only.
 
+### Batch 7 on the retained read path (not coverage complete)
+
+`RetainedSettlementArchive` now opens verified price zips in `batch7` as well as `batch2` through `batch6`. The path still checks the `.sha256` sidecar, inflates the CSV member, and parses it. It does not fetch and does not publish. The batch 7 NP6 zip posted 2022-11-15 11:45 has DeliveryDate 11/15/2022, hour 12, interval 3. `claims_complete_source_coverage` stays false.
+
 ### Desk source sample cycle (not trading)
 
 The Desk SOURCE strip shows one retained day-ahead hub row at a time. Chevron buttons and dots cycle Houston on 2021-02-10 (24.14 $/MWh), North on 2021-02-10 (27.18 $/MWh), and West on 2021-04-15 (18.87 $/MWh), each hour ending 01:00. Those decimals are copied from retained NP4 archive rows. The thumb button stays Review today’s plan. Coverage claims are unchanged.

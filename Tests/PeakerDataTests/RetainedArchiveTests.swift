@@ -7,13 +7,14 @@ private let retainedIngestedAt = "2026-09-24T00:00:00Z"
 @Test func retainedBatchesExposeOnlyVerifiedPriceZips() throws {
     let root = retainRoot()
     let zips = try RetainedSettlementArchive.priceZipURLs(in: root)
-    #expect(zips.count == 82)
+    #expect(zips.count == 106)
     #expect(zips.allSatisfy { $0.pathExtension == "zip" })
     #expect(zips.filter { $0.path.contains("/batch2/") }.count == 6)
     #expect(zips.filter { $0.path.contains("/batch3/") }.count == 13)
     #expect(zips.filter { $0.path.contains("/batch4/") }.count == 24)
     #expect(zips.filter { $0.path.contains("/batch5/") }.count == 14)
     #expect(zips.filter { $0.path.contains("/batch6/") }.count == 25)
+    #expect(zips.filter { $0.path.contains("/batch7/") }.count == 24)
     #expect(zips.allSatisfy {
         RetainedSettlementArchive.product(forZipFileName: $0.lastPathComponent) != nil
     })
@@ -92,6 +93,23 @@ private let retainedIngestedAt = "2026-09-24T00:00:00Z"
     #expect(houston.sourceLocalDate == "2021-04-15")
     #expect(houston.sourcePublishedAt == nil)
     #expect(read.verifiedSHA256 == "7c3ef076e8f01ad619359691f80b3e407f74fd02e55995a99b274ccdd5375d7f")
+}
+
+@Test func retainedBatch7NP6ZipParsesNovemberFifteenthAfterSidecarCheck() throws {
+    let url = retainRoot().appendingPathComponent(
+        "batch7/np6-905-cd__inst1_20221115_876906627_SPPHLZNP6905_20221115_1145_csv.zip"
+    )
+    let read = try RetainedSettlementArchive.readZip(at: url, ingestedAt: retainedIngestedAt)
+    #expect(read.product == .realtimeNP6905CD)
+    #expect(read.result.errors.isEmpty)
+    let houston = try #require(read.result.observations.first {
+        $0.sourcePointId == "HB_HOUSTON" && $0.hourEndingRaw == "12:3"
+    })
+    #expect(houston.pointType == "hub_spp")
+    #expect(houston.valueDecimal == "35.69")
+    #expect(houston.sourceLocalDate == "2022-11-15")
+    #expect(houston.sourcePublishedAt == nil)
+    #expect(read.verifiedSHA256 == "0cf5b0132f717b4b934bfddf92a3b5d2dfc3938c1499eb488d4cac717bad6da0")
 }
 
 @Test func januaryFifteenthStaysAnEmptyGateOnTheReadPath() throws {

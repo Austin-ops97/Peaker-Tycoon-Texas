@@ -205,7 +205,7 @@ Path: `Data/archives/ercot/2026-09-24/batch4/`. SHA-256 inventory: `RETENTION.md
 
 GATE: live `deliveryDateFrom` / `deliveryDateTo` returned `totalRecords` 0 for 2023-01-15 on both NP4-190-CD and NP6-905-CD. That day still needs an archive download whose CSV delivery date is 2023-01-15, or the ER products. The NP4 zip posted 2023-01-16 in this drop covers DeliveryDate 01/17/2023, not 2023-01-15. Earlier empty From/To days (2021-02-15, 2021-08-15, 2022-02-15, 2023-08-15) stay empty the same way.
 
-`RetainedSettlementArchive` can open the verified price zips in batch2, batch3, batch4, batch5, and batch6 and parse the CSV member. That read path checks the `.sha256` sidecar first. It does not fetch, does not publish a complete pack, and does not fill proxy coverage. `Data/archives/ercot/2026-09-24/retained-sample-inventory.json` lists the CSV delivery dates from that read. The list is a sample inventory, not complete coverage.
+`RetainedSettlementArchive` can open the verified price zips in batch2, batch3, batch4, batch5, batch6, and batch7 and parse the CSV member. That read path checks the `.sha256` sidecar first. It does not fetch, does not publish a complete pack, and does not fill proxy coverage. `Data/archives/ercot/2026-09-24/retained-sample-inventory.json` lists the CSV delivery dates from that read. The list is a sample inventory, not complete coverage.
 
 2025-06-15, 2024-10-15, and 2024-01-15 From/To responses have rows. Only pages 1–3 were retained on each product. That is not full-day coverage. NP6 landmark zips are one interval each (hour 12, interval 3). They are not proxy coverage.
 
@@ -223,7 +223,7 @@ GATE: live `deliveryDateFrom` / `deliveryDateTo` returned `totalRecords` 0 for 2
 
 ## Batch 7 retain
 
-Path: `Data/archives/ercot/2026-09-24/batch7/`. SHA-256 inventory: `RETENTION.md` in that folder. Twenty-four verified price zips were added (12 NP4, 12 NP6). No zip failed its sidecar. Listings and artifact pages are not counted. `source_batch_count` is 112 (6 + 6 + 13 + 24 + 14 + 25 + 24). The read path still opens batch2 through batch6 only.
+Path: `Data/archives/ercot/2026-09-24/batch7/`. SHA-256 inventory: `RETENTION.md` in that folder. Twenty-four verified price zips were added (12 NP4, 12 NP6). No zip failed its sidecar. Listings and artifact pages are not counted. `source_batch_count` is 112 (6 + 6 + 13 + 24 + 14 + 25 + 24). The read path opens batch2 through batch7.
 
 GATE: live `deliveryDateFrom` / `deliveryDateTo` returned `totalRecords` 0 for 2023-10-15 on both NP4-190-CD and NP6-905-CD. The NP4 zip posted 2023-10-14 covers DeliveryDate 10/15/2023. The NP4 zip posted 2023-10-15 covers DeliveryDate 10/16/2023, not 2023-10-15. There is no NP6 interval whose CSV DeliveryDate is 2023-10-15. Two NP6 zips have DeliveryDate 11/15/2022 (hour 12, intervals 3 and 4, docIds 876906627 and 876908682). Those are archive samples. This drop did not re-query the live endpoint for 2022-11-15. 2024-08-15 From/To responses have rows. Only pages 1–3 were retained. That is not a full day.
 
