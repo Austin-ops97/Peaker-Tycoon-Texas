@@ -122,3 +122,7 @@ Twenty-four more price zips verified and landed in `Data/archives/ercot/2026-09-
 ### Desk source sample cycle (not trading)
 
 The Desk SOURCE strip shows one retained day-ahead hub row at a time. Chevron buttons and dots cycle Houston on 2021-02-10 (24.14 $/MWh), North on 2021-02-10 (27.18 $/MWh), and West on 2021-04-15 (18.87 $/MWh), each hour ending 01:00. Those decimals are copied from retained NP4 archive rows. The thumb button stays Review today’s plan. Coverage claims are unchanged.
+
+### Desk source sample cycle includes later years (not trading)
+
+The same one-row strip now also cycles Houston on 2022-07-15 (43.75 $/MWh), North on 2023-10-15 (22.41 $/MWh), and West on 2024-08-15 (20.02 $/MWh), hour ending 01:00. Those decimals were copied from retained NP4 zips after the sidecar matched. The thumb button stays Review today’s plan. Coverage claims are unchanged.
