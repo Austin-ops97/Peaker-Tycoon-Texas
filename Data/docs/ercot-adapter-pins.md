@@ -6,11 +6,18 @@ Labels: a row is **documented** only when a public page states it. **UNKNOWN** m
 
 The coverage manifest keeps `pinned_api_path: null` until an authenticated catalog response is saved and reviewed. Do not hand-edit a slug into that field.
 
-## Credentials and rights (GATE)
+## Credentials and rights
 
-Username, password, and the API Explorer primary subscription key are not in this repository. Spec §5.1: credentials stay in the ingestion service, never in packs, browser or app code, exports, or saves.
+Owner decision, recorded 2026-09-24. This is a rights lock, not an ingest. No secret is stored here.
 
-API registration is not redistribution permission for a commercial game (spec §3). `rights_status` on the coverage manifest stays `unresolved`. The [Data Access Portal](https://www.ercot.com/services/mdt/data-portal) page says users must read and accept that site's Terms of Use before using API Explorer. This repository does not record acceptance of those terms.
+- Austin accepted the Data Portal/API terms at https://www.ercot.com/help/terms/data-portal.
+- Intended use: internal build for Austin and coworkers only. The game is not for sale.
+- The owner accepts the realistic downside that the API account may be closed.
+- Commercial App Store redistribution is **not** authorized and must not be recorded as authorized.
+- Coverage manifest `rights_status` is `terms_accepted_internal_use_only` (owner-approved internal pack use).
+- Username, password, subscription key, and tokens remain **out of this repository**. Access is still GATE. That is separate from this rights wording.
+- Spec §5.1 still applies: credentials stay in the ingestion service, never in packs, the app, exports, or saves.
+- Next ingest, once credentials exist outside git, is unchanged: obtain a token, GET `https://api.ercot.com/api/public-reports`, and copy artifact hrefs exactly as returned. Never invent slugs.
 
 ## What is documented
 
@@ -89,16 +96,16 @@ EMIL display duration on those pages: 31 for NP4-190-CD, 7 for NP6-905-CD, N/A f
 - EWS Option values for these products.
 - Whether historic files actually cover 2021-02-01 through 2025-12-31 for the selected proxy points. The five-year gate stays red until bytes are ingested.
 - Settlement point IDs for the fictional sites. Still null.
-- Username, password, subscription key, tokens, terms acceptance, and commercial redistribution rights.
+- Username, password, subscription key, and tokens. They stay out of git. Access is GATE. Terms acceptance for internal use is already recorded above. Commercial App Store redistribution is not authorized.
 
 ## Next ingest steps after access exists
 
 Do these from a host that ERCOT's geographic limit allows (the known-limits page says regions outside the United States may be blocked). Keep secrets out of the repo.
 
-1. Register on API Explorer and accept the site terms in ERCOT's own UI. Store the subscription key outside git.
+1. Terms at https://www.ercot.com/help/terms/data-portal are already accepted for internal use. Store the subscription key outside git. Do not commit it.
 2. POST the documented token URL. Keep the returned tokens out of git.
 3. GET `https://api.ercot.com/api/public-reports` with the two documented headers. Save the raw response and its SHA-256 under the ingestion pipeline. Do not publish it as a price pack.
 4. From that response, copy the artifact `href` and archive `href` for `emilId` NP4-190-CD and NP6-905-CD exactly as returned. Those copied strings are the first adapter pin. If an ID is missing, stop. Do not guess a slug from the NP3-233-CD example.
 5. Repeat the lookup for NP4-180-ER and NP6-785-ER. If they are absent, the EMIL channel list points at Public and EWS, not Data Portal. Use a documented EWS or EMIL file route only after its URL is copied from a reply or page, or ask ERCOT. Do not synthesize `/api/public-reports/np4-180-er/...`.
 6. Stay inside 30 requests per minute and 1,000 historic files per download. On HTTP 429, back off. An incomplete page must not be marked complete (spec §5.2).
-7. Retain raw bytes, hash them, normalize, validate, and only then consider the coverage manifest. `source_batch_count` stays 0 until that ingest exists. Record redistribution rights in the manifest before any pack is shipped in the game.
+7. Retain raw bytes, hash them, normalize, validate, and only then consider the coverage manifest. `source_batch_count` stays 0 until that ingest exists. Internal pack rights are already `terms_accepted_internal_use_only`. Commercial App Store redistribution stays unauthorized.

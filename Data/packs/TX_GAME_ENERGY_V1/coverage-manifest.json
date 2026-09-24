@@ -5,7 +5,7 @@
   "claims_complete_source_coverage": false,
   "completeness": "incomplete",
   "source_batch_count": 0,
-  "rights_status": "unresolved",
+  "rights_status": "terms_accepted_internal_use_only",
   "quality_grade": "blocked",
   "source_period": {
     "start": "2021-02-01",
@@ -61,7 +61,7 @@
   },
   "gap_report": {
     "status": "blocked",
-    "reason": "DA and RT settlement coverage for the selected proxy points has not been ingested for 2021-02-01 through 2025-12-31. This repository does not contain SOURCE prices, settlement point IDs, pinned API paths, or publication timestamps. No commercial redistribution permission is claimed."
+    "reason": "DA and RT settlement coverage for the selected proxy points has not been ingested for 2021-02-01 through 2025-12-31. This repository does not contain SOURCE prices, settlement point IDs, pinned API paths, or publication timestamps. Owner-approved internal redistribution into packs only (Austin and coworkers; not for sale). Commercial App Store redistribution is not claimed."
   },
   "training_archive": {
     "archive_id": "TX_TRAIN_2019_2020",

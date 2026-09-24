@@ -27,4 +27,8 @@ Spec sections touched: §1 (platform overridden), §2.1 chronology and bootstrap
 
 ### Not claimed
 
-No SOURCE prices, settlement point IDs, pinned API paths, publication timestamps, or redistribution permission.
+No SOURCE prices, settlement point IDs, pinned API paths, or publication timestamps.
+
+### Rights lock (not an ingest)
+
+Coverage manifest `rights_status` is `terms_accepted_internal_use_only`. Austin accepted the Data Portal terms for an internal build (Austin and coworkers; the game is not for sale). Commercial App Store redistribution is not authorized. Credentials stay out of git. `source_batch_count` remains 0.
