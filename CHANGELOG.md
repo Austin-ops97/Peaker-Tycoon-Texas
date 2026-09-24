@@ -138,3 +138,7 @@ Thirty-two more price zips verified and landed in `Data/archives/ercot/2026-09-2
 ### Desk source sample cycle includes later years (not trading)
 
 The same one-row strip now also cycles Houston on 2022-07-15 (43.75 $/MWh), North on 2023-10-15 (22.41 $/MWh), and West on 2024-08-15 (20.02 $/MWh), hour ending 01:00. Those decimals were copied from retained NP4 zips after the sidecar matched. The thumb button stays Review today’s plan. Coverage claims are unchanged.
+
+### Desk hub names and Evidence date span (not trading)
+
+The Desk sample card still shows the settlement code and adds Houston, North, South, or West under `HB_HOUSTON`, `HB_NORTH`, `HB_SOUTH`, and `HB_WEST`. Other codes stay code-only. Settings → Evidence, under “Coverage is incomplete.”, shows the earliest and latest delivery dates in the bundled inventory. File counts stay on the detail page. `claims_complete_source_coverage` stays false.

@@ -156,6 +156,11 @@ private struct MarketSampleCard: View {
             Text(row.sourcePointId)
                 .font(.subheadline.weight(.semibold))
                 .foregroundStyle(ControlGlass.textSecondary(scheme))
+            if let friendlyHub {
+                Text(friendlyHub)
+                    .font(.caption)
+                    .foregroundStyle(ControlGlass.textSecondary(scheme))
+            }
             Text(deliveryStamp)
                 .font(.caption)
                 .foregroundStyle(ControlGlass.textTertiary(scheme))
@@ -169,7 +174,7 @@ private struct MarketSampleCard: View {
         .background(ControlGlass.surfaceRecessed(scheme))
         .clipShape(RoundedRectangle(cornerRadius: 8))
         .accessibilityElement(children: .combine)
-        .accessibilityLabel("\(row.sourcePointId), \(deliveryStamp), \(row.valueDecimal) \(row.unit). Sample \(position). Retained source sample. Coverage is incomplete.")
+        .accessibilityLabel("\(accessibleName), \(deliveryStamp), \(row.valueDecimal) \(row.unit). Sample \(position). Retained source sample. Coverage is incomplete.")
     }
 
     private var deliveryStamp: String {
@@ -178,6 +183,24 @@ private struct MarketSampleCard: View {
     }
 
     private var provenance: String {
-        "SOURCE row from a retained day-ahead archive sample. \(row.sourcePointId), delivery \(row.sourceLocalDate), hour ending \(row.hourEndingRaw ?? ""), \(row.valueDecimal) \(row.unit). Not a live fetch, not a proxy site mapping, and not a complete day. Coverage is incomplete."
+        "SOURCE row from a retained day-ahead archive sample. \(accessibleName), delivery \(row.sourceLocalDate), hour ending \(row.hourEndingRaw ?? ""), \(row.valueDecimal) \(row.unit). Not a live fetch, not a proxy site mapping, and not a complete day. Coverage is incomplete."
+    }
+
+    /// Plain name for the four hubs. Any other settlement code stays code-only.
+    private var friendlyHub: String? {
+        switch row.sourcePointId {
+        case "HB_HOUSTON": return "Houston"
+        case "HB_NORTH": return "North"
+        case "HB_SOUTH": return "South"
+        case "HB_WEST": return "West"
+        default: return nil
+        }
+    }
+
+    private var accessibleName: String {
+        if let friendlyHub {
+            return "\(row.sourcePointId), \(friendlyHub)"
+        }
+        return row.sourcePointId
     }
 }

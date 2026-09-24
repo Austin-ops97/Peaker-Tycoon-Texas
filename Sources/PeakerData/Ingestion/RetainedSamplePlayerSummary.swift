@@ -13,6 +13,8 @@ public struct RetainedSamplePlayerSummary: Equatable, Sendable {
 
     public let fileSentence: String
     public let dateSentence: String
+    /// Earliest and latest CSV delivery dates in the inventory. Nil when no dates are listed.
+    public let spanSentence: String?
     public let showsEmptyLiveFetch: Bool
     public let showsMissingReports: Bool
     /// Always false. This summary does not publish a coverage claim.
@@ -25,9 +27,20 @@ public struct RetainedSamplePlayerSummary: Equatable, Sendable {
         let realtimeFiles = realtime?.zipCount ?? 0
         let dayAheadDates = dayAhead?.deliveryDates.count ?? 0
         let realtimeDates = realtime?.deliveryDates.count ?? 0
+        let dates = inventory.products
+            .flatMap(\.deliveryDates)
+            .map(\.sourceLocalDate)
+            .sorted()
+        let spanSentence: String?
+        if let earliest = dates.first, let latest = dates.last {
+            spanSentence = "Saved delivery dates span \(earliest) → \(latest)."
+        } else {
+            spanSentence = nil
+        }
         return RetainedSamplePlayerSummary(
             fileSentence: "\(dayAheadFiles) day-ahead price files and \(realtimeFiles) real-time price files are saved with this build.",
             dateSentence: "Those files mention \(dayAheadDates) day-ahead delivery dates and \(realtimeDates) real-time delivery dates. A real-time date here is a short sample, not a full day, and it does not fill an empty day.",
+            spanSentence: spanSentence,
             showsEmptyLiveFetch: !inventory.emptyLiveFromToGates.isEmpty,
             showsMissingReports: !inventory.absentProducts.isEmpty
         )

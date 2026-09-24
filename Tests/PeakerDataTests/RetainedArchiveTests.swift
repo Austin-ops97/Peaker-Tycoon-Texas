@@ -255,11 +255,13 @@ private let retainedIngestedAt = "2026-09-24T00:00:00Z"
     #expect(summary.dateSentence.contains("66 day-ahead delivery dates"))
     #expect(summary.dateSentence.contains("53 real-time delivery dates"))
     #expect(summary.dateSentence.contains("not a full day"))
+    #expect(summary.spanSentence == "Saved delivery dates span 2021-02-09 → 2025-12-31.")
     #expect(!summary.showsEmptyLiveFetch)
     #expect(summary.showsMissingReports)
     let spoken = [
         summary.fileSentence,
         summary.dateSentence,
+        summary.spanSentence ?? "",
         RetainedSamplePlayerSummary.incompleteSentence,
         RetainedSamplePlayerSummary.emptyLiveFetchSentence,
         RetainedSamplePlayerSummary.missingReportsSentence,
@@ -283,6 +285,7 @@ private let retainedIngestedAt = "2026-09-24T00:00:00Z"
     let denied = RetainedSamplePlayerSummary.make(from: lying)
     #expect(denied.claimsCompleteSourceCoverage == false)
     #expect(denied.fileSentence.contains("0 day-ahead price files"))
+    #expect(denied.spanSentence == nil)
     #expect(!denied.showsEmptyLiveFetch)
     #expect(!denied.showsMissingReports)
 }

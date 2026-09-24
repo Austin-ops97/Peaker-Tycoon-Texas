@@ -57,11 +57,11 @@ struct SettingsPlaceholderView: View {
                     NavigationLink {
                         CoverageSamplePage(summary: summary)
                     } label: {
-                        coverageRow
+                        coverageRow(summary)
                     }
                     .accessibilityHint("Opens the sample summary.")
                 } else {
-                    coverageRow
+                    coverageRow(nil)
                 }
             }
             Section("Evidence legend") {
@@ -99,16 +99,32 @@ struct SettingsPlaceholderView: View {
         !zoneIdentifier.isEmpty && !isSet
     }
 
-    private var coverageRow: some View {
+    private func coverageRow(_ summary: RetainedSamplePlayerSummary?) -> some View {
         VStack(alignment: .leading, spacing: 2) {
             Text(RetainedSamplePlayerSummary.rowTitle)
                 .foregroundStyle(ControlGlass.textPrimary(scheme))
             Text(RetainedSamplePlayerSummary.incompleteSentence)
                 .font(.subheadline)
                 .foregroundStyle(ControlGlass.textSecondary(scheme))
+            if let span = summary?.spanSentence {
+                Text(span)
+                    .font(.subheadline)
+                    .foregroundStyle(ControlGlass.textSecondary(scheme))
+            }
         }
         .accessibilityElement(children: .combine)
-        .accessibilityLabel("\(RetainedSamplePlayerSummary.rowTitle). \(RetainedSamplePlayerSummary.incompleteSentence)")
+        .accessibilityLabel(coverageAccessibility(summary))
+    }
+
+    private func coverageAccessibility(_ summary: RetainedSamplePlayerSummary?) -> String {
+        var parts = [
+            "\(RetainedSamplePlayerSummary.rowTitle).",
+            RetainedSamplePlayerSummary.incompleteSentence,
+        ]
+        if let span = summary?.spanSentence {
+            parts.append(span)
+        }
+        return parts.joined(separator: " ")
     }
 
     private var valueText: String {
@@ -140,6 +156,10 @@ private struct CoverageSamplePage: View {
                 HStack(alignment: .firstTextBaseline, spacing: 8) {
                     EvidenceTag(label: .gate, provenance: Self.gateProvenance)
                     Text(RetainedSamplePlayerSummary.incompleteSentence)
+                        .foregroundStyle(ControlGlass.textPrimary(scheme))
+                }
+                if let span = summary.spanSentence {
+                    Text(span)
                         .foregroundStyle(ControlGlass.textPrimary(scheme))
                 }
                 Text(summary.fileSentence)
