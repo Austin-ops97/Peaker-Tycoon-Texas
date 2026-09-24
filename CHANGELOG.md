@@ -162,3 +162,7 @@ Settings → Evidence now says saved samples are a partial history and the campa
 ### Desk sample caption (not a live market)
 
 Under the Desk hub arrows, a muted line says “These are retained historical samples, not a live market.” It stays in the scroll content while the hubs cycle. The thumb button is unchanged. `claims_complete_source_coverage` stays false.
+
+### Settings section headers (not a behavior change)
+
+Settings home groups the existing rows under Local time, Tips, and Evidence. The time-zone picker, the two tip buttons, and the saved-sample sentences are unchanged. Closing Settings still returns to Desk with no extra banner.

@@ -245,6 +245,8 @@ import Testing
     #expect(settings.contains("Your local time zone"))
     #expect(settings.contains("TimeZonePickerView"))
     #expect(settings.contains("Show navigation tips"))
+    #expect(settings.contains("Section(\"Local time\")"))
+    #expect(settings.contains("Section(\"Tips\")"))
     #expect(settings.contains("Section(\"Evidence\")"))
     #expect(settings.contains("CoverageSamplePage"))
     #expect(settings.contains("spanSentence"))

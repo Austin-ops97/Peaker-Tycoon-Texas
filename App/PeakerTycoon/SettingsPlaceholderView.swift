@@ -11,7 +11,7 @@ struct SettingsPlaceholderView: View {
 
     var body: some View {
         List {
-            Section {
+            Section("Local time") {
                 NavigationLink {
                     TimeZonePickerView(identifier: $zoneIdentifier, onSaved: {})
                 } label: {
@@ -48,7 +48,7 @@ struct SettingsPlaceholderView: View {
                     }
                 }
             }
-            Section {
+            Section("Tips") {
                 Button("Show local time tip", action: onShowTip)
                 Button("Show navigation tips", action: onShowNavigationTips)
             }
