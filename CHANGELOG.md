@@ -12,6 +12,7 @@ Spec sections touched: §1 (platform overridden), §2.1 chronology and bootstrap
 - JSON schemas under `Schemas/phase0`.
 - iPhone placeholder shell with four tabs (Desk, Fuel, Plant, Settle), evidence chips, deadline chips, interrupt tray, and audit-chain shell.
 - Design inventory committed at `Design/Peaker-Tycoon-Texas/01-phone-first-screen-inventory-v1.md`.
+- Adapter notes at `Data/docs/ercot-adapter-pins.md`. Documents the public product-list URL and EMIL pages. Does not pin price artifact paths, secrets, or point IDs.
 
 ### Gates
 

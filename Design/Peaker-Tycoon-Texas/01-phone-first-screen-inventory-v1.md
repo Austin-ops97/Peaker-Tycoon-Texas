@@ -237,4 +237,4 @@ Art direction can deepen later; Phase 1 ships **Control Glass tokens + component
 - [x] Engineer §5 questions resolved  
 - [x] Supervisor required fix: §8 four-marker + verdict on P1-06 / §1.4.1  
 - [x] Nits: SOURCE spelled on tap sheet; §8 speed set on clock chrome  
-- [ ] In-repo under `Design/Peaker-Tycoon-Texas/01-phone-first-screen-inventory-v1.md` on Engineer Phase 0 PR (local copy ready to copy)
+- [x] In-repo under `Design/Peaker-Tycoon-Texas/01-phone-first-screen-inventory-v1.md` on Engineer Phase 0 PR (local copy ready to copy)

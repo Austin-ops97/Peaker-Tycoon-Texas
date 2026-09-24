@@ -57,7 +57,7 @@ bash Scripts/verify-phase0-stub.sh
 
 Before the campaign can ship (§5, §27.1, §29.2):
 
-- Resolve API paths and schemas from ERCOT's current OpenAPI, then pin the adapter version. This repo does not invent paths.
+- Resolve API paths and schemas from ERCOT's current OpenAPI, then pin the adapter version. This repo does not invent paths. Public pages read on 2026-09-24 are recorded in [`Data/docs/ercot-adapter-pins.md`](Data/docs/ercot-adapter-pins.md). The product-list URL is documented. Price artifact paths, the OpenAPI file URL, credentials, and redistribution rights are still GATE.
 - Authenticate with the documented token and subscription key. Credentials stay out of packs, the app, and saves.
 - Ingest DA and RT settlement coverage for every selected proxy point for every civil day from 2021-02-01 through 2025-12-31.
 - Record redistribution rights. None are claimed here.
