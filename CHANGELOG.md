@@ -32,3 +32,7 @@ No SOURCE prices, settlement point IDs, pinned API paths, or publication timesta
 ### Rights lock (not an ingest)
 
 Coverage manifest `rights_status` is `terms_accepted_internal_use_only`. Austin accepted the Data Portal terms for an internal build (Austin and coworkers; the game is not for sale). Commercial App Store redistribution is not authorized. Credentials stay out of git. `source_batch_count` remains 0.
+
+### Catalog pin (not an ingest)
+
+NP4-190-CD and NP6-905-CD `pinned_api_path` values are the artifact hrefs copied from the 2026-09-24 catalog extract (HTTP 200, 116 products, SHA-256 `59a7daaad4e8c64a1f5e6b808299ce43667c92d38c38fe27a4fb118975889789`). Archive hrefs are in the adapter notes. NP4-180-ER and NP6-785-ER are absent from that catalog; their paths stay null. No raw catalog JSON, tokens, or price bytes were added.

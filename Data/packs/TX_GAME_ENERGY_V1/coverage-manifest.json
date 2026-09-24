@@ -61,7 +61,7 @@
   },
   "gap_report": {
     "status": "blocked",
-    "reason": "DA and RT settlement coverage for the selected proxy points has not been ingested for 2021-02-01 through 2025-12-31. This repository does not contain SOURCE prices, settlement point IDs, pinned API paths, or publication timestamps. Owner-approved internal redistribution into packs only (Austin and coworkers; not for sale). Commercial App Store redistribution is not claimed."
+    "reason": "DA and RT settlement coverage for the selected proxy points has not been ingested for 2021-02-01 through 2025-12-31. This repository does not contain SOURCE prices, settlement point IDs, or publication timestamps. NP4-190-CD and NP6-905-CD artifact paths are pinned from the 2026-09-24 catalog extract and are not ingested. NP4-180-ER and NP6-785-ER are absent from the Public API catalog and are still required by spec section 5.1. Owner-approved internal redistribution into packs only (Austin and coworkers; not for sale). Commercial App Store redistribution is not claimed."
   },
   "training_archive": {
     "archive_id": "TX_TRAIN_2019_2020",
@@ -75,25 +75,25 @@
     {
       "product_id": "NP4-190-CD",
       "role": "dam_settlement_point_prices",
-      "status": "not_ingested",
-      "pinned_api_path": null
+      "status": "pinned_not_ingested",
+      "pinned_api_path": "https://api.ercot.com/api/public-reports/np4-190-cd/dam_stlmnt_pnt_prices"
     },
     {
       "product_id": "NP6-905-CD",
       "role": "rt_settlement_point_prices",
-      "status": "not_ingested",
-      "pinned_api_path": null
+      "status": "pinned_not_ingested",
+      "pinned_api_path": "https://api.ercot.com/api/public-reports/np6-905-cd/spp_node_zone_hub"
     },
     {
       "product_id": "NP4-180-ER",
       "role": "annual_hub_load_zone_da_archive",
-      "status": "not_ingested",
+      "status": "absent_from_public_reports_catalog",
       "pinned_api_path": null
     },
     {
       "product_id": "NP6-785-ER",
       "role": "annual_hub_load_zone_rt_archive",
-      "status": "not_ingested",
+      "status": "absent_from_public_reports_catalog",
       "pinned_api_path": null
     }
   ],

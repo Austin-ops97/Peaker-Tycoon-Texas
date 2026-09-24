@@ -57,7 +57,7 @@ bash Scripts/verify-phase0-stub.sh
 
 Before the campaign can ship (§5, §27.1, §29.2):
 
-- Resolve API paths and schemas from ERCOT's current OpenAPI, then pin the adapter version. This repo does not invent paths. Public pages read on 2026-09-24 are recorded in [`Data/docs/ercot-adapter-pins.md`](Data/docs/ercot-adapter-pins.md). The product-list URL is documented. Price artifact paths, the OpenAPI file URL, and credentials are still GATE. Internal pack use is owner-approved. Commercial App Store redistribution is not authorized.
+- NP4-190-CD and NP6-905-CD artifact paths are pinned from the 2026-09-24 catalog extract. See [`Data/docs/ercot-adapter-pins.md`](Data/docs/ercot-adapter-pins.md). Price bytes are not downloaded. NP4-180-ER and NP6-785-ER are absent from that catalog and still GATE. The OpenAPI file URL and credentials are still GATE. Internal pack use is owner-approved. Commercial App Store redistribution is not authorized.
 - Authenticate with the documented token and subscription key. Credentials stay out of packs, the app, and saves.
 - Ingest DA and RT settlement coverage for every selected proxy point for every civil day from 2021-02-01 through 2025-12-31.
 - Rights lock: `terms_accepted_internal_use_only` (Austin and coworkers, not for sale). Commercial App Store redistribution is not authorized. No prices have been ingested.

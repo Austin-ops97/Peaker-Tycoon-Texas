@@ -1,10 +1,10 @@
-# ERCOT adapter notes (not a pin of price paths)
+# ERCOT adapter notes
 
-Checked 2026-09-24 by reading public ERCOT pages. No API call was made. This file does not contain SOURCE prices, settlement point IDs, account secrets, or a fabricated artifact path.
+Public pages were read on 2026-09-24. A later catalog extract, also dated 2026-09-24, supplied the price-product hrefs below. This commit does not repeat that call, does not store the raw catalog JSON, and does not store tokens. It does not contain SOURCE prices, settlement point IDs, account secrets, or a slug that was not in that extract.
 
-Labels: a row is **documented** only when a public page states it. **UNKNOWN** means this pass did not find a page that states it. **GATE** means the campaign still cannot treat the item as resolved.
+Labels: **pinned** means the string was copied from the catalog extract. **ABSENT** means the extract's product list did not contain that EMIL ID. **UNKNOWN** means neither a public page nor the extract stated it. **GATE** means the campaign still cannot treat the item as resolved.
 
-The coverage manifest keeps `pinned_api_path: null` until an authenticated catalog response is saved and reviewed. Do not hand-edit a slug into that field.
+`pinned_api_path` on the coverage manifest is the artifact href only. The manifest schema has no separate archive field, so archive hrefs live in this file. No price bytes were downloaded.
 
 ## Credentials and rights
 
@@ -17,7 +17,7 @@ Owner decision, recorded 2026-09-24. This is a rights lock, not an ingest. No se
 - Coverage manifest `rights_status` is `terms_accepted_internal_use_only` (owner-approved internal pack use).
 - Username, password, subscription key, and tokens remain **out of this repository**. Access is still GATE. That is separate from this rights wording.
 - Spec §5.1 still applies: credentials stay in the ingestion service, never in packs, the app, exports, or saves.
-- Next ingest, once credentials exist outside git, is unchanged: obtain a token, GET `https://api.ercot.com/api/public-reports`, and copy artifact hrefs exactly as returned. Never invent slugs.
+- The catalog list was already fetched. Do not invent further slugs. Price bytes are still not downloaded.
 
 ## What is documented
 
@@ -40,7 +40,7 @@ A sample JSON body on that page, for product `NP3-233-CD` only, includes:
 - artifact endpoint: `https://api.ercot.com/api/public-reports/np3-233-cd/hourly_res_outage_cap`
 - archive: `https://api.ercot.com/api/public-reports/archive/np3-233-cd`
 
-Those three hrefs are an example for Hourly Resource Outage Capacity. They are not DAM or RT settlement paths. Artifact slugs are product-specific and must be copied from a live catalog response.
+Those three hrefs are an example for Hourly Resource Outage Capacity. They are not pins for this repository.
 
 Sections on that same page titled "Retrieving a list of reports within an EMIL Product" ("Coming Soon"), "Retrieving data from a EMIL Product Artifact", and "Getting history archives for an EMIL Product" did not include a request procedure in the page text read on 2026-09-24. Query parameters for an artifact are **UNKNOWN**.
 
@@ -87,10 +87,41 @@ EMIL display duration on those pages: 31 for NP4-190-CD, 7 for NP6-905-CD, N/A f
 
 [EWS GetReports](https://developer.ercot.com/applications/ews/Report%20Messages/GetReports/) documents a report-list message whose `Request/Option` is a Report ID, and whose reply includes a download URL. This pass did not find a sentence that equates EMIL Report Type ID 12331, 12301, 13060, or 13061 with that EWS Option. That mapping is **UNKNOWN**. Do not send those integers as if the equivalence were already proven.
 
+## Catalog extract (pins copied, not an ingest)
+
+Evidence from the supplied extract. The raw catalog body is not in git.
+
+- Fetch date: 2026-09-24 (11:22:43 America/Chicago)
+- Catalog HTTP status: 200
+- Product count: 116
+- SHA-256 of `public-reports-raw.json`: `59a7daaad4e8c64a1f5e6b808299ce43667c92d38c38fe27a4fb118975889789`
+
+### Pinned from the extract
+
+NP4-190-CD was FOUND. These strings are copied verbatim.
+
+- Artifact (this is `pinned_api_path` in the coverage manifest): `https://api.ercot.com/api/public-reports/np4-190-cd/dam_stlmnt_pnt_prices`
+- Archive: `https://api.ercot.com/api/public-reports/archive/np4-190-cd`
+- Product self (catalog link, not a price pin): `https://api.ercot.com/api/public-reports/np4-190-cd`
+- Bundle (catalog link, not a price pin): `https://api.ercot.com/api/public-reports/bundle/np4-190-cd`
+
+NP6-905-CD was FOUND. These strings are copied verbatim.
+
+- Artifact (this is `pinned_api_path` in the coverage manifest): `https://api.ercot.com/api/public-reports/np6-905-cd/spp_node_zone_hub`
+- Archive: `https://api.ercot.com/api/public-reports/archive/np6-905-cd`
+- Product self (catalog link, not a price pin): `https://api.ercot.com/api/public-reports/np6-905-cd`
+- Bundle (catalog link, not a price pin): `https://api.ercot.com/api/public-reports/bundle/np6-905-cd`
+
+No other artifact slug is pinned. The NP3-233-CD path above is only the public guide's example.
+
+### Absent from the Public API catalog (still GATE)
+
+NP4-180-ER and NP6-785-ER were ABSENT from the live `GET /api/public-reports` body (116 products; substring search negative). No path is synthesized for them. Spec §5.1 still requires the historic DAM and RT hub/load-zone archives. `pinned_api_path` stays null. Status on the coverage manifest is `absent_from_public_reports_catalog`.
+
+Next path for those two archives: a documented EWS or EMIL file route only after a URL is copied from a reply or a page, or ask ERCOT.
+
 ## What is still UNKNOWN / GATE
 
-- Artifact href and archive href for NP4-190-CD, NP6-905-CD, NP4-180-ER, and NP6-785-ER. Not invented.
-- Whether those four IDs are present on the live `GET /api/public-reports` catalog. NP4-190-CD and NP6-905-CD were named in the December 2023 beta list. Presence on 2026-09-24 was not checked.
 - OpenAPI document URL and artifact query parameters.
 - MIS directory paths (`MIS Posting Location` was N/A).
 - EWS Option values for these products.
@@ -104,8 +135,8 @@ Do these from a host that ERCOT's geographic limit allows (the known-limits page
 
 1. Terms at https://www.ercot.com/help/terms/data-portal are already accepted for internal use. Store the subscription key outside git. Do not commit it.
 2. POST the documented token URL. Keep the returned tokens out of git.
-3. GET `https://api.ercot.com/api/public-reports` with the two documented headers. Save the raw response and its SHA-256 under the ingestion pipeline. Do not publish it as a price pack.
-4. From that response, copy the artifact `href` and archive `href` for `emilId` NP4-190-CD and NP6-905-CD exactly as returned. Those copied strings are the first adapter pin. If an ID is missing, stop. Do not guess a slug from the NP3-233-CD example.
-5. Repeat the lookup for NP4-180-ER and NP6-785-ER. If they are absent, the EMIL channel list points at Public and EWS, not Data Portal. Use a documented EWS or EMIL file route only after its URL is copied from a reply or page, or ask ERCOT. Do not synthesize `/api/public-reports/np4-180-er/...`.
+3. The 2026-09-24 catalog GET is already recorded above (HTTP 200, 116 products, SHA-256 in this file). Do not commit the raw JSON or a token. This pass did not download price bytes.
+4. NP4-190-CD and NP6-905-CD artifact and archive hrefs are already copied above. Do not replace them with a guessed slug.
+5. NP4-180-ER and NP6-785-ER are absent. Do not invent a Public API path for either. Use a documented EWS or EMIL file route only after a URL is copied from a reply or page, or ask ERCOT.
 6. Stay inside 30 requests per minute and 1,000 historic files per download. On HTTP 429, back off. An incomplete page must not be marked complete (spec §5.2).
 7. Retain raw bytes, hash them, normalize, validate, and only then consider the coverage manifest. `source_batch_count` stays 0 until that ingest exists. Internal pack rights are already `terms_accepted_internal_use_only`. Commercial App Store redistribution stays unauthorized.
