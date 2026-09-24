@@ -142,3 +142,7 @@ The same one-row strip now also cycles Houston on 2022-07-15 (43.75 $/MWh), Nort
 ### Desk hub names and Evidence date span (not trading)
 
 The Desk sample card still shows the settlement code and adds Houston, North, South, or West under `HB_HOUSTON`, `HB_NORTH`, `HB_SOUTH`, and `HB_WEST`. Other codes stay code-only. Settings → Evidence, under “Coverage is incomplete.”, shows the earliest and latest delivery dates in the bundled inventory. File counts stay on the detail page. `claims_complete_source_coverage` stays false.
+
+### Desk plan button opens the selected sample (not trading)
+
+Review today’s plan still uses that title. It opens a read-only sheet for the hub row currently on the strip: friendly name, settlement code, delivery date, hour ending, and the sample price. The sheet says “Retained sample — not live.” Done, the drag indicator, and a swipe dismiss it and return to Desk. Reduce Motion turns off the present animation. The six-row cycle is unchanged. Nothing on the sheet confirms, trades, or submits. `claims_complete_source_coverage` stays false.

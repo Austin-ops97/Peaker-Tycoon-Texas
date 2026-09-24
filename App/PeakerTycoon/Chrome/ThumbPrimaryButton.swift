@@ -3,6 +3,7 @@ import SwiftUI
 /// One filled action in the thumb zone. Label color is the existing teal on-fill token.
 struct ThumbPrimaryButton: View {
     let title: String
+    var accessibilityHint: String? = nil
     let action: () -> Void
     @Environment(\.colorScheme) private var scheme
 
@@ -26,6 +27,6 @@ struct ThumbPrimaryButton: View {
                 .fill(ControlGlass.hairline(scheme))
                 .frame(height: 1)
         }
-        .accessibilityHint(title)
+        .accessibilityHint(accessibilityHint ?? title)
     }
 }

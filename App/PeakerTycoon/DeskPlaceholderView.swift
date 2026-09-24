@@ -3,47 +3,56 @@ import PeakerData
 import PeakerKernel
 
 /// Desk stub. Next up, then Today, then one retained SOURCE sample at a time. No offer ticket.
-/// The single primary button sits in the thumb zone and scrolls to Today.
+/// The single primary button opens a read-only sheet for the sample currently on the strip.
 struct DeskPlaceholderView: View {
     var daLocalClock: String? = nil
     @Environment(\.colorScheme) private var scheme
     @Environment(\.accessibilityReduceMotion) private var reduceMotion
     @State private var sampleIndex = 0
+    @State private var showSampleReview = false
 
     private var samples: [NormalizedObservation] { MarketSampleArchive.rows }
 
+    private var activeSample: NormalizedObservation? {
+        guard !samples.isEmpty else { return nil }
+        return samples[sampleIndex % samples.count]
+    }
+
     var body: some View {
-        ScrollViewReader { proxy in
-            VStack(spacing: 0) {
-                ScrollView {
-                    VStack(alignment: .leading, spacing: 16) {
-                        nextUpCard
-                        todayCard
-                            .id(Self.todayID)
-                        DeadlineChip(
-                            title: "DA submission",
-                            centralLabel: "10:00 CT",
-                            localClock: daLocalClock,
-                            evidence: .source,
-                            provenance: "Build Spec §8, citing S6: ERCOT DAM inputs are due at 10:00 Central. This chip is a placeholder, not a live countdown and not a publication timestamp."
-                        )
-                        if !samples.isEmpty {
-                            sampleSection
-                        }
+        VStack(spacing: 0) {
+            ScrollView {
+                VStack(alignment: .leading, spacing: 16) {
+                    nextUpCard
+                    todayCard
+                    DeadlineChip(
+                        title: "DA submission",
+                        centralLabel: "10:00 CT",
+                        localClock: daLocalClock,
+                        evidence: .source,
+                        provenance: "Build Spec §8, citing S6: ERCOT DAM inputs are due at 10:00 Central. This chip is a placeholder, not a live countdown and not a publication timestamp."
+                    )
+                    if !samples.isEmpty {
+                        sampleSection
                     }
-                    .padding(16)
-                    .frame(maxWidth: .infinity, alignment: .leading)
                 }
-                ThumbPrimaryButton(title: "Review today’s plan") {
-                    var transaction = Transaction()
-                    transaction.disablesAnimations = reduceMotion
-                    withTransaction(transaction) {
-                        proxy.scrollTo(Self.todayID, anchor: .top)
-                    }
+                .padding(16)
+                .frame(maxWidth: .infinity, alignment: .leading)
+            }
+            ThumbPrimaryButton(
+                title: "Review today’s plan",
+                accessibilityHint: "Opens the retained sample on screen. Not live."
+            ) {
+                var transaction = Transaction()
+                transaction.disablesAnimations = reduceMotion
+                withTransaction(transaction) {
+                    showSampleReview = true
                 }
             }
         }
         .background(ControlGlass.surfaceBase(scheme).ignoresSafeArea())
+        .sheet(isPresented: $showSampleReview) {
+            RetainedSampleSheet(row: activeSample)
+        }
     }
 
     private var nextUpCard: some View {
@@ -142,8 +151,6 @@ struct DeskPlaceholderView: View {
         guard count > 1 else { return }
         sampleIndex = (sampleIndex + delta + count) % count
     }
-
-    private static let todayID = "desk-today"
 }
 
 private struct MarketSampleCard: View {
@@ -156,7 +163,7 @@ private struct MarketSampleCard: View {
             Text(row.sourcePointId)
                 .font(.subheadline.weight(.semibold))
                 .foregroundStyle(ControlGlass.textSecondary(scheme))
-            if let friendlyHub {
+            if let friendlyHub = friendlyHubName(for: row.sourcePointId) {
                 Text(friendlyHub)
                     .font(.caption)
                     .foregroundStyle(ControlGlass.textSecondary(scheme))
@@ -186,21 +193,88 @@ private struct MarketSampleCard: View {
         "SOURCE row from a retained day-ahead archive sample. \(accessibleName), delivery \(row.sourceLocalDate), hour ending \(row.hourEndingRaw ?? ""), \(row.valueDecimal) \(row.unit). Not a live fetch, not a proxy site mapping, and not a complete day. Coverage is incomplete."
     }
 
-    /// Plain name for the four hubs. Any other settlement code stays code-only.
-    private var friendlyHub: String? {
-        switch row.sourcePointId {
-        case "HB_HOUSTON": return "Houston"
-        case "HB_NORTH": return "North"
-        case "HB_SOUTH": return "South"
-        case "HB_WEST": return "West"
-        default: return nil
-        }
-    }
-
     private var accessibleName: String {
-        if let friendlyHub {
+        if let friendlyHub = friendlyHubName(for: row.sourcePointId) {
             return "\(row.sourcePointId), \(friendlyHub)"
         }
         return row.sourcePointId
+    }
+}
+
+/// Read-only look at the sample currently on the Desk strip. Nothing here is submitted.
+private struct RetainedSampleSheet: View {
+    let row: NormalizedObservation?
+    @Environment(\.dismiss) private var dismiss
+    @Environment(\.colorScheme) private var scheme
+
+    var body: some View {
+        NavigationStack {
+            VStack(alignment: .leading, spacing: 12) {
+                if let row {
+                    sampleBody(row)
+                } else {
+                    Text("No retained sample is loaded.")
+                        .font(.body)
+                        .foregroundStyle(ControlGlass.textPrimary(scheme))
+                    Text("Retained sample — not live.")
+                        .font(.body)
+                        .foregroundStyle(ControlGlass.textSecondary(scheme))
+                }
+                Spacer()
+            }
+            .padding(16)
+            .frame(maxWidth: .infinity, alignment: .leading)
+            .background(ControlGlass.surfaceBase(scheme).ignoresSafeArea())
+            .navigationTitle("Today’s plan")
+            .navigationBarTitleDisplayMode(.inline)
+            .toolbar {
+                ToolbarItem(placement: .confirmationAction) {
+                    Button("Done") { dismiss() }
+                }
+            }
+        }
+        .presentationDetents([.medium])
+        .presentationDragIndicator(.visible)
+    }
+
+    private func sampleBody(_ row: NormalizedObservation) -> some View {
+        let friendly = friendlyHubName(for: row.sourcePointId)
+        return VStack(alignment: .leading, spacing: 8) {
+            Text(friendly ?? row.sourcePointId)
+                .font(.title3.weight(.semibold))
+                .foregroundStyle(ControlGlass.textPrimary(scheme))
+            if friendly != nil {
+                Text(row.sourcePointId)
+                    .font(.subheadline)
+                    .foregroundStyle(ControlGlass.textSecondary(scheme))
+            }
+            Text(row.sourceLocalDate)
+                .font(.body)
+                .foregroundStyle(ControlGlass.textPrimary(scheme))
+            Text("Hour ending \(row.hourEndingRaw ?? "") CT")
+                .font(.body)
+                .foregroundStyle(ControlGlass.textSecondary(scheme))
+            Text("\(row.valueDecimal) \(row.unit)")
+                .font(.body.monospacedDigit())
+                .foregroundStyle(ControlGlass.textPrimary(scheme))
+            Text("Retained sample — not live.")
+                .font(.body)
+                .foregroundStyle(ControlGlass.textPrimary(scheme))
+            Text("Not the whole day. Coverage is incomplete.")
+                .font(.caption)
+                .foregroundStyle(ControlGlass.textTertiary(scheme))
+        }
+        .accessibilityElement(children: .combine)
+    }
+}
+
+/// Plain name for the four hubs. Any other settlement code stays code-only.
+private func friendlyHubName(for code: String) -> String? {
+    switch code {
+    case "HB_HOUSTON": return "Houston"
+    case "HB_NORTH": return "North"
+    case "HB_SOUTH": return "South"
+    case "HB_WEST": return "West"
+    default: return nil
     }
 }
