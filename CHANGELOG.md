@@ -66,3 +66,7 @@ Thirteen more price zips verified and landed in `Data/archives/ercot/2026-09-24/
 ### Shell clock scrub and Desk sample (not trading, not coverage)
 
 Pause still holds the displayed GAME instant at the morning-brief anchor. 1×, 8×, and 32× add that many game seconds per real second in the app shell only. Until next decision matches 1× and pauses at the placeholder 10:00 CT chip. Reduce Motion still advances the digits, with no ornamental animation. The scrub does not call `CampaignKernel`. Desk shows a read-only card for bundled NP4 rows `HB_HOUSTON` 24.14 and `HB_NORTH` 27.18 ($/MWh, 2021-02-10 hour ending 01:00) when `market-sample-np4.csv` is in the app. There is no submit button. Coverage claims are unchanged.
+
+### Design 04 iPhone nav clarity (stubs only)
+
+`Design/Peaker-Tycoon-Texas/04-iphone-nav-clarity-v1.md` is the handoff. Tabs use filled icons plus plain names. Desk stacks Next up, then Today, then a muted retained-price sample. Each tab has one thumb-zone button. Fuel closed shows the four-marker silhouette and hides Confirm. Settle’s explainer stays in plain language. Settings adds a clock row, a searchable zone list, and “Use my phone’s time zone.” A three-beat coach sits under the clock and can be replayed from Settings. Coverage claims are unchanged.

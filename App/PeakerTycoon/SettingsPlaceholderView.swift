@@ -4,15 +4,33 @@ import PeakerKernel
 struct SettingsPlaceholderView: View {
     @Binding var zoneIdentifier: String
     let onShowTip: () -> Void
+    let onShowNavigationTips: () -> Void
     @State private var reduceMotionNoted = false
     @Environment(\.colorScheme) private var scheme
 
     var body: some View {
         List {
             Section {
-                LabeledContent("Your local time zone", value: valueText)
+                NavigationLink {
+                    TimeZonePickerView(identifier: $zoneIdentifier, onSaved: {})
+                } label: {
+                    HStack(spacing: 12) {
+                        Image(systemName: "clock")
+                            .foregroundStyle(ControlGlass.textSecondary(scheme))
+                            .accessibilityHidden(true)
+                        VStack(alignment: .leading, spacing: 2) {
+                            Text("Your local time zone")
+                                .foregroundStyle(ControlGlass.textPrimary(scheme))
+                            Text(valueText)
+                                .font(.subheadline)
+                                .foregroundStyle(ControlGlass.textSecondary(scheme))
+                        }
+                    }
+                    .accessibilityElement(children: .combine)
                     .accessibilityLabel("Your local time zone. \(valueText).")
-                Text("Deadlines always show CT. Local is optional and only appears when set.")
+                    .accessibilityHint("Opens the time zone list.")
+                }
+                Text("Game deadlines always use Central Time. Local time is optional.")
                     .font(.caption)
                     .foregroundStyle(ControlGlass.textSecondary(scheme))
                 if saveFailed {
@@ -23,17 +41,15 @@ struct SettingsPlaceholderView: View {
                         .font(.caption)
                         .foregroundStyle(ControlGlass.textSecondary(scheme))
                 }
-                NavigationLink {
-                    TimeZonePickerView(identifier: $zoneIdentifier, onSaved: {})
-                } label: {
-                    Text(isSet ? "Change…" : "Set time zone…")
-                }
                 if isSet {
                     Button("Clear local time", role: .destructive) {
                         zoneIdentifier = ""
                     }
                 }
+            }
+            Section {
                 Button("Show local time tip", action: onShowTip)
+                Button("Show navigation tips", action: onShowNavigationTips)
             }
             Section("Evidence legend") {
                 ForEach(EvidenceLabel.allCases, id: \.self) { label in

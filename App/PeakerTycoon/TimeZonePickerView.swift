@@ -8,27 +8,48 @@ struct TimeZonePickerView: View {
     @State private var query = ""
 
     var body: some View {
-        List(filtered, id: \.self) { zoneID in
-            Button {
-                guard TimeZone(identifier: zoneID) != nil else { return }
-                identifier = zoneID
-                onSaved()
-                dismiss()
-            } label: {
-                VStack(alignment: .leading, spacing: 2) {
-                    Text(LocalTwinClock.friendlyLabel(zoneID))
-                        .font(.body)
-                        .foregroundStyle(ControlGlass.textPrimary(scheme))
-                    if identifier == zoneID {
-                        Text("Selected")
-                            .font(.caption)
-                            .foregroundStyle(ControlGlass.accentTeal)
+        List {
+            Section {
+                Button("Use my phone’s time zone") {
+                    let phoneZone = TimeZone.current.identifier
+                    guard TimeZone(identifier: phoneZone) != nil else { return }
+                    identifier = phoneZone
+                    onSaved()
+                    dismiss()
+                }
+                .font(.body.weight(.semibold))
+                if TimeZone(identifier: identifier) != nil {
+                    Button("Clear local time", role: .destructive) {
+                        identifier = ""
+                        onSaved()
+                        dismiss()
+                    }
+                }
+            }
+            Section {
+                ForEach(filtered, id: \.self) { zoneID in
+                    Button {
+                        guard TimeZone(identifier: zoneID) != nil else { return }
+                        identifier = zoneID
+                        onSaved()
+                        dismiss()
+                    } label: {
+                        VStack(alignment: .leading, spacing: 2) {
+                            Text(LocalTwinClock.friendlyLabel(zoneID))
+                                .font(.body)
+                                .foregroundStyle(ControlGlass.textPrimary(scheme))
+                            if identifier == zoneID {
+                                Text("Selected")
+                                    .font(.caption)
+                                    .foregroundStyle(ControlGlass.accentTeal)
+                            }
+                        }
                     }
                 }
             }
         }
         .searchable(text: $query, prompt: "Search time zones")
-        .navigationTitle("Set time zone…")
+        .navigationTitle("Local time zone")
         .navigationBarTitleDisplayMode(.inline)
     }
 

@@ -154,14 +154,14 @@ Non-blocking tip cards (sheet or bottom card **in chrome band**, never over List
 
 ## 9. Engineer checklist
 
-- [ ] Tab bar: 4 tabs, icon+text, teal selected, VoiceOver plain names  
-- [ ] Desk: Next-up card above Today; one primary CTA `Review today’s plan`  
-- [ ] Fuel closed: silhouette four-marker + copy above; Confirm hidden; CTA `See gas day timeline`  
-- [ ] Plant: three fields only; CTA `View unit status`  
-- [ ] Settle empty: plain empty + `How settlement works` sheet  
-- [ ] Settings twin: icon + chevron + hint + searchable picker + Use phone TZ / Clear  
-- [ ] Coach optional; never occludes scroll; respects 03 twin rules  
-- [ ] No Lens / 7-role / live trading chrome  
+- [x] Tab bar: 4 tabs, icon+text, teal selected, VoiceOver plain names  
+- [x] Desk: Next-up card above Today; one primary CTA `Review today’s plan`  
+- [x] Fuel closed: silhouette four-marker + copy above; Confirm hidden; CTA `See gas day timeline`  
+- [x] Plant: three fields only; CTA `View unit status`  
+- [x] Settle empty: plain empty + `How settlement works` sheet  
+- [x] Settings twin: icon + chevron + hint + searchable picker + Use phone TZ / Clear  
+- [x] Coach optional; never occludes scroll; respects 03 twin rules  
+- [x] No Lens / 7-role / live trading chrome  
 - [x] Supervisor PASS stamped 2026-09-24 — land doc at `Design/Peaker-Tycoon-Texas/04-iphone-nav-clarity-v1.md` on PR #1
 
 ---

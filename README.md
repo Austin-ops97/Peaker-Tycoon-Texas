@@ -31,7 +31,9 @@ Root navigation is frozen:
 
 Global chrome: Central game clock plus a local-time twin, a speed chip, a non-modal interrupt tray with an empty publisher, and Settings (evidence legend and accessibility stubs). There is no role switcher. `RoleId` exists only in the kernel.
 
-The clock starts at the GAME morning-brief anchor (2021-02-01 08:00 CT). It is not the phone clock. Pause holds that instant. 1×, 8×, and 32× scrub the displayed label by that many game seconds per real second. Until next decision matches 1× and pauses at the placeholder 10:00 CT deadline. The scrub does not run the kernel. Desk shows a read-only retained NP4 sample (`HB_HOUSTON`, `HB_NORTH`) when the bundled CSV is present. There is no offer ticket.
+The clock starts at the GAME morning-brief anchor (2021-02-01 08:00 CT). It is not the phone clock. Pause holds that instant. 1×, 8×, and 32× scrub the displayed label by that many game seconds per real second. Until next decision matches 1× and pauses at the placeholder 10:00 CT deadline. The scrub does not run the kernel.
+
+Design 04 (`Design/Peaker-Tycoon-Texas/04-iphone-nav-clarity-v1.md`) sets the stub hierarchy. Desk leads with Next up and `Review today’s plan`, then Today, then a muted retained NP4 sample (`HB_HOUSTON`, `HB_NORTH`). Fuel closed shows the four gas-day markers and no confirm button. Plant shows state, MW, and fuel flow as blanks. Settle’s only action explains settlement in plain language. There is no offer ticket.
 
 Open `App/PeakerTycoon.xcodeproj` in Xcode 16 or newer on a Mac. The app target links the local `PeakerKernel` and `PeakerData` packages. This environment has no Mac worker and cannot run `xcodebuild`, so the SwiftUI target has not been compiled here.
 

@@ -18,10 +18,10 @@ enum RootTab: String, Hashable, CaseIterable {
 
     var systemImage: String {
         switch self {
-        case .desk: return "briefcase"
-        case .fuel: return "flame"
+        case .desk: return "briefcase.fill"
+        case .fuel: return "flame.fill"
         case .plant: return "bolt.fill"
-        case .settle: return "doc.text.magnifyingglass"
+        case .settle: return "doc.text.fill"
         }
     }
 }
