@@ -41,4 +41,8 @@ NP4-190-CD and NP6-905-CD `pinned_api_path` values are the artifact hrefs copied
 
 Control Glass v1 is committed at `Design/Peaker-Tycoon-Texas/02-phase1-shell-polish-control-glass-v1.md`. It is a design document only. No chrome tokens were applied to PeakerKernel, PeakerData, or the app.
 
-Six verified price-instance zips, two artifact schemas, and two archive listings are under `Data/archives/ercot/2026-09-24/`, with sha256 sidecars and `RETENTION.md`. `source_batch_count` moved from 0 to 6. NP4-190-CD and NP6-905-CD status is `partial_batches_retained`. `claims_complete_source_coverage` stays false. The three RT zips are 2026-09-24 posts and are pipeline proof, not campaign days. ER products stay GATE.
+Six verified price-instance zips, two artifact schemas, and two archive listings are under `Data/archives/ercot/2026-09-24/`, with sha256 sidecars and `RETENTION.md`. That commit set `source_batch_count` to 6. NP4-190-CD and NP6-905-CD status is `partial_batches_retained`. `claims_complete_source_coverage` stays false. The three RT zips are 2026-09-24 posts and are pipeline proof, not campaign days. ER products stay GATE.
+
+### Batch 2 retain (still not coverage complete)
+
+Six more NP6 price zips verified and landed in `Data/archives/ercot/2026-09-24/batch2/`. `source_batch_count` moved from 6 to 12. Working artifact query is `deliveryDateFrom` and `deliveryDateTo` (`page` for later pages). Bare `deliveryDate` returned 400. 2021-02-15 is empty on both artifact endpoints. NP6 archive page 26 is the first probed page at or before 2025-12-31; page 197 is still in February 2021. The new zips’ delivery stamps are 2025-12-15, 2025-12-31 (three intervals), 2025-02-16, and 2021-02-09. They are samples, not proxy coverage. Point IDs stay null. ER products stay GATE.

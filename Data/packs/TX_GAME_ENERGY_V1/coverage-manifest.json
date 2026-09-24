@@ -4,7 +4,7 @@
   "evidence": "GATE",
   "claims_complete_source_coverage": false,
   "completeness": "incomplete",
-  "source_batch_count": 6,
+  "source_batch_count": 12,
   "rights_status": "terms_accepted_internal_use_only",
   "quality_grade": "blocked",
   "source_period": {
@@ -61,7 +61,7 @@
   },
   "gap_report": {
     "status": "blocked",
-    "reason": "Six verified price-instance zips are retained under Data/archives/ercot/2026-09-24 (3 NP4-190-CD, 3 NP6-905-CD). That is source_batch_count. It is not five-year coverage. claims_complete_source_coverage stays false. Proxy covered_local_dates stay empty and source_point_id stays null; CSV settlement point names were not assigned to fictional sites. DAM CSV DeliveryDate values proven in-file are 2025-12-30 (docId 1176609385), 2025-12-31 (docId 1177000125), and 2026-01-01 (docId 1177367606, post 2025-12-31, delivery after campaign end). Those are market files, not proxy-point days. The 3 NP6-905-CD zips are 2026-09-24 posts (docIds 1278458786, 1278455140, 1278451464) with DeliveryDate 2026-09-24, outside campaign end 2025-12-31. They are SOURCE pipeline proof, not campaign coverage days. NP4-180-ER and NP6-785-ER are absent from the Public API catalog and are still required by spec section 5.1. Next research for those two is an EWS/EMIL historic route. No Public API slug is invented. Owner-approved internal redistribution into packs only (Austin and coworkers; not for sale). Commercial App Store redistribution is not claimed."
+    "reason": "source_batch_count is 12 verified price-instance zips. Batch 1 under Data/archives/ercot/2026-09-24 is 3 NP4-190-CD DAM zips plus 3 NP6-905-CD zips. Those 3 RT zips posted 2026-09-24 (docIds 1278458786, 1278455140, 1278451464) and are pipeline proof, not campaign coverage days. Batch 2 under Data/archives/ercot/2026-09-24/batch2 adds 6 in-range NP6 zips. Proven CSV delivery stamps, each one interval: 2025-12-15 docId 1171744358 hour 22 interval 2; 2025-12-31 docIds 1177533089 (hour 24 interval 3), 1177529812 (hour 24 interval 2), 1177524979 (hour 24 interval 1); 2025-02-16 docId 1078358046 hour 19 interval 4; 2021-02-09 docId 757717538 hour 3 interval 2 (Uri-window sample). JSON listings and artifact pages are not counted. Working artifact query is deliveryDateFrom={date}&deliveryDateTo={date} plus &page=N. Bare deliveryDate= returned HTTP 400. Page-capped samples: NP4 2025-12-31 is 25848 rows / 26 pages; NP4 2025-02-15 is 23352 / 24; NP6 2025-12-31 is 104544 / 105; NP6 2025-02-15 is 94560 / 95. GATE: 2021-02-15 is empty (totalRecords 0) on the live artifact API for both products, so early-campaign days need archive ?download= or the ER products, not deliveryDateFrom/To alone. NP6 archive page param is page. Page 26 is the first probed page at or before 2025-12-31 (546 of 1000 posts in-era). Page 197 is still in February 2021. NP4 archive pages 2-5 are listings only. Proxy covered_local_dates stay empty and source_point_id stays null. Observed settlement point strings are listed in batch2/observed-settlement-point-names.txt and are not mapped to fictional sites. claims_complete_source_coverage stays false. This is not five-year coverage. NP4-180-ER and NP6-785-ER stay absent from the Public API catalog and are still required by spec section 5.1. Next research is an EWS/EMIL historic route. No Public API slug is invented. Owner-approved internal redistribution into packs only (Austin and coworkers; not for sale). Commercial App Store redistribution is not claimed."
   },
   "training_archive": {
     "archive_id": "TX_TRAIN_2019_2020",
