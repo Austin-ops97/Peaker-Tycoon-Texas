@@ -6,6 +6,8 @@ import PeakerKernel
 /// The single primary button opens a read-only sheet for the sample currently on the strip.
 struct DeskPlaceholderView: View {
     var daLocalClock: String? = nil
+    /// True after the coach is finished or the player chose Not now. Not a second tour.
+    var showsNextStep: Bool = false
     @Environment(\.colorScheme) private var scheme
     @Environment(\.accessibilityReduceMotion) private var reduceMotion
     @State private var sampleIndex = 0
@@ -23,6 +25,9 @@ struct DeskPlaceholderView: View {
             ScrollView {
                 VStack(alignment: .leading, spacing: 16) {
                     nextUpCard
+                    if showsNextStep {
+                        nextStepLine
+                    }
                     todayCard
                     DeadlineChip(
                         title: "DA submission",
@@ -78,6 +83,14 @@ struct DeskPlaceholderView: View {
                 .stroke(ControlGlass.hairline(scheme), lineWidth: 1)
         )
         .accessibilityElement(children: .combine)
+    }
+
+    private var nextStepLine: some View {
+        Text("Next, use the arrows to cycle saved hubs, or open Review today’s plan.")
+            .font(.subheadline)
+            .foregroundStyle(ControlGlass.textSecondary(scheme))
+            .fixedSize(horizontal: false, vertical: true)
+            .accessibilityHint("The arrows are on the saved hub samples. Review today’s plan opens the one on screen.")
     }
 
     private var todayCard: some View {

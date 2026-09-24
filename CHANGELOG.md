@@ -186,3 +186,7 @@ Tab names stay Desk, Fuel, Plant, and Settle, with a short hint after each name.
 ### Larger text reflow (not a copy change)
 
 At accessibility text sizes the clock and coach scroll in a band above the tabs, so they do not cover Desk or the thumb button. The clock and speed chip stack, thumb-button titles wrap, hub dots can drop under the arrows, and the plan and settlement sheets scroll. Default text size keeps the clock on one row beside the speed chip. Visible sentences are unchanged.
+
+### Desk line after the coach (not a second tour)
+
+After Got it finishes the three tips, or after Not now, Desk shows “Next, use the arrows to cycle saved hubs, or open Review today’s plan.” It sits in the Desk scroll under Next up. It hides again while a tip is on screen, including Settings → Show navigation tips. The thumb button and the clock stay where they were.

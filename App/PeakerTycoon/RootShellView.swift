@@ -104,6 +104,11 @@ struct RootShellView: View {
         return nil
     }
 
+    /// Quiet Desk line after Got it finishes the tips, or after Not now. Hidden while a tip is on screen.
+    private var showsDeskNextStep: Bool {
+        coachHeld || nextCoachBeat == nil
+    }
+
     /// Coach sits under the clock only after the local-time tip is out of the way.
     private var showCoach: Bool {
         let tipPending = showTip || (!tipDismissed && zoneIdentifier.isEmpty)
@@ -148,7 +153,7 @@ struct RootShellView: View {
 
     private var tabPages: some View {
         TabView(selection: $tab) {
-            tabPage(DeskPlaceholderView(daLocalClock: daLocalClock), tab: .desk)
+            tabPage(DeskPlaceholderView(daLocalClock: daLocalClock, showsNextStep: showsDeskNextStep), tab: .desk)
             tabPage(FuelPlaceholderView(), tab: .fuel)
             tabPage(PlantPlaceholderView(), tab: .plant)
             tabPage(SettlePlaceholderView(), tab: .settle)
