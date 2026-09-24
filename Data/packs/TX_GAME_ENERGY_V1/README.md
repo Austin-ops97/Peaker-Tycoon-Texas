@@ -2,7 +2,7 @@
 
 This directory is the in-repo published manifest path for the Phase 0 five-year gate (§5, §27.1).
 
-`coverage-manifest.json` is still a **GATE** document. It names the campaign era and the fictional proxy sites. `source_batch_count` is 25 because twenty-five price-instance zips verified (6 + 6 + 13 in `Data/archives/ercot/2026-09-24/batch3/`). That count is not five-year coverage. September 2026 RT samples are not coverage days. Live From/To is empty for 2021-02-15, 2021-08-15, 2022-02-15, and 2023-08-15. Proxy `source_point_id` values stay null. `operating_days` stays empty.
+`coverage-manifest.json` is still a **GATE** document. It names the campaign era and the fictional proxy sites. `source_batch_count` is 49 because forty-nine price-instance zips verified (6 + 6 + 13 + 24 in `Data/archives/ercot/2026-09-24/batch4/`). That count is not five-year coverage. September 2026 RT samples are not coverage days. Live From/To is empty for 2021-02-15, 2021-08-15, 2022-02-15, 2023-01-15, and 2023-08-15. Proxy `source_point_id` values stay null. `operating_days` stays empty.
 
 `claims_complete_source_coverage` is `false`. `rights_status` is `terms_accepted_internal_use_only` (internal packs for Austin and coworkers; not for sale). Commercial App Store redistribution is not authorized. `five_year_coverage_gate` and `campaign_chronology` stay fail-closed until every selected proxy has a point ID and every campaign day is present, and until every source product status is `ingested`.
 

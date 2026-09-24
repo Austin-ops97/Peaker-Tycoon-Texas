@@ -70,3 +70,7 @@ Pause still holds the displayed GAME instant at the morning-brief anchor. 1×, 8
 ### Design 04 iPhone nav clarity (stubs only)
 
 `Design/Peaker-Tycoon-Texas/04-iphone-nav-clarity-v1.md` is the handoff. Tabs use filled icons plus plain names. Desk stacks Next up, then Today, then a muted retained-price sample. Each tab has one thumb-zone button. Fuel closed shows the four-marker silhouette and hides Confirm. Settle’s explainer stays in plain language. Settings adds a clock row, a searchable zone list, and “Use my phone’s time zone.” A three-beat coach sits under the clock and can be replayed from Settings. Coverage claims are unchanged.
+
+### Batch 4 retain (still not coverage complete)
+
+Twenty-four more price zips verified and landed in `Data/archives/ercot/2026-09-24/batch4/` (10 NP6 mid-campaign landmarks, each one interval, and 14 NP4 archive posts 2021-05-16 through 2025-09-15). `source_batch_count` moved from 25 to 49. No zip was excluded. Live From/To is empty for 2023-01-15 on both products. Page samples for 2025-06-15, 2024-10-15, and 2024-01-15 are not full days. `claims_complete_source_coverage` stays false. ER products stay GATE.

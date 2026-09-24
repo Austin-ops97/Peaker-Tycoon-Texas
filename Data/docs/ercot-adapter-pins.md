@@ -4,7 +4,7 @@ Public pages were read on 2026-09-24. A later catalog extract, also dated 2026-0
 
 Labels: **pinned** means the string was copied from the catalog extract. **ABSENT** means the extract's product list did not contain that EMIL ID. **UNKNOWN** means neither a public page nor the extract stated it. **GATE** means the campaign still cannot treat the item as resolved.
 
-`pinned_api_path` on the coverage manifest is the artifact href only. The manifest schema has no separate archive field, so archive hrefs live in this file. SHA-256 inventories are the `RETENTION.md` files under `Data/archives/ercot/2026-09-24/`, `batch2/`, and `batch3/`. `source_batch_count` is 25 verified price-instance zips. Coverage is partial. NP4-180-ER and NP6-785-ER remain GATE.
+`pinned_api_path` on the coverage manifest is the artifact href only. The manifest schema has no separate archive field, so archive hrefs live in this file. SHA-256 inventories are the `RETENTION.md` files under `Data/archives/ercot/2026-09-24/`, `batch2/`, `batch3/`, and `batch4/`. `source_batch_count` is 49 verified price-instance zips. Coverage is partial. NP4-180-ER and NP6-785-ER remain GATE.
 
 ## Credentials and rights
 
@@ -199,6 +199,14 @@ GATE: live `deliveryDateFrom` / `deliveryDateTo` returned `totalRecords` 0 for 2
 
 NP6 Uri-window posts in this drop run 2021-02-09 through 2021-02-19. NP4 archive posts run 2021-02-09 through 2023-06-15. CSV delivery dates are in the batch 3 retention note. They are not written onto proxy `covered_local_dates`.
 
+## Batch 4 retain
+
+Path: `Data/archives/ercot/2026-09-24/batch4/`. SHA-256 inventory: `RETENTION.md` in that folder. Twenty-four verified price zips were added (10 NP6 landmarks, 14 NP4). No zip failed its sidecar. Listings and artifact pages are not counted. `source_batch_count` is 49 (6 + 6 + 13 + 24).
+
+GATE: live `deliveryDateFrom` / `deliveryDateTo` returned `totalRecords` 0 for 2023-01-15 on both NP4-190-CD and NP6-905-CD. That day still needs an archive download whose CSV delivery date is 2023-01-15, or the ER products. The NP4 zip posted 2023-01-16 in this drop covers DeliveryDate 01/17/2023, not 2023-01-15. Earlier empty From/To days (2021-02-15, 2021-08-15, 2022-02-15, 2023-08-15) stay empty the same way.
+
+2025-06-15, 2024-10-15, and 2024-01-15 From/To responses have rows. Only pages 1–3 were retained on each product. That is not full-day coverage. NP6 landmark zips are one interval each (hour 12, interval 3). They are not proxy coverage.
+
 ## What is still UNKNOWN / GATE
 
 - OpenAPI document URL. The date-range query above is observed. Other artifact filters are not pinned.
@@ -218,4 +226,4 @@ Do these from a host that ERCOT's geographic limit allows (the known-limits page
 4. NP4-190-CD and NP6-905-CD artifact and archive hrefs are already copied above. Do not replace them with a guessed slug. Use `deliveryDateFrom` and `deliveryDateTo`, not bare `deliveryDate`. Twelve price zips are retained. 2021-02-15 was empty on the artifact API, so early days still need archive `?download=` or the ER products. NP6 page 1 had no in-era posts; page 26 is the first probed page at the campaign end, and page 197 is still in February 2021.
 5. NP4-180-ER and NP6-785-ER are absent. Do not invent a Public API path for either. Use a documented EWS or EMIL historic route only after a URL is copied from a reply or page, or ask ERCOT.
 6. Stay inside 30 requests per minute and 1,000 historic files per download. On HTTP 429, back off. An incomplete page must not be marked complete (spec §5.2).
-7. Further batches follow the same retain, hash, normalize, and validate path before any coverage day is published. `source_batch_count` is 25 verified price zips (6 + 6 + 13). It is not a complete-coverage claim. Days that came back empty on From/To still need archive downloads or the ER products. Internal pack rights stay `terms_accepted_internal_use_only`. Commercial App Store redistribution stays unauthorized.
+7. Further batches follow the same retain, hash, normalize, and validate path before any coverage day is published. `source_batch_count` is 49 verified price zips (6 + 6 + 13 + 24). It is not a complete-coverage claim. Days that came back empty on From/To, including 2023-01-15, still need archive downloads or the ER products. Internal pack rights stay `terms_accepted_internal_use_only`. Commercial App Store redistribution stays unauthorized.
