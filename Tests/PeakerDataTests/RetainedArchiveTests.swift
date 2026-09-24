@@ -7,7 +7,7 @@ private let retainedIngestedAt = "2026-09-24T00:00:00Z"
 @Test func retainedBatchesExposeOnlyVerifiedPriceZips() throws {
     let root = retainRoot()
     let zips = try RetainedSettlementArchive.priceZipURLs(in: root)
-    #expect(zips.count == 106)
+    #expect(zips.count == 138)
     #expect(zips.allSatisfy { $0.pathExtension == "zip" })
     #expect(zips.filter { $0.path.contains("/batch2/") }.count == 6)
     #expect(zips.filter { $0.path.contains("/batch3/") }.count == 13)
@@ -15,6 +15,7 @@ private let retainedIngestedAt = "2026-09-24T00:00:00Z"
     #expect(zips.filter { $0.path.contains("/batch5/") }.count == 14)
     #expect(zips.filter { $0.path.contains("/batch6/") }.count == 25)
     #expect(zips.filter { $0.path.contains("/batch7/") }.count == 24)
+    #expect(zips.filter { $0.path.contains("/batch8/") }.count == 32)
     #expect(zips.allSatisfy {
         RetainedSettlementArchive.product(forZipFileName: $0.lastPathComponent) != nil
     })
@@ -110,6 +111,23 @@ private let retainedIngestedAt = "2026-09-24T00:00:00Z"
     #expect(houston.sourceLocalDate == "2022-11-15")
     #expect(houston.sourcePublishedAt == nil)
     #expect(read.verifiedSHA256 == "0cf5b0132f717b4b934bfddf92a3b5d2dfc3938c1499eb488d4cac717bad6da0")
+}
+
+@Test func retainedBatch8NP6ZipParsesOctoberFifteenthAfterSidecarCheck() throws {
+    let url = retainRoot().appendingPathComponent(
+        "batch8/np6-905-cd__inst13_20231015_951063935_SPPHLZNP6905_20231015_1145_csv.zip"
+    )
+    let read = try RetainedSettlementArchive.readZip(at: url, ingestedAt: retainedIngestedAt)
+    #expect(read.product == .realtimeNP6905CD)
+    #expect(read.result.errors.isEmpty)
+    let south = try #require(read.result.observations.first {
+        $0.sourcePointId == "HB_SOUTH" && $0.hourEndingRaw == "12:3"
+    })
+    #expect(south.pointType == "hub_spp")
+    #expect(south.valueDecimal == "-3.31")
+    #expect(south.sourceLocalDate == "2023-10-15")
+    #expect(south.sourcePublishedAt == nil)
+    #expect(read.verifiedSHA256 == "7fed90104b63b4bd34feaa61780a0a01f618d2fb35830f2529ff8fc3ddeda40f")
 }
 
 @Test func januaryFifteenthStaysAnEmptyGateOnTheReadPath() throws {
