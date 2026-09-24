@@ -1,10 +1,10 @@
 # ERCOT adapter notes
 
-Public pages were read on 2026-09-24. A later catalog extract, also dated 2026-09-24, supplied the price-product hrefs below. This commit does not repeat that call, does not store the raw catalog JSON, and does not store tokens. It does not contain SOURCE prices, settlement point IDs, account secrets, or a slug that was not in that extract.
+Public pages were read on 2026-09-24. A later catalog extract, also dated 2026-09-24, supplied the price-product hrefs below. A supervisor drop the same day retained the first SOURCE batch under `Data/archives/ercot/2026-09-24/`. This file does not store the raw catalog JSON or tokens. It does not assign settlement point IDs to the fictional sites, and it does not claim five-year coverage.
 
 Labels: **pinned** means the string was copied from the catalog extract. **ABSENT** means the extract's product list did not contain that EMIL ID. **UNKNOWN** means neither a public page nor the extract stated it. **GATE** means the campaign still cannot treat the item as resolved.
 
-`pinned_api_path` on the coverage manifest is the artifact href only. The manifest schema has no separate archive field, so archive hrefs live in this file. No price bytes were downloaded.
+`pinned_api_path` on the coverage manifest is the artifact href only. The manifest schema has no separate archive field, so archive hrefs live in this file. The first retained batch, including SHA-256 values, is `Data/archives/ercot/2026-09-24/RETENTION.md`. Coverage is partial. NP4-180-ER and NP6-785-ER remain GATE.
 
 ## Credentials and rights
 
@@ -17,7 +17,7 @@ Owner decision, recorded 2026-09-24. This is a rights lock, not an ingest. No se
 - Coverage manifest `rights_status` is `terms_accepted_internal_use_only` (owner-approved internal pack use).
 - Username, password, subscription key, and tokens remain **out of this repository**. Access is still GATE. That is separate from this rights wording.
 - Spec §5.1 still applies: credentials stay in the ingestion service, never in packs, the app, exports, or saves.
-- The catalog list was already fetched. Do not invent further slugs. Price bytes are still not downloaded.
+- The catalog list was already fetched. Do not invent further slugs. The first price-instance batch is retained under `Data/archives/ercot/2026-09-24/`. It is not five-year coverage.
 
 ## What is documented
 
@@ -42,7 +42,9 @@ A sample JSON body on that page, for product `NP3-233-CD` only, includes:
 
 Those three hrefs are an example for Hourly Resource Outage Capacity. They are not pins for this repository.
 
-Sections on that same page titled "Retrieving a list of reports within an EMIL Product" ("Coming Soon"), "Retrieving data from a EMIL Product Artifact", and "Getting history archives for an EMIL Product" did not include a request procedure in the page text read on 2026-09-24. Query parameters for an artifact are **UNKNOWN**.
+Sections on that same page titled "Retrieving a list of reports within an EMIL Product" ("Coming Soon"), "Retrieving data from a EMIL Product Artifact", and "Getting history archives for an EMIL Product" did not include a request procedure in the page text read on 2026-09-24.
+
+A GET of each pinned artifact href with no query parameters returned field-schema JSON (`report`, `fields`, `_links`), not price rows. Those bodies are retained. Searchable field names are inside the schema files. The wire format for applying those filters was not exercised in this batch and is not invented here.
 
 ### Authentication URL (not a data path)
 
@@ -118,14 +120,55 @@ No other artifact slug is pinned. The NP3-233-CD path above is only the public g
 
 NP4-180-ER and NP6-785-ER were ABSENT from the live `GET /api/public-reports` body (116 products; substring search negative). No path is synthesized for them. Spec §5.1 still requires the historic DAM and RT hub/load-zone archives. `pinned_api_path` stays null. Status on the coverage manifest is `absent_from_public_reports_catalog`.
 
-Next path for those two archives: a documented EWS or EMIL file route only after a URL is copied from a reply or a page, or ask ERCOT.
+Next path for those two archives: a documented EWS or EMIL historic route only after a URL is copied from a reply or a page, or ask ERCOT. No Public API slug is invented.
+
+## Archive listing shape (observed 2026-09-24)
+
+GET of each archive href with no query parameters returned JSON:
+
+- `_meta`: `totalRecords`, `pageSize`, `totalPages`, `currentPage`, `query` (page 1 `sortedBy` was `postDatetime: DESC`)
+- `product`
+- `archives[]`: `docId`, `friendlyName`, `postDatetime`, `_links.endpoint.href`
+- `_links`
+
+Instance download shape, copied from those hrefs:
+
+`?download=<docId>`
+
+on `https://api.ercot.com/api/public-reports/archive/np4-190-cd` and `https://api.ercot.com/api/public-reports/archive/np6-905-cd`.
+
+Pagination: `pageSize` 1000.
+
+- NP4-190-CD page 1: 1000 archives, `totalRecords` 4529, `totalPages` 5. Posts on that page run 2023-12-28 through 2026-09-23. 735 of those 1000 posts fall in 2021-02-01 through 2025-12-31. Page 1 does not reach the campaign start.
+- NP6-905-CD page 1: 1000 archives, `totalRecords` 434735, `totalPages` 435. Posts on that page run 2026-09-14 through 2026-09-24. 0 of those 1000 posts fall in 2021-02-01 through 2025-12-31.
+
+## Artifact endpoints until query parameters are applied
+
+GET of each pinned artifact href, with no query parameters, returned schema JSON, not price rows. Retained files and SHA-256 values are in `Data/archives/ercot/2026-09-24/RETENTION.md`.
+
+- NP4-190-CD schema fields: `deliveryDate`, `hourEnding`, `settlementPoint`, `settlementPointPrice`, `DSTFlag`.
+- NP6-905-CD schema fields: `deliveryDate`, `deliveryHour`, `deliveryInterval`, `settlementPoint`, `settlementPointType`, `settlementPointPrice`, `DSTFlag`.
+
+The DAM CSV header matches those names (`DeliveryDate`, `HourEnding`, `SettlementPoint`, `SettlementPointPrice`, `DSTFlag`). The RT CSV header uses `SettlementPointName` where the schema says `settlementPoint`.
+
+## First retained batch
+
+Six price-instance zips verified against READY and sha256 sidecars, plus the two schemas and two page-1 archive listings. Inventory and SHA-256 values: `Data/archives/ercot/2026-09-24/RETENTION.md`.
+
+`source_batch_count` is 6. The manifest uses one integer. The split is 3 DAM zips and 3 RT zips. That count is retained files, not campaign days.
+
+NP4-190-CD and NP6-905-CD status is `partial_batches_retained`. `pinned_api_path` is unchanged. `claims_complete_source_coverage` stays false. Five-year gates stay fail-closed. Settlement `source_point_id` stays null.
+
+DAM CSV delivery dates proven in-file: 2025-12-30 (docId 1176609385), 2025-12-31 (docId 1177000125), and 2026-01-01 (docId 1177367606). The 2026-01-01 file posted 2025-12-31, so the post is inside the campaign window and the delivery date is not. None of these dates are written onto proxy `covered_local_dates`.
+
+The three NP6-905-CD zips posted 2026-09-24 (docIds 1278458786, 1278455140, 1278451464). CSV `DeliveryDate` is 09/24/2026, after campaign end 2025-12-31. Each file is one hour and one interval. They are SOURCE pipeline proof, not campaign coverage days.
 
 ## What is still UNKNOWN / GATE
 
-- OpenAPI document URL and artifact query parameters.
+- OpenAPI document URL, and the wire format for artifact query parameters. Unparameterized artifact GETs returned schema only.
 - MIS directory paths (`MIS Posting Location` was N/A).
-- EWS Option values for these products.
-- Whether historic files actually cover 2021-02-01 through 2025-12-31 for the selected proxy points. The five-year gate stays red until bytes are ingested.
+- EWS Option values for these products. NP4-180-ER and NP6-785-ER stay GATE until a copied EWS or EMIL URL exists.
+- Whether historic files cover 2021-02-01 through 2025-12-31 for the selected proxy points. The five-year gate stays red. This batch does not.
 - Settlement point IDs for the fictional sites. Still null.
 - Username, password, subscription key, and tokens. They stay out of git. Access is GATE. Terms acceptance for internal use is already recorded above. Commercial App Store redistribution is not authorized.
 
@@ -135,8 +178,8 @@ Do these from a host that ERCOT's geographic limit allows (the known-limits page
 
 1. Terms at https://www.ercot.com/help/terms/data-portal are already accepted for internal use. Store the subscription key outside git. Do not commit it.
 2. POST the documented token URL. Keep the returned tokens out of git.
-3. The 2026-09-24 catalog GET is already recorded above (HTTP 200, 116 products, SHA-256 in this file). Do not commit the raw JSON or a token. This pass did not download price bytes.
-4. NP4-190-CD and NP6-905-CD artifact and archive hrefs are already copied above. Do not replace them with a guessed slug.
-5. NP4-180-ER and NP6-785-ER are absent. Do not invent a Public API path for either. Use a documented EWS or EMIL file route only after a URL is copied from a reply or page, or ask ERCOT.
+3. The 2026-09-24 catalog GET is already recorded above (HTTP 200, 116 products, SHA-256 in this file). Do not commit the raw catalog JSON or a token.
+4. NP4-190-CD and NP6-905-CD artifact and archive hrefs are already copied above. Do not replace them with a guessed slug. The first six price zips, two schemas, and two page-1 listings are retained. Continue from later listing pages. NP6-905-CD page 1 had no in-era posts.
+5. NP4-180-ER and NP6-785-ER are absent. Do not invent a Public API path for either. Use a documented EWS or EMIL historic route only after a URL is copied from a reply or page, or ask ERCOT.
 6. Stay inside 30 requests per minute and 1,000 historic files per download. On HTTP 429, back off. An incomplete page must not be marked complete (spec §5.2).
-7. Retain raw bytes, hash them, normalize, validate, and only then consider the coverage manifest. `source_batch_count` stays 0 until that ingest exists. Internal pack rights are already `terms_accepted_internal_use_only`. Commercial App Store redistribution stays unauthorized.
+7. Further batches follow the same retain, hash, normalize, and validate path before any coverage day is published. `source_batch_count` is 6 for this drop's verified price zips. It is not a complete-coverage claim. Internal pack rights stay `terms_accepted_internal_use_only`. Commercial App Store redistribution stays unauthorized.

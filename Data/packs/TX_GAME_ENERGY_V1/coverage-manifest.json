@@ -4,7 +4,7 @@
   "evidence": "GATE",
   "claims_complete_source_coverage": false,
   "completeness": "incomplete",
-  "source_batch_count": 0,
+  "source_batch_count": 6,
   "rights_status": "terms_accepted_internal_use_only",
   "quality_grade": "blocked",
   "source_period": {
@@ -61,7 +61,7 @@
   },
   "gap_report": {
     "status": "blocked",
-    "reason": "DA and RT settlement coverage for the selected proxy points has not been ingested for 2021-02-01 through 2025-12-31. This repository does not contain SOURCE prices, settlement point IDs, or publication timestamps. NP4-190-CD and NP6-905-CD artifact paths are pinned from the 2026-09-24 catalog extract and are not ingested. NP4-180-ER and NP6-785-ER are absent from the Public API catalog and are still required by spec section 5.1. Owner-approved internal redistribution into packs only (Austin and coworkers; not for sale). Commercial App Store redistribution is not claimed."
+    "reason": "Six verified price-instance zips are retained under Data/archives/ercot/2026-09-24 (3 NP4-190-CD, 3 NP6-905-CD). That is source_batch_count. It is not five-year coverage. claims_complete_source_coverage stays false. Proxy covered_local_dates stay empty and source_point_id stays null; CSV settlement point names were not assigned to fictional sites. DAM CSV DeliveryDate values proven in-file are 2025-12-30 (docId 1176609385), 2025-12-31 (docId 1177000125), and 2026-01-01 (docId 1177367606, post 2025-12-31, delivery after campaign end). Those are market files, not proxy-point days. The 3 NP6-905-CD zips are 2026-09-24 posts (docIds 1278458786, 1278455140, 1278451464) with DeliveryDate 2026-09-24, outside campaign end 2025-12-31. They are SOURCE pipeline proof, not campaign coverage days. NP4-180-ER and NP6-785-ER are absent from the Public API catalog and are still required by spec section 5.1. Next research for those two is an EWS/EMIL historic route. No Public API slug is invented. Owner-approved internal redistribution into packs only (Austin and coworkers; not for sale). Commercial App Store redistribution is not claimed."
   },
   "training_archive": {
     "archive_id": "TX_TRAIN_2019_2020",
@@ -75,13 +75,13 @@
     {
       "product_id": "NP4-190-CD",
       "role": "dam_settlement_point_prices",
-      "status": "pinned_not_ingested",
+      "status": "partial_batches_retained",
       "pinned_api_path": "https://api.ercot.com/api/public-reports/np4-190-cd/dam_stlmnt_pnt_prices"
     },
     {
       "product_id": "NP6-905-CD",
       "role": "rt_settlement_point_prices",
-      "status": "pinned_not_ingested",
+      "status": "partial_batches_retained",
       "pinned_api_path": "https://api.ercot.com/api/public-reports/np6-905-cd/spp_node_zone_hub"
     },
     {

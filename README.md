@@ -57,10 +57,10 @@ bash Scripts/verify-phase0-stub.sh
 
 Before the campaign can ship (§5, §27.1, §29.2):
 
-- NP4-190-CD and NP6-905-CD artifact paths are pinned from the 2026-09-24 catalog extract. See [`Data/docs/ercot-adapter-pins.md`](Data/docs/ercot-adapter-pins.md). Price bytes are not downloaded. NP4-180-ER and NP6-785-ER are absent from that catalog and still GATE. The OpenAPI file URL and credentials are still GATE. Internal pack use is owner-approved. Commercial App Store redistribution is not authorized.
+- NP4-190-CD and NP6-905-CD artifact paths are pinned from the 2026-09-24 catalog extract. See [`Data/docs/ercot-adapter-pins.md`](Data/docs/ercot-adapter-pins.md). A first batch of six price zips is retained under `Data/archives/ercot/2026-09-24/` (`source_batch_count` 6). That is not five-year coverage. NP4-180-ER and NP6-785-ER are absent from that catalog and still GATE. The OpenAPI file URL and credentials are still GATE. Internal pack use is owner-approved. Commercial App Store redistribution is not authorized.
 - Authenticate with the documented token and subscription key. Credentials stay out of packs, the app, and saves.
 - Ingest DA and RT settlement coverage for every selected proxy point for every civil day from 2021-02-01 through 2025-12-31.
-- Rights lock: `terms_accepted_internal_use_only` (Austin and coworkers, not for sale). Commercial App Store redistribution is not authorized. No prices have been ingested.
+- Rights lock: `terms_accepted_internal_use_only` (Austin and coworkers, not for sale). Commercial App Store redistribution is not authorized. Retained batches are not a completed price ingest for the fictional sites.
 - Assign validated settlement point IDs. The four sites in `Config/proxy-sites.json` are fictional and have null point IDs.
 - Fill `TX_TRAIN_2019_2020` with hub-level 2019–2020 DA/RT SPP, still labeled training-only, or keep the retirement rule on an explicit empty archive.
 - Ancillary-service prices are not selected. Release 1 is energy-only (§4, §20, §28.2). The gate checks AS families only when the manifest selects them.

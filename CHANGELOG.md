@@ -12,7 +12,7 @@ Spec sections touched: §1 (platform overridden), §2.1 chronology and bootstrap
 - JSON schemas under `Schemas/phase0`.
 - iPhone placeholder shell with four tabs (Desk, Fuel, Plant, Settle), evidence chips, deadline chips, interrupt tray, and audit-chain shell.
 - Design inventory committed at `Design/Peaker-Tycoon-Texas/01-phone-first-screen-inventory-v1.md`.
-- Adapter notes at `Data/docs/ercot-adapter-pins.md`. Documents the public product-list URL and EMIL pages. Does not pin price artifact paths, secrets, or point IDs.
+- Adapter notes at `Data/docs/ercot-adapter-pins.md`. Documents the public product-list URL, catalog pins, and the first retained batch. Does not store secrets or fictional-site point IDs.
 
 ### Gates
 
@@ -27,12 +27,18 @@ Spec sections touched: §1 (platform overridden), §2.1 chronology and bootstrap
 
 ### Not claimed
 
-No SOURCE prices, settlement point IDs, pinned API paths, or publication timestamps.
+No settlement point IDs for the fictional sites. No complete five-year SOURCE coverage. NP4-180-ER and NP6-785-ER still have no Public API path.
 
 ### Rights lock (not an ingest)
 
-Coverage manifest `rights_status` is `terms_accepted_internal_use_only`. Austin accepted the Data Portal terms for an internal build (Austin and coworkers; the game is not for sale). Commercial App Store redistribution is not authorized. Credentials stay out of git. `source_batch_count` remains 0.
+Coverage manifest `rights_status` is `terms_accepted_internal_use_only`. Austin accepted the Data Portal terms for an internal build (Austin and coworkers; the game is not for sale). Commercial App Store redistribution is not authorized. Credentials stay out of git. That commit left `source_batch_count` at 0. A later retain set it to 6 without claiming complete coverage.
 
 ### Catalog pin (not an ingest)
 
-NP4-190-CD and NP6-905-CD `pinned_api_path` values are the artifact hrefs copied from the 2026-09-24 catalog extract (HTTP 200, 116 products, SHA-256 `59a7daaad4e8c64a1f5e6b808299ce43667c92d38c38fe27a4fb118975889789`). Archive hrefs are in the adapter notes. NP4-180-ER and NP6-785-ER are absent from that catalog; their paths stay null. No raw catalog JSON, tokens, or price bytes were added.
+NP4-190-CD and NP6-905-CD `pinned_api_path` values are the artifact hrefs copied from the 2026-09-24 catalog extract (HTTP 200, 116 products, SHA-256 `59a7daaad4e8c64a1f5e6b808299ce43667c92d38c38fe27a4fb118975889789`). Archive hrefs are in the adapter notes. NP4-180-ER and NP6-785-ER are absent from that catalog; their paths stay null. No raw catalog JSON or tokens were added.
+
+### Design handoff and first SOURCE retain (not coverage complete)
+
+Control Glass v1 is committed at `Design/Peaker-Tycoon-Texas/02-phase1-shell-polish-control-glass-v1.md`. It is a design document only. No chrome tokens were applied to PeakerKernel, PeakerData, or the app.
+
+Six verified price-instance zips, two artifact schemas, and two archive listings are under `Data/archives/ercot/2026-09-24/`, with sha256 sidecars and `RETENTION.md`. `source_batch_count` moved from 0 to 6. NP4-190-CD and NP6-905-CD status is `partial_batches_retained`. `claims_complete_source_coverage` stays false. The three RT zips are 2026-09-24 posts and are pipeline proof, not campaign days. ER products stay GATE.
