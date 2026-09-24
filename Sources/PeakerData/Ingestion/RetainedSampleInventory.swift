@@ -113,6 +113,10 @@ public struct RetainedSampleInventory: Codable, Equatable, Sendable {
         )
     }
 
+    public static func decode(from data: Data) throws -> RetainedSampleInventory {
+        try JSONDecoder().decode(RetainedSampleInventory.self, from: data)
+    }
+
     public func jsonUTF8() throws -> Data {
         let encoder = JSONEncoder()
         encoder.outputFormatting = [.prettyPrinted, .sortedKeys, .withoutEscapingSlashes]

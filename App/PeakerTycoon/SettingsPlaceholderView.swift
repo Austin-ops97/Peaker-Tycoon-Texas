@@ -1,4 +1,5 @@
 import SwiftUI
+import PeakerData
 import PeakerKernel
 
 struct SettingsPlaceholderView: View {
@@ -51,6 +52,18 @@ struct SettingsPlaceholderView: View {
                 Button("Show local time tip", action: onShowTip)
                 Button("Show navigation tips", action: onShowNavigationTips)
             }
+            Section("Evidence") {
+                if let summary = BundledCoverageSamples.summary {
+                    NavigationLink {
+                        CoverageSamplePage(summary: summary)
+                    } label: {
+                        coverageRow
+                    }
+                    .accessibilityHint("Opens the sample summary.")
+                } else {
+                    coverageRow
+                }
+            }
             Section("Evidence legend") {
                 ForEach(EvidenceLabel.allCases, id: \.self) { label in
                     VStack(alignment: .leading, spacing: 4) {
@@ -86,6 +99,18 @@ struct SettingsPlaceholderView: View {
         !zoneIdentifier.isEmpty && !isSet
     }
 
+    private var coverageRow: some View {
+        VStack(alignment: .leading, spacing: 2) {
+            Text(RetainedSamplePlayerSummary.rowTitle)
+                .foregroundStyle(ControlGlass.textPrimary(scheme))
+            Text(RetainedSamplePlayerSummary.incompleteSentence)
+                .font(.subheadline)
+                .foregroundStyle(ControlGlass.textSecondary(scheme))
+        }
+        .accessibilityElement(children: .combine)
+        .accessibilityLabel("\(RetainedSamplePlayerSummary.rowTitle). \(RetainedSamplePlayerSummary.incompleteSentence)")
+    }
+
     private var valueText: String {
         isSet ? LocalTwinClock.friendlyLabel(zoneIdentifier) : "Not set"
     }
@@ -102,4 +127,43 @@ struct SettingsPlaceholderView: View {
             return "GATE. A dependency that must pass before the feature can ship."
         }
     }
+}
+
+/// Read-only sample counts. Not a thumb-zone action and not a coverage claim.
+private struct CoverageSamplePage: View {
+    let summary: RetainedSamplePlayerSummary
+    @Environment(\.colorScheme) private var scheme
+
+    var body: some View {
+        List {
+            Section {
+                HStack(alignment: .firstTextBaseline, spacing: 8) {
+                    EvidenceTag(label: .gate, provenance: Self.gateProvenance)
+                    Text(RetainedSamplePlayerSummary.incompleteSentence)
+                        .foregroundStyle(ControlGlass.textPrimary(scheme))
+                }
+                Text(summary.fileSentence)
+                    .foregroundStyle(ControlGlass.textPrimary(scheme))
+                Text(summary.dateSentence)
+                    .foregroundStyle(ControlGlass.textSecondary(scheme))
+            }
+            if summary.showsEmptyLiveFetch {
+                Section {
+                    Text(RetainedSamplePlayerSummary.emptyLiveFetchSentence)
+                        .foregroundStyle(ControlGlass.textPrimary(scheme))
+                }
+            }
+            if summary.showsMissingReports {
+                Section {
+                    Text(RetainedSamplePlayerSummary.missingReportsSentence)
+                        .foregroundStyle(ControlGlass.textPrimary(scheme))
+                }
+            }
+        }
+        .navigationTitle(RetainedSamplePlayerSummary.rowTitle)
+        .navigationBarTitleDisplayMode(.inline)
+        .tint(ControlGlass.accentTeal)
+    }
+
+    private static let gateProvenance = "GATE. Saved price files are samples only. Coverage is incomplete. Some early days are still empty on the live fetch. Some reports are not in the public catalog."
 }

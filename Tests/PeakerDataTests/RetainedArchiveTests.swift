@@ -157,11 +157,14 @@ private let retainedIngestedAt = "2026-09-24T00:00:00Z"
     let jsonURL = repo.appendingPathComponent(RetainedSampleInventory.jsonRelativePath)
     let markdownURL = repo.appendingPathComponent(RetainedSampleInventory.markdownRelativePath)
     let json = try inventory.jsonUTF8()
+    let bundledURL = repo.appendingPathComponent("App/PeakerTycoon/Resources/retained-sample-inventory.json")
     if ProcessInfo.processInfo.environment["PEAKER_REFRESH_RETAINED_INVENTORY"] == "1" {
         try json.write(to: jsonURL)
+        try json.write(to: bundledURL)
         try Data(text.utf8).write(to: markdownURL)
     }
     #expect(try Data(contentsOf: jsonURL) == json)
+    #expect(try Data(contentsOf: bundledURL) == json)
     #expect(try String(contentsOf: markdownURL, encoding: .utf8) == text)
     let manifest = try CoverageManifest.load(
         from: repo.appendingPathComponent(CoverageManifest.publishedRelativePath)
@@ -169,6 +172,50 @@ private let retainedIngestedAt = "2026-09-24T00:00:00Z"
     #expect(manifest.claimsCompleteSourceCoverage == false)
     #expect(manifest.sourceBatchCount == 63)
     #expect(manifest.selectedProxyPoints.allSatisfy { $0.sourcePointId == nil && $0.coveredLocalDates.isEmpty })
+}
+
+@Test func retainedSamplePlayerSummaryStaysIncomplete() throws {
+    let repo = repoRootForRetain()
+    let data = try Data(contentsOf: repo.appendingPathComponent(RetainedSampleInventory.jsonRelativePath))
+    let bundled = try Data(contentsOf: repo.appendingPathComponent("App/PeakerTycoon/Resources/retained-sample-inventory.json"))
+    #expect(data == bundled)
+    let inventory = try RetainedSampleInventory.decode(from: data)
+    #expect(inventory.claimsCompleteSourceCoverage == false)
+    let summary = RetainedSamplePlayerSummary.make(from: inventory)
+    #expect(summary.claimsCompleteSourceCoverage == false)
+    #expect(summary.fileSentence == "28 day-ahead price files and 29 real-time price files are saved with this build.")
+    #expect(summary.dateSentence.contains("28 day-ahead delivery dates"))
+    #expect(summary.dateSentence.contains("25 real-time delivery dates"))
+    #expect(summary.dateSentence.contains("not a full day"))
+    #expect(summary.showsEmptyLiveFetch)
+    #expect(summary.showsMissingReports)
+    let spoken = [
+        summary.fileSentence,
+        summary.dateSentence,
+        RetainedSamplePlayerSummary.incompleteSentence,
+        RetainedSamplePlayerSummary.emptyLiveFetchSentence,
+        RetainedSamplePlayerSummary.missingReportsSentence,
+    ].joined(separator: " ")
+    #expect(!spoken.contains("NP4"))
+    #expect(!spoken.contains("NP6"))
+    #expect(!spoken.contains("covered_local"))
+
+    let lying = RetainedSampleInventory(
+        label: "retained_sample_inventory",
+        statement: "not coverage",
+        claimsCompleteSourceCoverage: true,
+        campaignEraStart: "2021-02-01",
+        campaignEraEnd: "2025-12-31",
+        retainFolders: [],
+        products: [],
+        emptyLiveFromToGates: [],
+        absentProducts: []
+    )
+    let denied = RetainedSamplePlayerSummary.make(from: lying)
+    #expect(denied.claimsCompleteSourceCoverage == false)
+    #expect(denied.fileSentence.contains("0 day-ahead price files"))
+    #expect(!denied.showsEmptyLiveFetch)
+    #expect(!denied.showsMissingReports)
 }
 
 private func retainRoot() -> URL {
