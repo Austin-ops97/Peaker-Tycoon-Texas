@@ -13,7 +13,6 @@ struct FuelPlaceholderView: View {
                 DeadlineChip(
                     title: "Timely gas gate",
                     centralLabel: "13:00 CT",
-                    localTwinLabel: "local twin unset",
                     evidence: .game,
                     provenance: "GAME modeled timely gas deadline of 13:00 (§8). S16 is gas-coordination context, not a claim that every Texas pipeline uses this gate."
                 )

@@ -11,9 +11,6 @@ struct SettingsPlaceholderView: View {
                 Text("Your own timezone is not chosen yet. That is expected in this build. Nothing is broken.")
                     .font(.body)
                     .foregroundStyle(.secondary)
-                Text("Tap Local twin on the clock to open this note. It stays a single chip and does not cover the desk.")
-                    .font(.caption)
-                    .foregroundStyle(.secondary)
             }
             Section("Evidence legend") {
                 ForEach(EvidenceLabel.allCases, id: \.self) { label in

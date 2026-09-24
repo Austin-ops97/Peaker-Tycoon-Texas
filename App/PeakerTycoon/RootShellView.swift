@@ -10,11 +10,18 @@ struct RootShellView: View {
 
     var body: some View {
         NavigationStack {
-            TabView(selection: $tab) {
-                tabPage(DeskPlaceholderView(), tab: .desk)
-                tabPage(FuelPlaceholderView(), tab: .fuel)
-                tabPage(PlantPlaceholderView(), tab: .plant)
-                tabPage(SettlePlaceholderView(), tab: .settle)
+            VStack(spacing: 0) {
+                GameClockBar(
+                    clock: chrome.clock,
+                    localCaption: nil,
+                    speed: $chrome.speed
+                )
+                TabView(selection: $tab) {
+                    tabPage(DeskPlaceholderView(), tab: .desk)
+                    tabPage(FuelPlaceholderView(), tab: .fuel)
+                    tabPage(PlantPlaceholderView(), tab: .plant)
+                    tabPage(SettlePlaceholderView(), tab: .settle)
+                }
             }
             .navigationTitle(tab.title)
             .navigationBarTitleDisplayMode(.inline)
@@ -26,14 +33,6 @@ struct RootShellView: View {
                         Label("Settings", systemImage: "gearshape")
                     }
                 }
-            }
-            .safeAreaInset(edge: .top, spacing: 0) {
-                GameClockBar(
-                    clock: chrome.clock,
-                    localTwinChip: chrome.localTwinChip,
-                    speed: $chrome.speed,
-                    onOpenPlayerTimezone: { showSettings = true }
-                )
             }
             .sheet(isPresented: $showSettings) {
                 NavigationStack {

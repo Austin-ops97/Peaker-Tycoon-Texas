@@ -1,32 +1,30 @@
 import SwiftUI
 import PeakerKernel
 
+/// Status band. Callers place this in a VStack above scroll content. It is not an overlay.
 struct GameClockBar: View {
     let clock: GameInstant
-    let localTwinChip: String
+    /// Shown only when a player zone is saved. Nil omits the line.
+    var localCaption: String? = nil
     @Binding var speed: PresentationSpeed
-    let onOpenPlayerTimezone: () -> Void
 
     var body: some View {
         VStack(alignment: .leading, spacing: 4) {
-            HStack(spacing: 8) {
-                Text(clock.centralLabel)
-                    .font(.headline)
-                    .lineLimit(1)
-                    .minimumScaleFactor(0.75)
-                    .accessibilityLabel("Game clock \(clock.centralLabel)")
-                Button(action: onOpenPlayerTimezone) {
-                    Text(localTwinChip)
-                        .font(.caption.weight(.semibold))
+            HStack(alignment: .center, spacing: 8) {
+                VStack(alignment: .leading, spacing: 2) {
+                    Text(clock.centralLabel)
+                        .font(.system(.headline, design: .monospaced))
                         .lineLimit(1)
-                        .padding(.horizontal, 8)
-                        .padding(.vertical, 4)
-                        .overlay(
-                            Capsule().stroke(Color.secondary, lineWidth: 1)
-                        )
+                        .minimumScaleFactor(0.75)
+                    if let localCaption {
+                        Text(localCaption)
+                            .font(.caption)
+                            .foregroundStyle(.secondary)
+                            .lineLimit(1)
+                    }
                 }
-                .buttonStyle(.plain)
-                .accessibilityLabel("Local twin. Opens Settings. Clock labels use Central time.")
+                .accessibilityElement(children: .ignore)
+                .accessibilityLabel(accessibilityLabel)
                 Spacer(minLength: 8)
                 SpeedChip(speed: $speed)
             }
@@ -37,6 +35,16 @@ struct GameClockBar: View {
         }
         .padding(.horizontal, 16)
         .padding(.vertical, 8)
+        .frame(maxWidth: .infinity, alignment: .leading)
+        .fixedSize(horizontal: false, vertical: true)
         .background(.bar)
+    }
+
+    private var accessibilityLabel: String {
+        let time = String(format: "%02d:%02d:%02d", clock.hour, clock.minute, clock.second)
+        if let localCaption {
+            return "Game time \(time) Central. \(localCaption)."
+        }
+        return "Game time \(time) Central."
     }
 }

@@ -45,7 +45,7 @@ Six verified price-instance zips, two artifact schemas, and two archive listings
 
 ### Clock bar no longer covers the desk
 
-The long “local twin unset” caption is gone from `GameClockBar`. The bar is the Central clock, a one-line Local twin chip that opens Settings, the speed chip, and the evidence tag. The explanation is a Settings section. No timezone list is stored.
+The clock bar is a `VStack` sibling above `TabView`, not a top `safeAreaInset`. Scroll content starts below the bar. The bar shows Central time only until a player zone is saved. Desk and Fuel deadline rows no longer say the twin is unset.
 
 ### Batch 2 retain (still not coverage complete)
 
