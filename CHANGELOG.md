@@ -106,3 +106,7 @@ Twenty-five more price zips verified and landed in `Data/archives/ercot/2026-09-
 ### Settings sample stub (not coverage complete)
 
 Settings → Evidence shows a read-only row, Saved price samples, and a detail page with day-ahead and real-time file counts from the bundled inventory. The row says coverage is incomplete. Real-time dates are described as short samples. Empty live-fetch days and reports missing from the public catalog are one sentence each. There is no new thumb-zone button. `claims_complete_source_coverage` stays false.
+
+### Desk source sample cycle (not trading)
+
+The Desk SOURCE strip shows one retained day-ahead hub row at a time. Chevron buttons and dots cycle Houston on 2021-02-10 (24.14 $/MWh), North on 2021-02-10 (27.18 $/MWh), and West on 2021-04-15 (18.87 $/MWh), each hour ending 01:00. Those decimals are copied from retained NP4 archive rows. The thumb button stays Review today’s plan. Coverage claims are unchanged.

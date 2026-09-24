@@ -1,7 +1,8 @@
 import Foundation
 import PeakerData
 
-/// Bundled NP4 rows for the Desk card. Read-only. Does not write the coverage manifest.
+/// Three curated day-ahead hub rows for the Desk sample strip.
+/// Houston and North are 2021-02-10. West is 2021-04-15. Read-only. Does not write coverage.
 enum MarketSampleArchive {
     static let resourceName = "market-sample-np4"
     /// Fixed label. The shell does not stamp this from the device clock.

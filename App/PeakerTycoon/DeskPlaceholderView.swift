@@ -2,12 +2,13 @@ import SwiftUI
 import PeakerData
 import PeakerKernel
 
-/// Desk stub. Next up, then Today, then muted reference rows. No offer ticket.
+/// Desk stub. Next up, then Today, then one retained SOURCE sample at a time. No offer ticket.
 /// The single primary button sits in the thumb zone and scrolls to Today.
 struct DeskPlaceholderView: View {
     var daLocalClock: String? = nil
     @Environment(\.colorScheme) private var scheme
     @Environment(\.accessibilityReduceMotion) private var reduceMotion
+    @State private var sampleIndex = 0
 
     private var samples: [NormalizedObservation] { MarketSampleArchive.rows }
 
@@ -87,18 +88,59 @@ struct DeskPlaceholderView: View {
     }
 
     private var sampleSection: some View {
-        VStack(alignment: .leading, spacing: 8) {
+        let index = samples.isEmpty ? 0 : sampleIndex % samples.count
+        let row = samples[index]
+        return VStack(alignment: .leading, spacing: 8) {
             Text("Sample prices from retained SOURCE archives")
                 .font(.caption.weight(.semibold))
                 .foregroundStyle(ControlGlass.textTertiary(scheme))
-            Text("Nothing to submit. These are a few retained archive rows, not a live price and not the whole day.")
+            Text("Nothing to submit. This is one retained archive row, not a live price and not the whole day. Coverage is incomplete.")
                 .font(.caption)
                 .foregroundStyle(ControlGlass.textTertiary(scheme))
-            ForEach(samples, id: \.sourcePointId) { row in
-                MarketSampleCard(row: row)
+            MarketSampleCard(row: row, position: "\(index + 1) of \(samples.count)")
+            if samples.count > 1 {
+                sampleCycle(index: index)
             }
         }
-        .accessibilityElement(children: .contain)
+    }
+
+    private func sampleCycle(index: Int) -> some View {
+        HStack(spacing: 8) {
+            cycleButton(systemName: "chevron.left", label: "Previous sample") {
+                moveSample(by: -1)
+            }
+            Spacer(minLength: 0)
+            HStack(spacing: 6) {
+                ForEach(samples.indices, id: \.self) { dot in
+                    Circle()
+                        .fill(dot == index ? ControlGlass.accentTeal : ControlGlass.textTertiary(scheme))
+                        .frame(width: 6, height: 6)
+                }
+            }
+            .accessibilityHidden(true)
+            Spacer(minLength: 0)
+            cycleButton(systemName: "chevron.right", label: "Next sample") {
+                moveSample(by: 1)
+            }
+        }
+    }
+
+    private func cycleButton(systemName: String, label: String, action: @escaping () -> Void) -> some View {
+        Button(action: action) {
+            Image(systemName: systemName)
+                .font(.body.weight(.semibold))
+                .foregroundStyle(ControlGlass.textSecondary(scheme))
+                .frame(minWidth: 44, minHeight: 44)
+                .contentShape(Rectangle())
+        }
+        .buttonStyle(.plain)
+        .accessibilityLabel(label)
+    }
+
+    private func moveSample(by delta: Int) {
+        let count = samples.count
+        guard count > 1 else { return }
+        sampleIndex = (sampleIndex + delta + count) % count
     }
 
     private static let todayID = "desk-today"
@@ -106,6 +148,7 @@ struct DeskPlaceholderView: View {
 
 private struct MarketSampleCard: View {
     let row: NormalizedObservation
+    let position: String
     @Environment(\.colorScheme) private var scheme
 
     var body: some View {
@@ -126,6 +169,7 @@ private struct MarketSampleCard: View {
         .background(ControlGlass.surfaceRecessed(scheme))
         .clipShape(RoundedRectangle(cornerRadius: 8))
         .accessibilityElement(children: .combine)
+        .accessibilityLabel("\(row.sourcePointId), \(deliveryStamp), \(row.valueDecimal) \(row.unit). Sample \(position). Retained source sample. Coverage is incomplete.")
     }
 
     private var deliveryStamp: String {
@@ -134,6 +178,6 @@ private struct MarketSampleCard: View {
     }
 
     private var provenance: String {
-        "SOURCE row from the bundled NP4-190-CD sample market-sample-np4.csv, cut from a retained archive extract. \(row.sourcePointId), delivery \(row.sourceLocalDate), hour ending \(row.hourEndingRaw ?? ""), \(row.valueDecimal) \(row.unit). Not a live fetch, not a proxy site mapping, and not a complete day. Coverage claims are unchanged."
+        "SOURCE row from a retained day-ahead archive sample. \(row.sourcePointId), delivery \(row.sourceLocalDate), hour ending \(row.hourEndingRaw ?? ""), \(row.valueDecimal) \(row.unit). Not a live fetch, not a proxy site mapping, and not a complete day. Coverage is incomplete."
     }
 }
