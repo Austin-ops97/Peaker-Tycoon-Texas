@@ -1,10 +1,12 @@
-# Peaker Tycoon Texas — Phone-first screen inventory v1
+# Peaker Tycoon Texas — Phone-first screen inventory v1.1
 
 **Owner:** UI/UX Graphics Designer  
-**Source of truth:** Build Spec v3 §15, §22 (functional hierarchy + info contracts; not a look)  
+**Source of truth:** Build Spec v3 §8, §15, §22 (functional hierarchy + info contracts; not a look)  
 **Platform:** iPhone-first (Austin override of §1 desktop browser)  
-**Date:** 2026-09-24  
+**Date:** 2026-09-24 (v1.1 — Supervisor conditional-pass fixes)  
 **Partners:** iOS Development Engineer (systems), Supervisor iOS Game (gates)
+
+**Changelog v1.1:** Expanded P1-06 / §1.4 gas-day panel to full §8 four-marker + verdict contract (Supervisor required fix). Locked Engineer answers into §5. Evidence tap sheet spells SOURCE. Speed chrome prefers §8 discrete set. Art direction label aligned to **Control Glass**.
 
 **Binding rules carried from the sheet**
 - §22 specifies hierarchy and information contracts — not visuals. Prior visual prototype is rejected; do not revive it.
@@ -19,7 +21,7 @@
 
 | Phase | UI we design | UI we do **not** ship yet |
 |-------|--------------|---------------------------|
-| **0** | None (data/determinism only) | Any chrome |
+| **0** | Empty TabView shell + stubs OK in repo (Engineer scaffold); **no P1 visual polish** until Phase 0 data stubs exist | Polished P1 desk visuals |
 | **1** | **Trader desk shell** — DA shaped ticket, fuel blind-nom panel, settlement/audit chain, plant telemetry *read* hooks | Role switcher with 7 live firewalls; Outcome Lens calib; Fund/Risk/Asset boards |
 | **2** | Outcome Lens calibration (§22.3); regret/exposure depth | Full multi-role org |
 | **3a** | Operator alarm board lite; maintenance surfaces | Full ISA-18.2 fatigue model chrome |
@@ -37,7 +39,7 @@
 | Screen / chrome | Spec | Phone notes |
 |-----------------|------|-------------|
 | **Role switcher** | §22.2 / §15 | Bottom sheet or radial picker: 7 roles. Instant switch. Shows unread interrupt count per role. Firewall badge when entering a restricted desk. |
-| **Game clock + speed** | §22.6 | Top status: game time (CT) + local TZ twin; speed chip; auto-locks to 1× at binding gates. |
+| **Game clock + speed** | §8 (prefer) / §22.6 | Top status: game time (CT) + local TZ twin; speed chip. Discrete set: **pause · 1× · 8× · 32× · Until next decision**. Auto-forces pause/1× at binding gates per mode rules. |
 | **Interrupt tray** | §22.2 | Persistent non-modal strip / stacked cards. Origin role · decision · deadline · inaction consequence. Swipe to defer (logged). **Never** `alert()`-style pause. |
 | **Evidence legend** | §22.2 / §2 | First-run coach mark + Settings → Evidence. Tap any tagged number → sheet with label + source string. |
 
@@ -67,9 +69,33 @@ Every role workspace is the **same four-panel skeleton** (tabs or segmented cont
 | Screen | Spec | Phase | Notes |
 |--------|------|-------|-------|
 | **Outcome Lens calibration** | §22.3 | **2** | Distributions + coverage stats only. Labels: CALIBRATED / WIDE / NARROW. Insufficient-n grayed. Regime marks (Uri, drought). **Never recommendations.** |
-| **Gas-day blind-nomination panel** | §22.4 | **1** (inside Gas / Phase-1 shell) | Two-marker timeline: DAM publish vs 13:00 gas gate; overlap/gap shaded; plain-language blind YES/NO + why. Updates when DAM late. |
-| **Settlement / audit causal chain** | §22.5 | **1** | Click any P&L line → walk back: revenue → settlement → award → offer ticket → (later) policy → Lens → calibration status. Data-model requirement. |
-| **Cross-role interrupts** | §22.2 | Stub P1; full P3b | Structured; non-pausing. |
+| **Gas-day blind-nomination panel** | **§8 (binding) + §22.4** | **1** (Fuel tab) | **Four markers + verdict before confirm** (not two-marker shorthand alone). See §1.4.1 below. |
+| **Settlement / audit causal chain** | §22.5 / §25.3 | **1** | Bind to stable `StatementLine → Award → OfferTranche` (on `OfferTicket`) ID graph. Fixtures must use same IDs — no parallel mock graph. |
+| **Cross-role interrupts** | §22.2 | Stub P1; full P3b | Structured; non-pausing. Empty publisher OK in scaffold. |
+
+### 1.4.1 Gas-day legibility panel — §8 binding contract (P1-06)
+
+**Required chrome every gas day, visible before nomination confirm:**
+
+| Marker | Time (CT) | Meaning |
+|--------|-----------|---------|
+| 1. DA submission gate | **10:00** | Power offer already locked (context) |
+| 2. Timely gas gate | **13:00** | Modeled timely nomination lock |
+| 3. DAM result target | **13:30** | Normal expected publish (not actual) |
+| 4. Archive actual DAM publish | **{HH:MM} from archive** | What was actually known that day |
+
+Render as a timeline with overlap/gap shading between gas gate and actual publish. Dual-label CT + player local.
+
+**Verdict line (sheet language — show before Confirm):**
+
+| Condition | Verdict copy |
+|-----------|----------------|
+| Actual publish **after** 13:00 gas gate | `DAM results published {HH:MM} CT, AFTER your 13:00 gas gate: this nomination is BLIND` |
+| Actual publish **before** gas gate | `DAM results published {HH:MM} CT, BEFORE your gas gate: you nominated with results in hand.` |
+| Publish timestamp **missing** | `publication time unknown — treated as BLIND (conservative)` **and** write the same note into the decision record |
+| Archive shows results already public | **Never force BLIND** — use the BEFORE / in-hand verdict |
+
+Blind status for a day must never be discoverable only after the fact. Panel updates if DAM publishes late while the desk is still open.
 
 ### 1.5 Preserved v2 inventory (still in scope eventually)
 
@@ -86,7 +112,7 @@ Market overview · DA ticket · fuel desk · plant detail · maintenance · port
 ```
 TabView (4 tabs) — label + SF Symbol + text (color not sole meaning)
 ├── Desk        // Power Trader Now/Today composite
-├── Fuel        // Gas nomination + blind-nom panel
+├── Fuel        // Gas nomination + §8 blind-nom panel
 ├── Plant       // Read-only physics strip (MW, state, fuel flow) — no price chrome
 └── Settle      // Statement + audit chain
 Plus: top clock / speed; Settings (evidence legend, accessibility); Interrupt tray overlay (empty until systems emit)
@@ -103,8 +129,8 @@ Plus: top clock / speed; Settings (evidence legend, accessibility); Interrupt tr
 | P1-03 | **Desk · Today** | Desk | Cadence checklist (brief → build → joint fuel check → gate → RT watch → EOD) | — |
 | P1-04 | **Exposure strip** | Desk | Cash/physical exposure summary for current ticket (hooks only; depth in P2) | GAME tags |
 | P1-05 | **Fuel · Nomination** | Fuel | Volume/timing; receipt after lock | Contract quotes SOURCE/GAME |
-| P1-06 | **Fuel · Blind explainer** | Fuel | Timeline DAM vs 13:00; blind state sentence; updates live | Publish times SOURCE |
-| P1-07 | **Plant · Telemetry** | Plant | Unit state, MW, fuel flow (minute physics). **No RT price.** | Telemetry GAME/PROXY |
+| P1-06 | **Fuel · Blind explainer (§8)** | Fuel | Four markers: 10:00 DA · 13:00 gas · 13:30 DAM target · archive actual publish; verdict line **before Confirm**; never force blind if archive already public | Publish times SOURCE |
+| P1-07 | **Plant · Telemetry** | Plant | §12.1 state enum + net MW + fuel_flow (MMBtu/h) only. **No prices. No gauges for fields physics doesn’t emit yet.** | Telemetry GAME/PROXY |
 | P1-08 | **Settle · Statement** | Settle | Hourly lines expandable | Settlement SOURCE/GAME |
 | P1-09 | **Settle · Audit chain** | Settle | Causal walk-back from any line | Full provenance |
 | P1-10 | **Interrupt tray** | Global | Non-modal cards (may be empty in P1) | — |
@@ -115,8 +141,8 @@ Plus: top clock / speed; Settings (evidence legend, accessibility); Interrupt tr
 **Flow A — Morning DA (Trader)**  
 Desk/Now → open ticket → edit tranches per hour → exposure strip updates → (optional) jump Fuel to confirm coverage → return → Submit → gate lock at 10:00 CT → Desk/Today checks off “DA gate”.
 
-**Flow B — Blind gas day (Scheduler panel)**  
-Fuel tab → Blind explainer shows DAM-after-13:00 → nomination marked BLIND + reason → nominate anyway or wait if publish early → receipt → Handoff stub logs “coverage confirmed/declined” (even pre-firewall, log the event for future attribution).
+**Flow B — Gas day with §8 legibility (Fuel tab)**  
+Fuel tab → panel shows four CT markers (10:00 / 13:00 / 13:30 / archive actual) → verdict line appears → player reads BLIND vs in-hand → Confirm nomination (verdict must already be visible) → receipt → decision record stores verdict + publish timestamp (or “unknown → conservative BLIND”) → Handoff stub logs coverage confirmed/declined.
 
 **Flow C — Why did we lose money?**  
 Settle → tap P&L line → chain: statement line → award → tranche on ticket → (stub) forecast family → “calibration N/A until Phase 2”.
@@ -141,7 +167,7 @@ Background card: “Fuel coverage short hour 17 — confirm or accept naked” �
 - **Density:** Trading desks are dense but scroll in **one column**; no multi-pane. Use collapsible hour rows on the DA ticket.
 - **Safe areas:** Clock/status under Dynamic Island / notch; tab bar clears Home Indicator.
 - **Type:** Dynamic Type from the start; tabular figures for MW, $, prices.
-- **Evidence:** Badge chips `SRC` `GAME` `PROXY` `GATE` beside values; tap → provenance sheet (not hover).
+- **Evidence:** Badge chips may abbreviate `SRC` / `GAME` / `PROXY` / `GATE` in the dense row; **tap sheet must spell `SOURCE`** (sheet label), plus GAME / PROXY / GATE in full. Never hover-only.
 - **Deadlines:** Always dual-label: `10:00 CT · 10:00 your local` (or converted).
 - **Alarms (when present):** ISA-18.2 color **plus** icon shape **plus** text priority (e.g. CRITICAL / HIGH / MEDIUM / LOW / INFO). Patterns for color-blind / grayscale.
 - **Interrupts:** Bottom or top card stack; max 3 visible; overflow to tray list; never full-screen modal that stops the clock.
@@ -174,14 +200,20 @@ Art direction can deepen later; Phase 1 ships **Control Glass tokens + component
 
 ---
 
-## 5. Open questions for Engineer
+## 5. Engineer answers (locked 2026-09-24) + remaining
 
-1. **Settlement model shape for AuditChain:** Will Phase 1 expose a stable `StatementLine → Award → OfferTranche` ID graph we can bind in SwiftUI, or should Design mock with fixtures until golden tests land?  
-2. **Blind-nom inputs:** Confirm fields for DAM publish timestamp vs gas gate (always 13:00 CT?) and the canonical reason strings for the explainer.  
-3. **Plant tab:** Exact telemetry fields available in Phase 1 minute physics (state enum, MW, fuel flow, temps?) so we don’t draw empty gauges.  
-4. **Interrupt bus:** Even a no-op publisher in the scaffold? Prefer empty tray over omitting the chrome.  
-5. **Repo path:** Confirm when `Design/` lands on `https://github.com/Austin-ops97/Peaker-Tycoon-Texas` (or current remote) so this file can move in-repo.  
-6. **Nav freeze:** Please lock TabView IA above before adding more tabs — I’ll revise if domain needs a fifth root.
+| # | Topic | Resolution |
+|---|--------|------------|
+| 1 | Audit chain IDs | **Yes.** Phase 1 domain exposes stable `StatementLine → Award → OfferTranche` (on `OfferTicket`) per §25.3 / §22.5. Fixtures use the **same** IDs — no parallel mock graph. |
+| 2 | Blind-nom | **§8 binding** (see §1.4.1). Gates: DA 10:00 · gas 13:00 · DAM target 13:30 · archive actual publish. Canonical verdict strings as above. Never force blind when archive already public. |
+| 3 | Plant telemetry P1 | Read-only, **no prices.** State enum §12.1: OFFLINE, READY, STARTING, PURGING, FIRING, ACCELERATING, SYNCHRONIZING, ONLINE, STOPPING, COOLDOWN, TRIPPED, MAINTENANCE (+ DERATED overlay). Emit at minimum: `state`, net `MW`, `fuel_flow` (MMBtu/h). Optional later: exhaust temps / T/C spread / vibration / lube — **do not draw gauges for unpublished fields.** |
+| 4 | InterruptTray | **Yes** — empty publisher/chrome now; non-modal; never pauses time. |
+| 5 | `Design/` in repo | **Yes this PR** — inventory lands at `Design/Peaker-Tycoon-Texas/01-phone-first-screen-inventory-v1.md` on Phase 0 PR. |
+| 6 | Nav freeze | **Locked** four tabs (Desk / Fuel / Plant / Settle). No fifth without domain need + Design revise. |
+
+**Art tokens:** Control Glass noted by Engineer — no visual tokens in systems code until Design hands component/token specs. Domain stays package-separated from UI.
+
+**Still open (non-blocking):** token/spec handoff timing for SwiftUI components once Phase 0 stub compiles.
 
 ---
 
@@ -201,6 +233,8 @@ Art direction can deepen later; Phase 1 ships **Control Glass tokens + component
 - [x] Phase 1 shell + wireflows  
 - [x] Role switcher specified but phase-gated  
 - [x] iPhone layout + a11y rules  
-- [x] One cohesive art direction  
-- [x] Open questions for Engineer  
-- [ ] In-repo under `Design/` when Engineer opens path (local copy: `/workspace/Design/Peaker-Tycoon-Texas/`)
+- [x] One cohesive art direction (**Control Glass**)  
+- [x] Engineer §5 questions resolved  
+- [x] Supervisor required fix: §8 four-marker + verdict on P1-06 / §1.4.1  
+- [x] Nits: SOURCE spelled on tap sheet; §8 speed set on clock chrome  
+- [ ] In-repo under `Design/Peaker-Tycoon-Texas/01-phone-first-screen-inventory-v1.md` on Engineer Phase 0 PR (local copy ready to copy)
