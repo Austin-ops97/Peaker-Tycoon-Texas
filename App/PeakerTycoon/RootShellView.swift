@@ -28,6 +28,9 @@ struct RootShellView: View {
                 }
             }
             .background(ControlGlass.surfaceBase(scheme).ignoresSafeArea())
+            .background {
+                PresentationClockDriver(clock: $chrome.clock, speed: $chrome.speed)
+            }
             .tint(ControlGlass.accentTeal)
             .navigationTitle(tab.title)
             .navigationBarTitleDisplayMode(.inline)

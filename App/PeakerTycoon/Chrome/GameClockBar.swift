@@ -32,7 +32,7 @@ struct GameClockBar: View {
             }
             EvidenceTag(
                 label: .game,
-                provenance: "GAME placeholder morning-brief anchor at 08:00 CT on the campaign start date (§8). This is not the device clock and not a market publication time."
+                provenance: "Displayed GAME time. It starts at the morning-brief anchor 2021-02-01 08:00 CT and scrubs only while a speed other than Pause is selected. This is not the device clock, not a simulation step, and not a market publication time."
             )
         }
         .padding(.horizontal, 16)

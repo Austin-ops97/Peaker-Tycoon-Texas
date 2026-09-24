@@ -130,6 +130,39 @@ import Testing
     }
 }
 
+@Test func presentationScrubMovesTheDisplayedInstantAndStopsAtThePlaceholderDeadline() {
+    let start = GameDefaults.placeholderMorningBrief
+    let paused = PresentationScrub.step(clock: start, speed: .pause)
+    #expect(paused.clock == start)
+    #expect(paused.speed == .pause)
+
+    let one = PresentationScrub.step(clock: start, speed: .x1)
+    #expect(one.clock == GameInstant(date: start.date, hour: 8, minute: 0, second: 1))
+    #expect(one.speed == .x1)
+
+    let eight = PresentationScrub.step(clock: start, speed: .x8)
+    #expect(eight.clock.second == 8)
+    let fast = PresentationScrub.step(clock: start, speed: .x32)
+    #expect(fast.clock.second == 32)
+
+    let late = GameInstant(date: start.date, hour: 23, minute: 59, second: 50)
+    let rolled = PresentationScrub.step(clock: late, speed: .x32)
+    #expect(rolled.clock == GameInstant(date: start.date.addingDays(1), hour: 0, minute: 0, second: 22))
+
+    let almost = GameInstant(date: start.date, hour: 9, minute: 59, second: 59)
+    let decision = PresentationScrub.step(clock: almost, speed: .untilNextDecision)
+    #expect(decision.clock == GameInstant(date: start.date, hour: 10, minute: 0, second: 0))
+    #expect(decision.speed == .pause)
+
+    let morning = PresentationScrub.step(clock: start, speed: .untilNextDecision)
+    #expect(morning.clock.second == 1)
+    #expect(morning.speed == .untilNextDecision)
+
+    let already = PresentationScrub.step(clock: decision.clock, speed: .untilNextDecision)
+    #expect(already.clock == decision.clock)
+    #expect(already.speed == .pause)
+}
+
 @Test func kernelAndAppSourcesDoNotReadTheWallClockOrImportUI() throws {
     let root = repoRoot()
     let kernel = try swiftSources(at: root.appendingPathComponent("Sources/PeakerKernel"))
@@ -159,6 +192,13 @@ import Testing
         }
         #expect(!text.contains("RoleSwitcher"))
     }
+    let driver = try String(contentsOf: root.appendingPathComponent("App/PeakerTycoon/Chrome/PresentationClockDriver.swift"), encoding: .utf8)
+    #expect(driver.contains("TimelineView"))
+    #expect(driver.contains("PresentationScrub"))
+    #expect(!driver.contains("CampaignKernel"))
+    let desk = try String(contentsOf: root.appendingPathComponent("App/PeakerTycoon/DeskPlaceholderView.swift"), encoding: .utf8)
+    #expect(desk.contains("Sample prices from retained SOURCE archives"))
+    #expect(!desk.contains("Submit offer"))
     let rootTab = try String(contentsOf: root.appendingPathComponent("App/PeakerTycoon/RootTab.swift"), encoding: .utf8)
     #expect(rootTab.contains("case desk"))
     #expect(rootTab.contains("case fuel"))

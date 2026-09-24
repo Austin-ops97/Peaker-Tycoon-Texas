@@ -62,3 +62,7 @@ Thirteen more price zips verified and landed in `Data/archives/ercot/2026-09-24/
 ### Settlement CSV parse (not coverage complete)
 
 `ERCOTSettlementCSV` and `IngestionPipeline.parseRetainedSettlementCSV` turn retained NP4-190-CD and NP6-905-CD CSV bytes into `NormalizedObservation`. Settlement point names stay verbatim. `sourcePublishedAt` stays null. The helper validates and does not publish; a complete publish still requires `requestComplete: false` to succeed while publication times are missing. Zip inflate stays caller-owned. `claims_complete_source_coverage` stays false. `source_batch_count` stays 25. Proxy point ids and `covered_local_dates` stay empty.
+
+### Shell clock scrub and Desk sample (not trading, not coverage)
+
+Pause still holds the displayed GAME instant at the morning-brief anchor. 1×, 8×, and 32× add that many game seconds per real second in the app shell only. Until next decision matches 1× and pauses at the placeholder 10:00 CT chip. Reduce Motion still advances the digits, with no ornamental animation. The scrub does not call `CampaignKernel`. Desk shows a read-only card for bundled NP4 rows `HB_HOUSTON` 24.14 and `HB_NORTH` 27.18 ($/MWh, 2021-02-10 hour ending 01:00) when `market-sample-np4.csv` is in the app. There is no submit button. Coverage claims are unchanged.

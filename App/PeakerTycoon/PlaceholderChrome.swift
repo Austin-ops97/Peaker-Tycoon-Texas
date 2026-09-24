@@ -9,8 +9,8 @@ struct InterruptCard: Identifiable, Equatable {
     let inactionConsequence: String
 }
 
-/// Placeholder chrome state. The clock is a GAME anchor, not the device time.
-/// Changing speed does not advance the kernel and does not start a timer.
+/// Placeholder chrome state. The clock starts at the GAME morning-brief anchor, not the device time.
+/// `PresentationClockDriver` may scrub `clock` when speed is not pause. That scrub does not run `CampaignKernel`.
 struct PlaceholderChrome: Equatable {
     var speed: PresentationSpeed = .pause
     var clock: GameInstant = GameDefaults.placeholderMorningBrief

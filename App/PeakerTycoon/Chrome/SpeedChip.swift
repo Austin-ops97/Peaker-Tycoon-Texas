@@ -20,6 +20,6 @@ struct SpeedChip: View {
                     Capsule().stroke(ControlGlass.hairline(scheme), lineWidth: 1)
                 )
         }
-        .accessibilityLabel("Speed \(speed.label). Display only. Does not advance simulation time.")
+        .accessibilityLabel("Speed \(speed.label). Scrubs the displayed game clock. Does not run the simulation.")
     }
 }

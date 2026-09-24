@@ -145,6 +145,23 @@ private let fixedIngestedAt = "2026-09-24T00:00:00Z"
     #expect(draft.completeness == "incomplete")
 }
 
+@Test func bundledDeskSampleParsesHoustonAndNorthWithoutCoverageClaims() throws {
+    let url = settlementRepoRoot().appendingPathComponent("App/PeakerTycoon/Resources/market-sample-np4.csv")
+    let csv = try Data(contentsOf: url)
+    let parsed = IngestionPipeline.parseRetainedSettlementCSV(
+        csv: csv,
+        product: .dayAheadNP4190CD,
+        ingestedAt: "2026-09-24T00:00:00Z",
+        revisionId: "app-bundle-sample"
+    )
+    #expect(parsed.errors.isEmpty)
+    #expect(parsed.observations.map(\.sourcePointId) == ["HB_HOUSTON", "HB_NORTH"])
+    #expect(parsed.observations.map(\.pointType) == ["hub_spp", "hub_spp"])
+    #expect(parsed.observations.map(\.valueDecimal) == ["24.14", "27.18"])
+    #expect(parsed.observations.allSatisfy { $0.sourceLocalDate == "2021-02-10" && $0.sourcePublishedAt == nil })
+    #expect(parsed.observations.allSatisfy { $0.qualityFlags.isEmpty })
+}
+
 @Test func parsingSamplesDoesNotFlipTheCoverageManifest() throws {
     let root = settlementRepoRoot()
     let manifest = try CoverageManifest.load(from: root.appendingPathComponent(CoverageManifest.publishedRelativePath))

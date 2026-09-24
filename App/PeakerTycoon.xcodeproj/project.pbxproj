@@ -23,6 +23,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				AA0000000000000000000003 /* PeakerKernel in Frameworks */,
+				AA0000000000000000000013 /* PeakerData in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -66,6 +67,7 @@
 			name = PeakerTycoon;
 			packageProductDependencies = (
 				AA000000000000000000000B /* PeakerKernel */,
+				AA0000000000000000000014 /* PeakerData */,
 			);
 			productName = PeakerTycoon;
 			productReference = AA0000000000000000000006 /* PeakerTycoon.app */;
@@ -130,6 +132,7 @@
 
 /* Begin PBXBuildFile section */
 		AA0000000000000000000003 /* PeakerKernel in Frameworks */ = {isa = PBXBuildFile; productRef = AA000000000000000000000B /* PeakerKernel */; };
+		AA0000000000000000000013 /* PeakerData in Frameworks */ = {isa = PBXBuildFile; productRef = AA0000000000000000000014 /* PeakerData */; };
 /* End PBXBuildFile section */
 
 /* Begin XCBuildConfiguration section */
@@ -264,6 +267,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = AA000000000000000000000E /* XCLocalSwiftPackageReference ".." */;
 			productName = PeakerKernel;
+		};
+		AA0000000000000000000014 /* PeakerData */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = AA000000000000000000000E /* XCLocalSwiftPackageReference ".." */;
+			productName = PeakerData;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};

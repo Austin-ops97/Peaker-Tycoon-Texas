@@ -16,5 +16,26 @@ public struct GameInstant: Hashable, Sendable, Codable, Equatable, CustomStringC
         String(format: "%@ %02d:%02d:%02d CT", date.iso, hour, minute, second)
     }
 
+    /// Adds civil seconds for the phone's displayed clock. This does not step `CampaignKernel`.
+    public func adding(seconds delta: Int) -> GameInstant {
+        var total = hour * 3_600 + minute * 60 + second + delta
+        var cursor = date
+        while total < 0 {
+            total += 86_400
+            cursor = cursor.addingDays(-1)
+        }
+        let extraDays = total / 86_400
+        total %= 86_400
+        if extraDays > 0 {
+            cursor = cursor.addingDays(extraDays)
+        }
+        return GameInstant(
+            date: cursor,
+            hour: total / 3_600,
+            minute: (total % 3_600) / 60,
+            second: total % 60
+        )
+    }
+
     public var description: String { centralLabel }
 }
