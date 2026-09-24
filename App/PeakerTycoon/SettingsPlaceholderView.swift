@@ -46,11 +46,14 @@ struct SettingsPlaceholderView: View {
                     Button("Clear local time", role: .destructive) {
                         zoneIdentifier = ""
                     }
+                    .accessibilityHint("Removes the local time zone. Game time stays on Central Time.")
                 }
             }
             Section("Tips") {
                 Button("Show local time tip", action: onShowTip)
+                    .accessibilityHint("Shows the local time tip. Dismissing it does not cover Desk.")
                 Button("Show navigation tips", action: onShowNavigationTips)
+                    .accessibilityHint("Plays the three tips under the clock again.")
             }
             Section("Evidence") {
                 if let summary = BundledCoverageSamples.summary {

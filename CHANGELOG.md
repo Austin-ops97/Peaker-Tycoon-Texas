@@ -178,3 +178,7 @@ Plant says it is waiting for a connected reading, and that this is not a live di
 ### Settle waiting for a statement (not a live settle)
 
 Settle says the tab is waiting, statements aren’t ready yet, and this isn’t a live settle. The empty line is still “No statements yet.” The sheet still explains money in and money out, and it says none is ready yet. The button stays How settlement works.
+
+### VoiceOver hints on the shell (not a copy change)
+
+Tab names stay Desk, Fuel, Plant, and Settle, with a short hint after each name. The hub arrows, the sample caption, the four thumb buttons, the Fuel, Plant, and Settle leads, the Settings tip rows, and the coach buttons Got it and Not now now have hints. Visible sentences are unchanged. Got it and Not now are separate VoiceOver controls.

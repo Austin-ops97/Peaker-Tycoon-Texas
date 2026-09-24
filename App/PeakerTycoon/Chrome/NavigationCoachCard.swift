@@ -15,12 +15,15 @@ struct NavigationCoachCard: View {
                 .font(.subheadline)
                 .foregroundStyle(ControlGlass.textPrimary(scheme))
                 .fixedSize(horizontal: false, vertical: true)
+                .accessibilityLabel("Navigation tip. \(message)")
             HStack(spacing: 16) {
                 Button("Got it", action: onGotIt)
                     .font(.subheadline.weight(.semibold))
+                    .accessibilityHint("Dismisses this tip and shows the next one.")
                 Button("Not now", action: onNotNow)
                     .font(.subheadline)
                     .foregroundStyle(ControlGlass.textSecondary(scheme))
+                    .accessibilityHint("Dismisses this tip and hides the rest of this session.")
             }
         }
         .padding(.horizontal, 16)
@@ -32,8 +35,6 @@ struct NavigationCoachCard: View {
                 .fill(ControlGlass.hairline(scheme))
                 .frame(height: 1)
         }
-        .accessibilityElement(children: .combine)
-        .accessibilityLabel("Navigation tip. \(message)")
     }
 
     private var message: String {

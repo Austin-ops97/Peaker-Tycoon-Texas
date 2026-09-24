@@ -17,6 +17,7 @@ struct SettlePlaceholderView: View {
                         .font(.body)
                         .foregroundStyle(ControlGlass.textPrimary(scheme))
                         .fixedSize(horizontal: false, vertical: true)
+                        .accessibilityHint("No statement is on this screen.")
                     Text("No statements yet.")
                         .font(.body)
                         .foregroundStyle(ControlGlass.textSecondary(scheme))
@@ -25,7 +26,10 @@ struct SettlePlaceholderView: View {
                 .padding(16)
                 .frame(maxWidth: .infinity, alignment: .leading)
             }
-            ThumbPrimaryButton(title: "How settlement works") {
+            ThumbPrimaryButton(
+                title: "How settlement works",
+                accessibilityHint: "Opens a short explanation. Statements aren’t ready yet."
+            ) {
                 showExplainer = true
             }
         }

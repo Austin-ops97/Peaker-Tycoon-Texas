@@ -111,12 +111,17 @@ struct DeskPlaceholderView: View {
                 .font(.caption)
                 .foregroundStyle(ControlGlass.textTertiary(scheme))
                 .fixedSize(horizontal: false, vertical: true)
+                .accessibilityHint("Stays true for every hub in this cycle.")
         }
     }
 
     private func sampleCycle(index: Int) -> some View {
         HStack(spacing: 8) {
-            cycleButton(systemName: "chevron.left", label: "Previous sample") {
+            cycleButton(
+                systemName: "chevron.left",
+                label: "Previous sample",
+                hint: "Shows the previous retained hub sample. Not a live market."
+            ) {
                 moveSample(by: -1)
             }
             Spacer(minLength: 0)
@@ -129,13 +134,17 @@ struct DeskPlaceholderView: View {
             }
             .accessibilityHidden(true)
             Spacer(minLength: 0)
-            cycleButton(systemName: "chevron.right", label: "Next sample") {
+            cycleButton(
+                systemName: "chevron.right",
+                label: "Next sample",
+                hint: "Shows the next retained hub sample. Not a live market."
+            ) {
                 moveSample(by: 1)
             }
         }
     }
 
-    private func cycleButton(systemName: String, label: String, action: @escaping () -> Void) -> some View {
+    private func cycleButton(systemName: String, label: String, hint: String, action: @escaping () -> Void) -> some View {
         Button(action: action) {
             Image(systemName: systemName)
                 .font(.body.weight(.semibold))
@@ -145,6 +154,7 @@ struct DeskPlaceholderView: View {
         }
         .buttonStyle(.plain)
         .accessibilityLabel(label)
+        .accessibilityHint(hint)
     }
 
     private func moveSample(by delta: Int) {

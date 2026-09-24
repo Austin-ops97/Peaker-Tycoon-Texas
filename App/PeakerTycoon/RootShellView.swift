@@ -135,13 +135,19 @@ struct RootShellView: View {
         if tab == .desk, !chrome.interrupts.isEmpty {
             pageWithTray(content)
                 .badge(chrome.interrupts.count)
-                .tabItem { Label(tab.title, systemImage: tab.systemImage) }
+                .tabItem { tabLabel(tab) }
                 .tag(tab)
         } else {
             pageWithTray(content)
-                .tabItem { Label(tab.title, systemImage: tab.systemImage) }
+                .tabItem { tabLabel(tab) }
                 .tag(tab)
         }
+    }
+
+    private func tabLabel(_ tab: RootTab) -> some View {
+        Label(tab.title, systemImage: tab.systemImage)
+            .accessibilityLabel(tab.title)
+            .accessibilityHint(tab.voiceOverHint)
     }
 
     @ViewBuilder

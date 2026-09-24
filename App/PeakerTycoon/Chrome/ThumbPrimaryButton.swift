@@ -27,6 +27,7 @@ struct ThumbPrimaryButton: View {
                 .fill(ControlGlass.hairline(scheme))
                 .frame(height: 1)
         }
+        .accessibilityLabel(title)
         .accessibilityHint(accessibilityHint ?? title)
     }
 }

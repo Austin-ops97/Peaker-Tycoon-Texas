@@ -19,13 +19,17 @@ struct PlantPlaceholderView: View {
                             .font(.body)
                             .foregroundStyle(ControlGlass.textPrimary(scheme))
                             .fixedSize(horizontal: false, vertical: true)
+                            .accessibilityHint("State, power, and fuel flow stay blank.")
                         statusCard
                             .id(Self.statusID)
                     }
                     .padding(16)
                     .frame(maxWidth: .infinity, alignment: .leading)
                 }
-                ThumbPrimaryButton(title: "View unit status") {
+                ThumbPrimaryButton(
+                    title: "View unit status",
+                    accessibilityHint: "Scrolls to state, power, and fuel flow. Not a live dispatch."
+                ) {
                     var transaction = Transaction()
                     transaction.disablesAnimations = reduceMotion
                     withTransaction(transaction) {

@@ -18,6 +18,7 @@ struct FuelPlaceholderView: View {
                             .font(.body)
                             .foregroundStyle(ControlGlass.textPrimary(scheme))
                             .fixedSize(horizontal: false, vertical: true)
+                            .accessibilityHint("Closed gas day. Not a live nomination.")
                         timeline
                             .id(Self.timelineID)
                         Text("No result yet — nomination is still closed.")
@@ -30,7 +31,10 @@ struct FuelPlaceholderView: View {
                     .padding(16)
                     .frame(maxWidth: .infinity, alignment: .leading)
                 }
-                ThumbPrimaryButton(title: "See gas day timeline") {
+                ThumbPrimaryButton(
+                    title: "See gas day timeline",
+                    accessibilityHint: "Scrolls to the four gas-day markers. Nomination isn’t open yet."
+                ) {
                     var transaction = Transaction()
                     transaction.disablesAnimations = reduceMotion
                     withTransaction(transaction) {
