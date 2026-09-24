@@ -47,6 +47,10 @@ Six verified price-instance zips, two artifact schemas, and two archive listings
 
 The clock bar is a `VStack` sibling above `TabView`, not a top `safeAreaInset`. Scroll content starts below the bar. The bar shows Central time only until a player zone is saved. Desk and Fuel deadline rows no longer say the twin is unset.
 
+### Design 03 local time and light shell
+
+`Design/Peaker-Tycoon-Texas/03-local-twin-and-vibe-pass-v1.md` and the light token JSON are in the repo. Settings stores `localTimeZoneIdentifier`. A one-time tip stores `localTwinTipDismissed` and does not return as a banner. Empty Desk, Fuel, Plant, and Settle copy matches that doc. Control Glass colors live in the app only. Coverage claims are unchanged.
+
 ### Batch 2 retain (still not coverage complete)
 
 Six more NP6 price zips verified and landed in `Data/archives/ercot/2026-09-24/batch2/`. `source_batch_count` moved from 6 to 12. Working artifact query is `deliveryDateFrom` and `deliveryDateTo` (`page` for later pages). Bare `deliveryDate` returned 400. 2021-02-15 is empty on both artifact endpoints. NP6 archive page 26 is the first probed page at or before 2025-12-31; page 197 is still in February 2021. The new zips’ delivery stamps are 2025-12-15, 2025-12-31 (three intervals), 2025-02-16, and 2021-02-09. They are samples, not proxy coverage. Point IDs stay null. ER products stay GATE.

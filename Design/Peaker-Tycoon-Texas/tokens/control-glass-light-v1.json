@@ -1,0 +1,89 @@
+{
+  "name": "Control Glass Light",
+  "version": "v1",
+  "date": "2026-09-24",
+  "extends": "02-phase1-shell-polish-control-glass-v1 dark seeds",
+  "accentNote": "Single interactive accent remains teal; color never sole meaning",
+  "colors": {
+    "cg.surface.base": {
+      "hex": "#F2F4F6",
+      "role": "App / tab root background"
+    },
+    "cg.surface.elevated": {
+      "hex": "#FFFFFF",
+      "opacity": 0.92,
+      "role": "Cards / glass panels"
+    },
+    "cg.surface.recessed": {
+      "hex": "#E6EAEE",
+      "role": "Inset wells"
+    },
+    "cg.surface.tint.cool": {
+      "hex": "#E8F4F2",
+      "role": "Soft teal-mist selected wash"
+    },
+    "cg.hairline": {
+      "hex": "#C5CCD4",
+      "role": "Dividers, panel edges"
+    },
+    "cg.glass.fill": {
+      "hex": "#F7F9FA",
+      "opacity": 0.78,
+      "role": "Material stand-in; opaque elevated if Reduce Transparency"
+    },
+    "cg.text.primary": {
+      "hex": "#1A1F24",
+      "role": "Titles, primary values"
+    },
+    "cg.text.secondary": {
+      "hex": "#5C6570",
+      "role": "Captions, dual TZ"
+    },
+    "cg.text.tertiary": {
+      "hex": "#8A939C",
+      "role": "Disabled / stub hints"
+    },
+    "cg.accent.teal": {
+      "hex": "#2EC4B6",
+      "role": "Interactive focus, tab tint, primary CTA"
+    },
+    "cg.accent.teal.muted": {
+      "hex": "#2EC4B6",
+      "opacity": 0.12,
+      "role": "Selected row / tip wash"
+    },
+    "cg.accent.teal.onFill": {
+      "hex": "#0E1114",
+      "role": "Label on filled teal button"
+    },
+    "cg.money.pos": {
+      "hex": "#1B9E6E",
+      "role": "Gain; pair with + and triangle"
+    },
+    "cg.money.neg": {
+      "hex": "#D64550",
+      "role": "Loss; pair with minus and triangle"
+    },
+    "cg.warn.amber": {
+      "hex": "#C9851A",
+      "role": "GATE / soft warn; text required"
+    },
+    "cg.evidence.source": {
+      "hex": "#DDE3E8",
+      "role": "SRC chip; sheet spells SOURCE"
+    },
+    "cg.evidence.game": {
+      "hex": "#D6DEE4",
+      "role": "GAME chip"
+    },
+    "cg.evidence.proxy": {
+      "hex": "#DDD8E6",
+      "role": "PROXY chip"
+    },
+    "cg.evidence.gate": {
+      "hex": "#F0E4D4",
+      "hairline": "#C9851A",
+      "role": "GATE chip + GATE text"
+    }
+  }
+}

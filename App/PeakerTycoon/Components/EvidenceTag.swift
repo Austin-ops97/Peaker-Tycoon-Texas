@@ -5,6 +5,7 @@ struct EvidenceTag: View {
     let label: EvidenceLabel
     let provenance: String
     @State private var presented = false
+    @Environment(\.colorScheme) private var scheme
 
     var body: some View {
         Button {
@@ -12,11 +13,13 @@ struct EvidenceTag: View {
         } label: {
             Text(label.chipText)
                 .font(.caption.weight(.semibold))
+                .foregroundStyle(ControlGlass.textPrimary(scheme))
                 .padding(.horizontal, 6)
                 .padding(.vertical, 2)
+                .background(ControlGlass.evidenceFill(label, scheme))
                 .overlay(
                     RoundedRectangle(cornerRadius: 4)
-                        .stroke(Color.secondary, lineWidth: 1)
+                        .stroke(label == .gate ? ControlGlass.warnAmber(scheme) : ControlGlass.hairline(scheme), lineWidth: 1)
                 )
         }
         .buttonStyle(.plain)

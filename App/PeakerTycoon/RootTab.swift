@@ -18,9 +18,9 @@ enum RootTab: String, Hashable, CaseIterable {
 
     var systemImage: String {
         switch self {
-        case .desk: return "chart.line.uptrend.xyaxis"
-        case .fuel: return "flame.fill"
-        case .plant: return "gearshape.2.fill"
+        case .desk: return "briefcase"
+        case .fuel: return "flame"
+        case .plant: return "bolt.fill"
         case .settle: return "doc.text.magnifyingglass"
         }
     }

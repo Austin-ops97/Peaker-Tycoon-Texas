@@ -1,36 +1,29 @@
 import SwiftUI
-import PeakerKernel
 
-/// Placeholder for nomination and the blind-nomination explainer. No fuel desk logic.
+/// Closed gas-day stub. Marker times stay off this screen until the window is open.
 struct FuelPlaceholderView: View {
+    @Environment(\.colorScheme) private var scheme
+
     var body: some View {
         ScrollView {
             VStack(alignment: .leading, spacing: 16) {
-                Text("Fuel")
-                    .font(.largeTitle.bold())
-                Text("Phase 0 placeholder. Nomination is not implemented.")
+                Text("Gas day is closed")
+                    .font(.title3.weight(.semibold))
+                    .foregroundStyle(ControlGlass.textPrimary(scheme))
+                    .accessibilityLabel("Fuel tab. Nomination not open.")
+                Text("When nomination opens, this tab shows the four time markers and whether you’re nominating blind.")
                     .font(.body)
-                DeadlineChip(
-                    title: "Timely gas gate",
-                    centralLabel: "13:00 CT",
-                    evidence: .game,
-                    provenance: "GAME modeled timely gas deadline of 13:00 (§8). S16 is gas-coordination context, not a claim that every Texas pipeline uses this gate."
-                )
-                Text("Blind-nomination explainer")
-                    .font(.headline)
-                Text("publication time unknown — treated as BLIND (conservative)")
+                    .foregroundStyle(ControlGlass.textPrimary(scheme))
+                Text("Check back when the gas window opens. Markers stay on Central Time.")
                     .font(.body)
-                    .accessibilityLabel("Publication time unknown. Treated as blind. Conservative.")
-                EvidenceTag(
-                    label: .gate,
-                    provenance: "GATE. The archive has no DAM publication timestamp, so the spec's unknown branch is shown (§8). No publication time was invented."
-                )
-                Text("Volume, timing, and receipt stay empty until Phase 1.")
-                    .font(.body)
-                    .foregroundStyle(.secondary)
+                    .foregroundStyle(ControlGlass.textSecondary(scheme))
+                Text("Gas times stay on Central Time. Markers appear when the window opens.")
+                    .font(.caption)
+                    .foregroundStyle(ControlGlass.textTertiary(scheme))
             }
             .padding(16)
             .frame(maxWidth: .infinity, alignment: .leading)
         }
+        .background(ControlGlass.surfaceBase(scheme).ignoresSafeArea())
     }
 }

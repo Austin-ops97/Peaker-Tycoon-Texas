@@ -8,6 +8,7 @@ struct DeadlineChip: View {
     var localClock: String? = nil
     let evidence: EvidenceLabel
     let provenance: String
+    @Environment(\.colorScheme) private var scheme
 
     var body: some View {
         VStack(alignment: .leading, spacing: 4) {
@@ -20,9 +21,10 @@ struct DeadlineChip: View {
         }
         .frame(maxWidth: .infinity, alignment: .leading)
         .padding(12)
+        .background(ControlGlass.surfaceElevated(scheme))
         .overlay(
             RoundedRectangle(cornerRadius: 8)
-                .stroke(Color.secondary, lineWidth: 1)
+                .stroke(ControlGlass.hairline(scheme), lineWidth: 1)
         )
     }
 

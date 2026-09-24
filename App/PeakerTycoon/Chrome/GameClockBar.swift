@@ -4,9 +4,10 @@ import PeakerKernel
 /// Status band. Callers place this in a VStack above scroll content. It is not an overlay.
 struct GameClockBar: View {
     let clock: GameInstant
-    /// Shown only when a player zone is saved. Nil omits the line.
-    var localCaption: String? = nil
+    var zoneIdentifier: String = ""
     @Binding var speed: PresentationSpeed
+    @Environment(\.colorScheme) private var scheme
+    @Environment(\.accessibilityReduceTransparency) private var reduceTransparency
 
     var body: some View {
         VStack(alignment: .leading, spacing: 4) {
@@ -14,17 +15,18 @@ struct GameClockBar: View {
                 VStack(alignment: .leading, spacing: 2) {
                     Text(clock.centralLabel)
                         .font(.system(.headline, design: .monospaced))
+                        .foregroundStyle(ControlGlass.textPrimary(scheme))
                         .lineLimit(1)
                         .minimumScaleFactor(0.75)
-                    if let localCaption {
-                        Text(localCaption)
+                    if let caption = LocalTwinClock.localCaption(for: clock, identifier: zoneIdentifier) {
+                        Text(caption)
                             .font(.caption)
-                            .foregroundStyle(.secondary)
+                            .foregroundStyle(ControlGlass.textSecondary(scheme))
                             .lineLimit(1)
                     }
                 }
                 .accessibilityElement(children: .ignore)
-                .accessibilityLabel(accessibilityLabel)
+                .accessibilityLabel(LocalTwinClock.accessibility(for: clock, identifier: zoneIdentifier))
                 Spacer(minLength: 8)
                 SpeedChip(speed: $speed)
             }
@@ -37,14 +39,11 @@ struct GameClockBar: View {
         .padding(.vertical, 8)
         .frame(maxWidth: .infinity, alignment: .leading)
         .fixedSize(horizontal: false, vertical: true)
-        .background(.bar)
-    }
-
-    private var accessibilityLabel: String {
-        let time = String(format: "%02d:%02d:%02d", clock.hour, clock.minute, clock.second)
-        if let localCaption {
-            return "Game time \(time) Central. \(localCaption)."
+        .background(ControlGlass.glassFill(scheme, reduceTransparency: reduceTransparency))
+        .overlay(alignment: .bottom) {
+            Rectangle()
+                .fill(ControlGlass.hairline(scheme))
+                .frame(height: 1)
         }
-        return "Game time \(time) Central."
     }
 }

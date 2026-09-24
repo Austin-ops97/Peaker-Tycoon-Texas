@@ -2,15 +2,38 @@ import SwiftUI
 import PeakerKernel
 
 struct SettingsPlaceholderView: View {
+    @Binding var zoneIdentifier: String
+    let onShowTip: () -> Void
     @State private var reduceMotionNoted = false
+    @Environment(\.colorScheme) private var scheme
 
     var body: some View {
         List {
-            Section("Player timezone") {
-                Text("Clock labels use Central time.")
-                Text("Your own timezone is not chosen yet. That is expected in this build. Nothing is broken.")
-                    .font(.body)
-                    .foregroundStyle(.secondary)
+            Section {
+                LabeledContent("Your local time zone", value: valueText)
+                    .accessibilityLabel("Your local time zone. \(valueText).")
+                Text("Deadlines always show CT. Local is optional and only appears when set.")
+                    .font(.caption)
+                    .foregroundStyle(ControlGlass.textSecondary(scheme))
+                if saveFailed {
+                    Text("Couldn’t save time zone")
+                        .font(.body.weight(.semibold))
+                        .foregroundStyle(ControlGlass.warnAmber(scheme))
+                    Text("Try again from Settings. Game time still runs on CT.")
+                        .font(.caption)
+                        .foregroundStyle(ControlGlass.textSecondary(scheme))
+                }
+                NavigationLink {
+                    TimeZonePickerView(identifier: $zoneIdentifier, onSaved: {})
+                } label: {
+                    Text(isSet ? "Change…" : "Set time zone…")
+                }
+                if isSet {
+                    Button("Clear local time", role: .destructive) {
+                        zoneIdentifier = ""
+                    }
+                }
+                Button("Show local time tip", action: onShowTip)
             }
             Section("Evidence legend") {
                 ForEach(EvidenceLabel.allCases, id: \.self) { label in
@@ -18,7 +41,7 @@ struct SettingsPlaceholderView: View {
                         EvidenceTag(label: label, provenance: legendCopy(label))
                         Text(legendCopy(label))
                             .font(.caption)
-                            .foregroundStyle(.secondary)
+                            .foregroundStyle(ControlGlass.textSecondary(scheme))
                     }
                 }
             }
@@ -27,7 +50,7 @@ struct SettingsPlaceholderView: View {
                 Toggle("Reduce Motion noted", isOn: $reduceMotionNoted)
                 Text("No motion is used in this placeholder. The toggle is a stub and is not stored.")
                     .font(.caption)
-                    .foregroundStyle(.secondary)
+                    .foregroundStyle(ControlGlass.textSecondary(scheme))
                 Text("Alarm patterns, when they exist, use a word plus a shape: CRITICAL octagon, HIGH triangle, MEDIUM square, LOW circle, INFO dash. Color is never the only signal.")
             }
             Section("Roles") {
@@ -36,6 +59,19 @@ struct SettingsPlaceholderView: View {
             }
         }
         .navigationTitle("Settings")
+        .tint(ControlGlass.accentTeal)
+    }
+
+    private var isSet: Bool {
+        LocalTwinClock.zone(for: zoneIdentifier) != nil
+    }
+
+    private var saveFailed: Bool {
+        !zoneIdentifier.isEmpty && !isSet
+    }
+
+    private var valueText: String {
+        isSet ? LocalTwinClock.friendlyLabel(zoneIdentifier) : "Not set"
     }
 
     private func legendCopy(_ label: EvidenceLabel) -> String {
