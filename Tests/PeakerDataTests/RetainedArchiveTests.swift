@@ -187,7 +187,7 @@ private let retainedIngestedAt = "2026-09-24T00:00:00Z"
         from: repoRootForRetain().appendingPathComponent(CoverageManifest.publishedRelativePath)
     )
     #expect(manifest.claimsCompleteSourceCoverage == false)
-    #expect(manifest.sourceBatchCount == 171)
+    #expect(manifest.sourceBatchCount == 199)
     #expect(manifest.selectedProxyPoints.allSatisfy { $0.sourcePointId == nil && $0.coveredLocalDates.isEmpty })
     let er = manifest.sourceProducts.filter { $0.productId == "NP4-180-ER" || $0.productId == "NP6-785-ER" }
     #expect(er.count == 2)
@@ -261,7 +261,7 @@ private let retainedIngestedAt = "2026-09-24T00:00:00Z"
         from: repo.appendingPathComponent(CoverageManifest.publishedRelativePath)
     )
     #expect(manifest.claimsCompleteSourceCoverage == false)
-    #expect(manifest.sourceBatchCount == 171)
+    #expect(manifest.sourceBatchCount == 199)
     #expect(manifest.selectedProxyPoints.allSatisfy { $0.sourcePointId == nil && $0.coveredLocalDates.isEmpty })
 }
 

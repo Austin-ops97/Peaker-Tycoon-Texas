@@ -172,7 +172,7 @@ private let fixedIngestedAt = "2026-09-24T00:00:00Z"
     let root = settlementRepoRoot()
     let manifest = try CoverageManifest.load(from: root.appendingPathComponent(CoverageManifest.publishedRelativePath))
     #expect(manifest.claimsCompleteSourceCoverage == false)
-    #expect(manifest.sourceBatchCount == 171)
+    #expect(manifest.sourceBatchCount == 199)
     #expect(manifest.selectedProxyPoints.allSatisfy { $0.sourcePointId == nil && $0.coveredLocalDates.isEmpty })
 }
 
