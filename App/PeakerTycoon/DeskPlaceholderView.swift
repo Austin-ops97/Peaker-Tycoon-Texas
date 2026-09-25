@@ -212,6 +212,12 @@ private struct MarketSampleCard: View {
             Text("\(row.valueDecimal) \(row.unit)")
                 .font(.caption.monospacedDigit())
                 .foregroundStyle(ControlGlass.textSecondary(scheme))
+            ForEach(sampleFacts(for: row), id: \.self) { fact in
+                Text(fact)
+                    .font(.caption)
+                    .foregroundStyle(ControlGlass.textTertiary(scheme))
+                    .fixedSize(horizontal: false, vertical: true)
+            }
             EvidenceTag(label: .source, provenance: provenance)
         }
         .padding(10)
@@ -219,7 +225,7 @@ private struct MarketSampleCard: View {
         .background(ControlGlass.surfaceRecessed(scheme))
         .clipShape(RoundedRectangle(cornerRadius: 8))
         .accessibilityElement(children: .combine)
-        .accessibilityLabel("\(accessibleName), \(deliveryStamp), \(row.valueDecimal) \(row.unit). Sample \(position). Retained historical sample, not a live market.")
+        .accessibilityLabel("\(accessibleName), \(deliveryStamp), \(row.valueDecimal) \(row.unit). \(sampleFacts(for: row).joined(separator: " ")) Sample \(position). Retained historical sample, not a live market.")
     }
 
     private var deliveryStamp: String {
@@ -228,7 +234,7 @@ private struct MarketSampleCard: View {
     }
 
     private var provenance: String {
-        "SOURCE row from a retained day-ahead archive sample. \(accessibleName), delivery \(row.sourceLocalDate), hour ending \(row.hourEndingRaw ?? ""), \(row.valueDecimal) \(row.unit). Retained historical sample, not a live market, and not a proxy site mapping. Not the whole day."
+        "SOURCE row from a retained day-ahead archive sample. \(accessibleName), delivery \(row.sourceLocalDate), hour ending \(row.hourEndingRaw ?? ""), \(row.valueDecimal) \(row.unit). \(sampleFacts(for: row).joined(separator: " ")) Retained historical sample, not a live market, and not a proxy site mapping. Not the whole day."
     }
 
     private var accessibleName: String {
@@ -303,6 +309,12 @@ private struct RetainedSampleSheet: View {
             Text("\(row.valueDecimal) \(row.unit)")
                 .font(.body.monospacedDigit())
                 .foregroundStyle(ControlGlass.textPrimary(scheme))
+            ForEach(sampleFacts(for: row), id: \.self) { fact in
+                Text(fact)
+                    .font(.body)
+                    .foregroundStyle(ControlGlass.textSecondary(scheme))
+                    .fixedSize(horizontal: false, vertical: true)
+            }
             Text("Retained sample — not live.")
                 .font(.body)
                 .foregroundStyle(ControlGlass.textPrimary(scheme))
@@ -312,6 +324,33 @@ private struct RetainedSampleSheet: View {
         }
         .accessibilityElement(children: .combine)
     }
+}
+
+/// Plain facts already on the parsed row. No product id and no invented publication time.
+func sampleFacts(for row: NormalizedObservation) -> [String] {
+    var lines: [String] = []
+    switch row.pointType {
+    case "hub_spp":
+        lines.append("Hub price")
+    case "load_zone_spp":
+        lines.append("Load zone price")
+    case "resource_spp":
+        lines.append("Resource price")
+    default:
+        break
+    }
+    switch row.dstFlagRaw {
+    case "N":
+        lines.append("Not a repeated hour.")
+    case "Y":
+        lines.append("Repeated hour.")
+    default:
+        break
+    }
+    if row.sourcePublishedAt == nil {
+        lines.append("No publication time saved with this row.")
+    }
+    return lines
 }
 
 /// Plain name for the four hubs. Any other settlement code stays code-only.

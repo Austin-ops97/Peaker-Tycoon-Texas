@@ -199,6 +199,10 @@ Next up, Gas day, Plant, and Settlement use a muted teal bar and a title2 title.
 
 “Next, See gas day timeline.” scrolls to the four markers. “Next, View unit status.” scrolls to State, MW, and fuel flow. “Next, How settlement works.” opens the same explanation sheet. Visible sentences are unchanged. Desk is unchanged.
 
+### Fuel closed readout from saved day-ahead rows (not a nomination)
+
+When the bundled day-ahead sample has rows, Fuel’s lead is “Nomination is closed. These saved days have no publication time.” The four markers stay. The card lists those delivery dates, says the publication time isn’t saved, and says it is not a gas volume. Confirm stays off. With no rows, the Design 05 lead stays. Settle still says “No statements yet.” The price files are not a statement. Desk’s sample card and plan sheet add “Hub price”, “Not a repeated hour.”, and “No publication time saved with this row.” from the parsed fields. `claims_complete_source_coverage` stays false.
+
 ### Batch 9 sample inventory (not coverage)
 
 `RetainedSampleInventory` now scans batch9 with batch2–batch8. The JSON and markdown artifacts list 77 day-ahead files and 88 real-time files (77 and 63 delivery dates). Live From/To empty in this drop is 2023-06-15. The day-ahead hours on that date come from the earlier batch 8 file. No real-time interval is retained for 2023-06-15. Two new real-time intervals have DeliveryDate 2022-02-15 (hour 12, intervals 3 and 4). Settings → Evidence reads the bundled copy. `claims_complete_source_coverage` stays false.
