@@ -1,6 +1,6 @@
 # Retained sample inventory
 
-This file lists CSV `DeliveryDate` values found by `RetainedSettlementArchive` in verified price zips under `batch2` through `batch10`. It is an inventory of retained samples. It is not complete coverage.
+This file lists CSV `DeliveryDate` values found by `RetainedSettlementArchive` in verified price zips under `batch2` through `batch11`. It is an inventory of retained samples. It is not complete coverage.
 
 `claims_complete_source_coverage` is false. Proxy `source_point_id` and `covered_local_dates` are not filled from this list.
 
@@ -12,7 +12,7 @@ Regenerate both artifacts from the retained zips with `PEAKER_REFRESH_RETAINED_I
 
 ## NP4-190-CD
 
-89 price zips. Parse errors reported by the validator: 0. Those errors stay on the rows; they are not dropped from this date list when a row still parsed.
+103 price zips. Parse errors reported by the validator: 0. Those errors stay on the rows; they are not dropped from this date list when a row still parsed.
 
 | Delivery date | In campaign era | Hour endings | Observations | Zips |
 | --- | --- | --- | --- | --- |
@@ -92,23 +92,37 @@ Regenerate both artifacts from the retained zips with `PEAKER_REFRESH_RETAINED_I
 | 2024-10-15 | yes | 01:00–24:00 (24) | 22488 | `batch8/np4-190-cd__inst11_20241014_1044071870_DAMSPNP4190_csv.zip` |
 | 2024-11-15 | yes | 01:00–24:00 (24) | 22656 | `batch9/np4-190-cd__inst11_20241114_1052416414_DAMSPNP4190_csv.zip` |
 | 2024-11-16 | yes | 01:00–24:00 (24) | 22656 | `batch4/np4-190-cd__inst12_20241115_1052688105_DAMSPNP4190_csv.zip` |
+| 2024-12-14 | yes | 01:00–24:00 (24) | 22800 | `batch11/np4-190-cd__inst8_20241213_1060344099_DAMSPNP4190_csv.zip` |
 | 2024-12-15 | yes | 01:00–24:00 (24) | 22800 | `batch8/np4-190-cd__inst7_20241214_1060611912_DAMSPNP4190_csv.zip` |
+| 2024-12-16 | yes | 01:00–24:00 (24) | 22800 | `batch11/np4-190-cd__inst1_20241215_1060876405_DAMSPNP4190_csv.zip` |
 | 2025-01-15 | yes | 01:00–24:00 (24) | 23184 | `batch8/np4-190-cd__inst12_20250114_1069109760_DAMSPNP4190_csv.zip` |
 | 2025-02-15 | yes | 01:00–24:00 (24) | 23352 | `batch8/np4-190-cd__inst8_20250214_1077745007_DAMSPNP4190_csv.zip` |
 | 2025-03-15 | yes | 01:00–24:00 (24) | 23544 | `batch9/np4-190-cd__inst3_20250314_1085553446_DAMSPNP4190_csv.zip` |
 | 2025-04-16 | yes | 01:00–24:00 (24) | 23712 | `batch4/np4-190-cd__inst13_20250415_1094526170_DAMSPNP4190_csv.zip` |
+| 2025-05-14 | yes | 01:00–24:00 (24) | 24048 | `batch11/np4-190-cd__inst9_20250513_1102560327_DAMSPNP4190_csv.zip` |
 | 2025-05-15 | yes | 01:00–24:00 (24) | 24072 | `batch8/np4-190-cd__inst9_20250514_1102852065_DAMSPNP4190_csv.zip` |
+| 2025-05-16 | yes | 01:00–24:00 (24) | 24072 | `batch11/np4-190-cd__inst2_20250515_1103146021_DAMSPNP4190_csv.zip` |
+| 2025-06-14 | yes | 01:00–24:00 (24) | 24288 | `batch11/np4-190-cd__inst10_20250613_1111639570_DAMSPNP4190_csv.zip` |
 | 2025-06-15 | yes | 01:00–24:00 (24) | 24288 | `batch9/np4-190-cd__inst4_20250614_1111925321_DAMSPNP4190_csv.zip` |
+| 2025-06-16 | yes | 01:00–24:00 (24) | 24288 | `batch11/np4-190-cd__inst3_20250615_1112207202_DAMSPNP4190_csv.zip` |
+| 2025-07-14 | yes | 01:00–24:00 (24) | 24816 | `batch11/np4-190-cd__inst11_20250713_1120499290_DAMSPNP4190_csv.zip` |
 | 2025-07-15 | yes | 01:00–24:00 (24) | 24816 | `batch9/np4-190-cd__inst5_20250714_1120795566_DAMSPNP4190_csv.zip` |
+| 2025-07-16 | yes | 01:00–24:00 (24) | 24816 | `batch11/np4-190-cd__inst4_20250715_1121114317_DAMSPNP4190_csv.zip` |
 | 2025-08-15 | yes | 01:00–24:00 (24) | 24960 | `batch9/np4-190-cd__inst6_20250814_1130328246_DAMSPNP4190_csv.zip` |
+| 2025-09-14 | yes | 01:00–24:00 (24) | 25128 | `batch11/np4-190-cd__inst12_20250913_1140156593_DAMSPNP4190_csv.zip` |
+| 2025-09-15 | yes | 01:00–24:00 (24) | 25128 | `batch11/np4-190-cd__inst5_20250914_1140481884_DAMSPNP4190_csv.zip` |
 | 2025-09-16 | yes | 01:00–24:00 (24) | 25128 | `batch4/np4-190-cd__inst14_20250915_1140793955_DAMSPNP4190_csv.zip` |
+| 2025-10-14 | yes | 01:00–24:00 (24) | 25272 | `batch11/np4-190-cd__inst13_20251013_1150134105_DAMSPNP4190_csv.zip` |
 | 2025-10-15 | yes | 01:00–24:00 (24) | 25272 | `batch9/np4-190-cd__inst7_20251014_1150481984_DAMSPNP4190_csv.zip` |
+| 2025-10-16 | yes | 01:00–24:00 (24) | 25272 | `batch11/np4-190-cd__inst6_20251015_1150803180_DAMSPNP4190_csv.zip` |
+| 2025-11-14 | yes | 01:00–24:00 (24) | 25632 | `batch11/np4-190-cd__inst14_20251113_1160251447_DAMSPNP4190_csv.zip` |
 | 2025-11-15 | yes | 01:00–24:00 (24) | 25632 | `batch9/np4-190-cd__inst8_20251114_1160606903_DAMSPNP4190_csv.zip` |
+| 2025-11-16 | yes | 01:00–24:00 (24) | 25632 | `batch11/np4-190-cd__inst7_20251115_1160958466_DAMSPNP4190_csv.zip` |
 | 2025-12-15 | yes | 01:00–24:00 (24) | 25848 | `batch9/np4-190-cd__inst9_20251214_1171255543_DAMSPNP4190_csv.zip` |
 
 ## NP6-905-CD
 
-104 price zips. Parse errors reported by the validator: 218. Those errors stay on the rows; they are not dropped from this date list when a row still parsed.
+120 price zips. Parse errors reported by the validator: 250. Those errors stay on the rows; they are not dropped from this date list when a row still parsed.
 
 | Delivery date | In campaign era | Hour endings | Observations | Zips |
 | --- | --- | --- | --- | --- |
@@ -179,24 +193,28 @@ Regenerate both artifacts from the retained zips with `PEAKER_REFRESH_RETAINED_I
 | 2024-09-08 | yes | 12:3 | 942 | `batch9/np6-905-cd__inst14_20240908_1034394040_SPPHLZNP6905_20240908_1145_csv.zip` |
 | 2024-10-01 | yes | 12:3 | 942 | `batch10/np6-905-cd__inst12_20241001_1040595008_SPPHLZNP6905_20241001_1145_csv.zip` |
 | 2024-11-15 | yes | 22:2, 24:3 | 1912 | `batch10/np6-905-cd__inst16_20241115_1052784376_SPPHLZNP6905_20241115_2130_csv.zip`, `batch10/np6-905-cd__inst4_20241115_1052807283_SPPHLZNP6905_20241115_2345_csv.zip` |
-| 2025-01-15 | yes | 12:3 | 980 | `batch10/np6-905-cd__inst5_20250115_1069383183_SPPHLZNP6905_20250115_1145_csv.zip` |
+| 2024-11-26 | yes | 3:2 | 956 | `batch11/np6-905-cd__inst9_20241126_1055538591_SPPHLZNP6905_20241126_0230_csv.zip` |
+| 2024-12-17 | yes | 12:3, 13:3 | 1924 | `batch11/np6-905-cd__inst13_20241217_1061432384_SPPHLZNP6905_20241217_1245_csv.zip`, `batch11/np6-905-cd__inst1_20241217_1061418502_SPPHLZNP6905_20241217_1145_csv.zip` |
+| 2025-01-15 | yes | 12:3, 12:4 | 1960 | `batch10/np6-905-cd__inst5_20250115_1069383183_SPPHLZNP6905_20250115_1145_csv.zip`, `batch11/np6-905-cd__inst11_20250115_1069385896_SPPHLZNP6905_20250115_1200_csv.zip` |
 | 2025-02-10 | yes | 12:3 | 985 | `batch4/np6-905-cd__inst2_20250210_1076607155_SPPHLZNP6905_20250210_1145_csv.zip` |
 | 2025-02-16 | yes | 19:4 | 985 | `batch2/np6-905-cd__inst6_20250216_1078358046_SPPHLZNP6905_20250216_1900_csv.zip` |
 | 2025-03-15 | yes | 12:3 | 993 | `batch4/np6-905-cd__inst1_20250315_1085818452_SPPHLZNP6905_20250315_1145_csv.zip` |
-| 2025-04-15 | yes | 12:3 | 1000 | `batch10/np6-905-cd__inst6_20250415_1094508425_SPPHLZNP6905_20250415_1145_csv.zip` |
-| 2025-08-10 | yes | 12:3 | 1052 | `batch9/np6-905-cd__inst10_20250810_1129060801_SPPHLZNP6905_20250810_1145_csv.zip` |
+| 2025-04-15 | yes | 12:3, 12:4 | 2000 | `batch10/np6-905-cd__inst6_20250415_1094508425_SPPHLZNP6905_20250415_1145_csv.zip`, `batch11/np6-905-cd__inst10_20250415_1094511369_SPPHLZNP6905_20250415_1200_csv.zip` |
+| 2025-05-15 | yes | 12:3, 12:4 | 2030 | `batch11/np6-905-cd__inst14_20250515_1103140502_SPPHLZNP6905_20250515_1200_csv.zip`, `batch11/np6-905-cd__inst2_20250515_1103137699_SPPHLZNP6905_20250515_1145_csv.zip` |
+| 2025-06-15 | yes | 12:3, 12:4 | 2048 | `batch11/np6-905-cd__inst15_20250615_1112202253_SPPHLZNP6905_20250615_1200_csv.zip`, `batch11/np6-905-cd__inst3_20250615_1112199482_SPPHLZNP6905_20250615_1145_csv.zip` |
+| 2025-07-15 | yes | 12:3, 12:4 | 2092 | `batch11/np6-905-cd__inst16_20250715_1121107288_SPPHLZNP6905_20250715_1200_csv.zip`, `batch11/np6-905-cd__inst4_20250715_1121104301_SPPHLZNP6905_20250715_1145_csv.zip` |
+| 2025-08-10 | yes | 12:3, 12:4 | 2104 | `batch11/np6-905-cd__inst12_20250810_1129060942_SPPHLZNP6905_20250810_1200_csv.zip`, `batch9/np6-905-cd__inst10_20250810_1129060801_SPPHLZNP6905_20250810_1145_csv.zip` |
+| 2025-09-13 | yes | 12:3 | 1059 | `batch11/np6-905-cd__inst5_20250913_1140146883_SPPHLZNP6905_20250913_1145_csv.zip` |
+| 2025-10-15 | yes | 3:1, 5:2 | 2130 | `batch11/np6-905-cd__inst6_20251015_1150680441_SPPHLZNP6905_20251015_0430_csv.zip`, `batch11/np6-905-cd__inst7_20251015_1150653966_SPPHLZNP6905_20251015_0215_csv.zip` |
+| 2025-11-15 | yes | 7:3 | 1080 | `batch11/np6-905-cd__inst8_20251115_1160868375_SPPHLZNP6905_20251115_0645_csv.zip` |
 | 2025-12-15 | yes | 22:2 | 1089 | `batch2/np6-905-cd__inst1_20251215_1171744358_SPPHLZNP6905_20251215_2130_csv.zip` |
 | 2025-12-31 | yes | 24:1, 24:2, 24:3 | 3267 | `batch2/np6-905-cd__inst3_20251231_1177533089_SPPHLZNP6905_20251231_2345_csv.zip`, `batch2/np6-905-cd__inst4_20251231_1177529812_SPPHLZNP6905_20251231_2330_csv.zip`, `batch2/np6-905-cd__inst5_20251231_1177524979_SPPHLZNP6905_20251231_2315_csv.zip` |
 
 ## EMPTY GATE — live From/To
 
-These days returned `totalRecords` 0 for live `deliveryDateFrom` / `deliveryDateTo` on both NP4-190-CD and NP6-905-CD. A retained hour or interval on that date does not close the gate.
+The latest retain recorded no new live `deliveryDateFrom` / `deliveryDateTo` day with `totalRecords` 0. A retained archive file is not a live From/To fill.
 
-| Day | NP4-190-CD retained hours | NP6-905-CD retained hours |
-| --- | --- | --- |
-| 2021-03-15 | none | 12:3, 12:4 |
-
-Earlier live From/To days 2021-04-15, 2022-07-15, 2022-11-15, 2023-01-15, 2023-04-15, 2023-06-15, 2023-10-15 now have archive CSV delivery dates in the retained zips. Those files are samples. A real-time file is still one interval. They are not proxy `covered_local_dates`, and this list does not say the live endpoint started returning rows.
+Earlier live From/To days 2021-03-15, 2021-04-15, 2022-07-15, 2022-11-15, 2023-01-15, 2023-04-15, 2023-06-15, 2023-10-15 now have archive CSV delivery dates in the retained zips. Those files are samples. A real-time file is still one interval. They are not proxy `covered_local_dates`, and this list does not say the live endpoint started returning rows.
 
 ## ER ABSENT GATE
 
