@@ -172,7 +172,7 @@ struct RootShellView: View {
         TabView(selection: $tab) {
             tabPage(DeskPlaceholderView(daLocalClock: daLocalClock, showsNextStep: showsDeskNextStep), tab: .desk)
             tabPage(FuelPlaceholderView(), tab: .fuel)
-            tabPage(PlantPlaceholderView(), tab: .plant)
+            tabPage(PlantPlaceholderView(reading: .gamePhysicsSample), tab: .plant)
             tabPage(SettlePlaceholderView(), tab: .settle)
         }
     }

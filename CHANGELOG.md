@@ -198,3 +198,7 @@ Next up, Gas day, Plant, and Settlement use a muted teal bar and a title2 title.
 ### Waiting lines use the same action as the thumb button
 
 “Next, See gas day timeline.” scrolls to the four markers. “Next, View unit status.” scrolls to State, MW, and fuel flow. “Next, How settlement works.” opens the same explanation sheet. Visible sentences are unchanged. Desk is unchanged.
+
+### Plant unit status from a game-physics sample (not a meter, not trading)
+
+Design 06 is at `Design/Peaker-Tycoon-Texas/06-plant-unit-status-retained-v1.md`. Plant stays on the Design 05 empty lead and blank State, MW, and fuel flow when no reading is passed in. The shell passes `PlantUnitReading.gamePhysicsSample`: Online, 48 MW, and 480 MMBtu/h. Those two figures use a documented heat rate of 10 MMBtu per MWh. The lead is “Unit status · read-only”. Each field has a GAME chip. Derated, when set, is a caption under State, not a fourth field. View unit status still scrolls to the card and now also opens the read-only explainer. The waiting line uses that same action. There are no prices. `claims_complete_source_coverage` stays false.
