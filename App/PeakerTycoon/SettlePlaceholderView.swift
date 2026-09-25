@@ -3,21 +3,20 @@ import SwiftUI
 /// Empty settlement stub. The explainer stays in plain language.
 struct SettlePlaceholderView: View {
     @Environment(\.colorScheme) private var scheme
+    @Environment(\.accessibilityReduceMotion) private var reduceMotion
     @State private var showExplainer = false
 
     var body: some View {
         VStack(spacing: 0) {
             ScrollView {
                 VStack(alignment: .leading, spacing: 16) {
-                    Text("Settlement")
-                        .font(.title3.weight(.semibold))
-                        .foregroundStyle(ControlGlass.textPrimary(scheme))
-                        .accessibilityLabel("Settle tab. Statements aren’t ready yet. This isn’t a live settle.")
-                    Text("This tab is waiting. Statements aren’t ready yet, and this isn’t a live settle.")
-                        .font(.body)
-                        .foregroundStyle(ControlGlass.textPrimary(scheme))
-                        .fixedSize(horizontal: false, vertical: true)
-                        .accessibilityHint("No statement is on this screen.")
+                    EmptyLeadHeader(
+                        title: "Settlement",
+                        lead: "Statements show up here after the day settles.",
+                        titleAccessibilityLabel: "Settle tab. Statements aren’t ready yet. This isn’t a live settle.",
+                        leadAccessibilityHint: "No statement is on this screen."
+                    )
+                    CalmWaitingLine(text: "Next, How settlement works.")
                     Text("No statements yet.")
                         .font(.body)
                         .foregroundStyle(ControlGlass.textSecondary(scheme))
@@ -30,10 +29,15 @@ struct SettlePlaceholderView: View {
                 title: "How settlement works",
                 accessibilityHint: "Opens a short explanation. Statements aren’t ready yet."
             ) {
-                showExplainer = true
+                var transaction = Transaction()
+                transaction.disablesAnimations = reduceMotion
+                withTransaction(transaction) {
+                    showExplainer = true
+                }
             }
         }
         .background(ControlGlass.surfaceBase(scheme).ignoresSafeArea())
+        .instantWhenReduceMotion(reduceMotion)
         .sheet(isPresented: $showExplainer) {
             SettlementExplainerSheet()
         }
@@ -43,6 +47,7 @@ struct SettlePlaceholderView: View {
 private struct SettlementExplainerSheet: View {
     @Environment(\.dismiss) private var dismiss
     @Environment(\.colorScheme) private var scheme
+    @Environment(\.accessibilityReduceMotion) private var reduceMotion
 
     var body: some View {
         NavigationStack {
@@ -65,7 +70,13 @@ private struct SettlementExplainerSheet: View {
             .navigationBarTitleDisplayMode(.inline)
             .toolbar {
                 ToolbarItem(placement: .confirmationAction) {
-                    Button("Done") { dismiss() }
+                    Button("Done") {
+                        var transaction = Transaction()
+                        transaction.disablesAnimations = reduceMotion
+                        withTransaction(transaction) {
+                            dismiss()
+                        }
+                    }
                 }
             }
         }

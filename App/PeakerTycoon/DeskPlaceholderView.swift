@@ -55,34 +55,32 @@ struct DeskPlaceholderView: View {
             }
         }
         .background(ControlGlass.surfaceBase(scheme).ignoresSafeArea())
+        .instantWhenReduceMotion(reduceMotion)
         .sheet(isPresented: $showSampleReview) {
             RetainedSampleSheet(row: activeSample)
         }
     }
 
     private var nextUpCard: some View {
-        HStack(alignment: .top, spacing: 0) {
-            Rectangle()
-                .fill(ControlGlass.accentTeal)
-                .frame(width: 4)
-            VStack(alignment: .leading, spacing: 6) {
-                Text("Next up")
-                    .font(.headline)
-                    .foregroundStyle(ControlGlass.textPrimary(scheme))
-                Text("You’re on the trading desk. When offers open, you’ll build them here. For now, check today’s plan.")
-                    .font(.body)
-                    .foregroundStyle(ControlGlass.textPrimary(scheme))
-                    .fixedSize(horizontal: false, vertical: true)
-            }
-            .padding(12)
+        HStack(alignment: .top, spacing: 8) {
+            RoundedRectangle(cornerRadius: 1.5)
+                .fill(ControlGlass.accentTeal.opacity(0.4))
+                .frame(width: 3, height: 28)
+                .accessibilityHidden(true)
+            Text("Next up")
+                .font(.title2.weight(.semibold))
+                .foregroundStyle(ControlGlass.textPrimary(scheme))
         }
+        .padding(12)
+        .frame(maxWidth: .infinity, alignment: .leading)
         .background(ControlGlass.surfaceElevated(scheme))
-        .clipShape(RoundedRectangle(cornerRadius: 8))
+        .clipShape(RoundedRectangle(cornerRadius: 12))
         .overlay(
-            RoundedRectangle(cornerRadius: 8)
+            RoundedRectangle(cornerRadius: 12)
                 .stroke(ControlGlass.hairline(scheme), lineWidth: 1)
         )
         .accessibilityElement(children: .combine)
+        .accessibilityLabel("Next up")
     }
 
     private var nextStepLine: some View {
@@ -246,6 +244,7 @@ private struct RetainedSampleSheet: View {
     let row: NormalizedObservation?
     @Environment(\.dismiss) private var dismiss
     @Environment(\.colorScheme) private var scheme
+    @Environment(\.accessibilityReduceMotion) private var reduceMotion
 
     var body: some View {
         NavigationStack {
@@ -270,7 +269,13 @@ private struct RetainedSampleSheet: View {
             .navigationBarTitleDisplayMode(.inline)
             .toolbar {
                 ToolbarItem(placement: .confirmationAction) {
-                    Button("Done") { dismiss() }
+                    Button("Done") {
+                        var transaction = Transaction()
+                        transaction.disablesAnimations = reduceMotion
+                        withTransaction(transaction) {
+                            dismiss()
+                        }
+                    }
                 }
             }
         }

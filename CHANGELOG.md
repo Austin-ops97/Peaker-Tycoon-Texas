@@ -190,3 +190,7 @@ At accessibility text sizes the clock and coach scroll in a band above the tabs,
 ### Desk line after the coach (not a second tour)
 
 After Got it finishes the three tips, or after Not now, Desk shows “Next, use the arrows to cycle saved hubs, or open Review today’s plan.” It sits in the Desk scroll under Next up. It hides again while a tip is on screen, including Settings → Show navigation tips. The thumb button and the clock stay where they were.
+
+### Design 05 empty-lead calm and Reduce Motion (not trading)
+
+Next up, Gas day, Plant, and Settlement use a muted teal bar and a title2 title. Next up no longer says you are on the trading desk. Fuel’s lead is “Nomination isn’t open right now. You can still see today’s timeline.” Plant’s lead is “Read-only unit status. State, power, and fuel flow show here when live.” Settle’s lead is “Statements show up here after the day settles.” Each of those three tabs has a quiet next line pointing at its existing button. When Reduce Motion is on, coach, tips, and sheets appear and leave without a slide, and tab changes are instant. The post-coach Desk line is unchanged. `claims_complete_source_coverage` stays false.

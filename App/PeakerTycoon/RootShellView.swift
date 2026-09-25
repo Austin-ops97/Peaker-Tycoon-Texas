@@ -16,6 +16,7 @@ struct RootShellView: View {
     @State private var coachHeld = false
     @Environment(\.colorScheme) private var scheme
     @Environment(\.dynamicTypeSize) private var dynamicTypeSize
+    @Environment(\.accessibilityReduceMotion) private var reduceMotion
 
     var body: some View {
         NavigationStack {
@@ -38,6 +39,7 @@ struct RootShellView: View {
                 }
             }
             .background(ControlGlass.surfaceBase(scheme).ignoresSafeArea())
+            .instantWhenReduceMotion(reduceMotion)
             .background {
                 PresentationClockDriver(clock: $chrome.clock, speed: $chrome.speed)
             }
@@ -47,7 +49,7 @@ struct RootShellView: View {
             .toolbar {
                 ToolbarItem(placement: .topBarTrailing) {
                     Button {
-                        showSettings = true
+                        withoutMotionIfNeeded { showSettings = true }
                     } label: {
                         Label("Settings", systemImage: "gearshape")
                     }
@@ -58,14 +60,16 @@ struct RootShellView: View {
                     SettingsPlaceholderView(
                         zoneIdentifier: $zoneIdentifier,
                         onShowTip: {
-                            showSettings = false
-                            showTip = true
+                            withoutMotionIfNeeded {
+                                showSettings = false
+                                showTip = true
+                            }
                         },
                         onShowNavigationTips: replayCoach
                     )
                     .toolbar {
                         ToolbarItem(placement: .confirmationAction) {
-                            Button("Done") { showSettings = false }
+                            Button("Done") { withoutMotionIfNeeded { showSettings = false } }
                         }
                     }
                 }
@@ -81,7 +85,7 @@ struct RootShellView: View {
             }
             .onAppear {
                 if !tipDismissed && zoneIdentifier.isEmpty {
-                    showTip = true
+                    withoutMotionIfNeeded { showTip = true }
                 }
             }
         }
@@ -116,22 +120,35 @@ struct RootShellView: View {
     }
 
     private func dismissCoach(beat: Int, advance: Bool) {
-        switch beat {
-        case 1: coachBeat1Dismissed = true
-        case 2: coachBeat2Dismissed = true
-        default: coachBeat3Dismissed = true
-        }
-        if !advance {
-            coachHeld = true
+        withoutMotionIfNeeded {
+            switch beat {
+            case 1: coachBeat1Dismissed = true
+            case 2: coachBeat2Dismissed = true
+            default: coachBeat3Dismissed = true
+            }
+            if !advance {
+                coachHeld = true
+            }
         }
     }
 
     private func replayCoach() {
-        coachBeat1Dismissed = false
-        coachBeat2Dismissed = false
-        coachBeat3Dismissed = false
-        coachHeld = false
-        showSettings = false
+        withoutMotionIfNeeded {
+            coachBeat1Dismissed = false
+            coachBeat2Dismissed = false
+            coachBeat3Dismissed = false
+            coachHeld = false
+            showSettings = false
+        }
+    }
+
+    /// Reduce Motion: coach, tips, and settings appear and leave with no slide.
+    private func withoutMotionIfNeeded(_ update: () -> Void) {
+        var transaction = Transaction()
+        transaction.disablesAnimations = reduceMotion
+        withTransaction(transaction) {
+            update()
+        }
     }
 
     private var chromeStack: some View {

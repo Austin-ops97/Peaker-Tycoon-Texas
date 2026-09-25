@@ -19,7 +19,13 @@ struct LocalTwinTipSheet: View {
                 .foregroundStyle(ControlGlass.textSecondary(scheme))
                 .fixedSize(horizontal: false, vertical: true)
             VStack(spacing: 8) {
-                Button(action: onOpenSettings) {
+                Button {
+                    var transaction = Transaction()
+                    transaction.disablesAnimations = reduceMotion
+                    withTransaction(transaction) {
+                        onOpenSettings()
+                    }
+                } label: {
                     Text("Open Settings")
                         .font(.body.weight(.semibold))
                         .foregroundStyle(ControlGlass.tealOnFill)
@@ -29,7 +35,13 @@ struct LocalTwinTipSheet: View {
                         .clipShape(RoundedRectangle(cornerRadius: 12))
                 }
                 .accessibilityLabel("Open Settings")
-                Button("Not now", action: onNotNow)
+                Button("Not now") {
+                    var transaction = Transaction()
+                    transaction.disablesAnimations = reduceMotion
+                    withTransaction(transaction) {
+                        onNotNow()
+                    }
+                }
                     .font(.body.weight(.semibold))
                     .foregroundStyle(ControlGlass.textPrimary(scheme))
                     .frame(maxWidth: .infinity)

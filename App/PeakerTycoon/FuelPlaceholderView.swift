@@ -10,15 +10,13 @@ struct FuelPlaceholderView: View {
             VStack(spacing: 0) {
                 ScrollView {
                     VStack(alignment: .leading, spacing: 16) {
-                        Text("Gas day")
-                            .font(.title3.weight(.semibold))
-                            .foregroundStyle(ControlGlass.textPrimary(scheme))
-                            .accessibilityLabel("Fuel tab. Nomination isn’t open yet. This tab is waiting.")
-                        Text("This tab is waiting. Nomination isn’t open yet, so you only see the day’s timeline.")
-                            .font(.body)
-                            .foregroundStyle(ControlGlass.textPrimary(scheme))
-                            .fixedSize(horizontal: false, vertical: true)
-                            .accessibilityHint("Closed gas day. Not a live nomination.")
+                        EmptyLeadHeader(
+                            title: "Gas day",
+                            lead: "Nomination isn’t open right now. You can still see today’s timeline.",
+                            titleAccessibilityLabel: "Fuel tab. Nomination isn’t open yet. This tab is waiting.",
+                            leadAccessibilityHint: "Closed gas day. Not a live nomination."
+                        )
+                        CalmWaitingLine(text: "Next, See gas day timeline.")
                         timeline
                             .id(Self.timelineID)
                         Text("No result yet — nomination is still closed.")
@@ -44,6 +42,7 @@ struct FuelPlaceholderView: View {
             }
         }
         .background(ControlGlass.surfaceBase(scheme).ignoresSafeArea())
+        .instantWhenReduceMotion(reduceMotion)
     }
 
     private var timeline: some View {

@@ -11,15 +11,13 @@ struct PlantPlaceholderView: View {
             VStack(spacing: 0) {
                 ScrollView {
                     VStack(alignment: .leading, spacing: 16) {
-                        Text("Plant")
-                            .font(.title3.weight(.semibold))
-                            .foregroundStyle(ControlGlass.textPrimary(scheme))
-                            .accessibilityLabel("Plant tab. Waiting for a connected reading. Not a live dispatch.")
-                        Text("This plant is waiting for a connected reading. State, power output, and fuel flow stay blank, and this is not a live dispatch.")
-                            .font(.body)
-                            .foregroundStyle(ControlGlass.textPrimary(scheme))
-                            .fixedSize(horizontal: false, vertical: true)
-                            .accessibilityHint("State, power, and fuel flow stay blank.")
+                        EmptyLeadHeader(
+                            title: "Plant",
+                            lead: "Read-only unit status. State, power, and fuel flow show here when live.",
+                            titleAccessibilityLabel: "Plant tab. Waiting for a connected reading. Not a live dispatch.",
+                            leadAccessibilityHint: "State, power, and fuel flow stay blank."
+                        )
+                        CalmWaitingLine(text: "Next, View unit status.")
                         statusCard
                             .id(Self.statusID)
                     }
@@ -39,6 +37,7 @@ struct PlantPlaceholderView: View {
             }
         }
         .background(ControlGlass.surfaceBase(scheme).ignoresSafeArea())
+        .instantWhenReduceMotion(reduceMotion)
     }
 
     private var statusCard: some View {
