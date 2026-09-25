@@ -199,6 +199,10 @@ Next up, Gas day, Plant, and Settlement use a muted teal bar and a title2 title.
 
 “Next, See gas day timeline.” scrolls to the four markers. “Next, View unit status.” scrolls to State, MW, and fuel flow. “Next, How settlement works.” opens the same explanation sheet. Visible sentences are unchanged. Desk is unchanged.
 
+### Batch 11 retain (not coverage)
+
+Thirty more price zips verified and landed in `Data/archives/ercot/2026-09-24/batch11/` (14 NP4 archive posts 2024-12-13 through 2025-11-15, and 16 NP6 intervals). `source_batch_count` moved from 199 to 229. No zip was excluded. This drop recorded no live From/To day with `totalRecords` 0. 2024-12-15 and 2025-09-15 From/To pages have rows; only pages 1–3 were retained. The NP4 zip posted 2025-09-14 covers DeliveryDate 09/15/2025. The NP4 zip posted 2024-12-15 covers DeliveryDate 12/16/2024, not 12/15/2024. Two NP6 intervals have DeliveryDate 2024-12-17 (hour 12 interval 3 and hour 13 interval 3). The NP6 filename stamp 2025-10-15 04:30 has DeliveryDate 10/15/2025, hour 5 interval 2. Archive samples now include days in 2024-12 and in 2025-05, 2025-06, 2025-07, 2025-09, 2025-10, and 2025-11. Each NP6 file is one interval. `claims_complete_source_coverage` stays false. ER products stay GATE. The read path still opens batch2 through batch10 only.
+
 ### Batch 10 sample inventory (not coverage)
 
 `RetainedSampleInventory` now scans batch10 with batch2–batch9. The JSON and markdown artifacts list 89 day-ahead files and 104 real-time files (89 and 75 delivery dates). Live From/To empty in this drop is 2021-03-15. No day-ahead hours are retained for that date. Two real-time intervals are (hour 12, intervals 3 and 4). 2023-06-15 moves to the earlier archive-sample list. Settings → Evidence reads the bundled copy. `claims_complete_source_coverage` stays false.
