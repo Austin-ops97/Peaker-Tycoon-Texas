@@ -1,7 +1,7 @@
 import Foundation
 import PeakerKernel
 
-/// Inventory of CSV delivery dates in the retained batch2–batch8 price zips.
+/// Inventory of CSV delivery dates in the retained batch2–batch9 price zips.
 ///
 /// Built only through `RetainedSettlementArchive` (sidecar, inflate, parse).
 /// This is a sample list. It does not publish, does not set proxy `covered_local_dates`,
@@ -11,9 +11,10 @@ public struct RetainedSampleInventory: Codable, Equatable, Sendable {
     public static let markdownRelativePath = "Data/archives/ercot/2026-09-24/retained-sample-inventory.md"
     /// Live artifact From/To days that returned `totalRecords` 0 on both price products in the latest drop.
     /// A retained file on one of these days is still not a live From/To fill.
-    /// Latest drop recorded no new live From/To day with `totalRecords` 0.
+    /// Latest drop recorded live From/To empty for 2023-06-15 on both products.
+    /// An earlier day-ahead archive file already has that delivery date. No real-time interval does.
     /// 2023-10-15 was empty on the live fetch in batch 7 and now has archive samples.
-    public static let emptyLiveFromToLocalDates: [String] = []
+    public static let emptyLiveFromToLocalDates: [String] = ["2023-06-15"]
     /// Days whose earlier live From/To was empty and that now have archive CSV delivery dates.
     public static let earlierEmptyLiveDaysWithArchiveSamples = [
         "2021-04-15", "2022-07-15", "2022-11-15", "2023-01-15", "2023-04-15", "2023-10-15",
@@ -107,7 +108,7 @@ public struct RetainedSampleInventory: Codable, Equatable, Sendable {
 
         return RetainedSampleInventory(
             label: "retained_sample_inventory",
-            statement: "Inventory of CSV DeliveryDate values in verified batch2-batch8 price zips. Not complete coverage. Dates are not proxy covered_local_dates.",
+            statement: "Inventory of CSV DeliveryDate values in verified batch2-batch9 price zips. Not complete coverage. Dates are not proxy covered_local_dates.",
             claimsCompleteSourceCoverage: false,
             campaignEraStart: CampaignCalendar.start.iso,
             campaignEraEnd: CampaignCalendar.end.iso,
@@ -136,7 +137,7 @@ public struct RetainedSampleInventory: Codable, Equatable, Sendable {
         var lines: [String] = []
         lines.append("# Retained sample inventory")
         lines.append("")
-        lines.append("This file lists CSV `DeliveryDate` values found by `RetainedSettlementArchive` in verified price zips under `batch2` through `batch8`. It is an inventory of retained samples. It is not complete coverage.")
+        lines.append("This file lists CSV `DeliveryDate` values found by `RetainedSettlementArchive` in verified price zips under `batch2` through `batch9`. It is an inventory of retained samples. It is not complete coverage.")
         lines.append("")
         lines.append("`claims_complete_source_coverage` is false. Proxy `source_point_id` and `covered_local_dates` are not filled from this list.")
         lines.append("")
