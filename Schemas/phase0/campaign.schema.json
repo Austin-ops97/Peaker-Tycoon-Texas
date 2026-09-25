@@ -1,0 +1,19 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://peaker.tycoon.texas/schemas/phase0/campaign.schema.json",
+  "title": "Campaign",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["campaign_id", "schema_version", "era_start", "era_end", "chronology", "rule_profile"],
+  "properties": {
+    "campaign_id": { "type": "string" },
+    "schema_version": { "type": "string" },
+    "era_start": { "type": "string" },
+    "era_end": { "type": "string" },
+    "chronology": { "const": "continuous" },
+    "seed": { "type": ["integer", "null"] },
+    "rule_profile": { "type": "string" },
+    "evidence_note": { "type": "string" }
+  },
+  "description": "Phase 0 Campaign skeleton (§25.1). Continuous era only. Shuffled blocks are invalid."
+}

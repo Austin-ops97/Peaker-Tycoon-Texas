@@ -1,0 +1,60 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://peaker.tycoon.texas/schemas/phase0/coverage-manifest.schema.json",
+  "title": "CoverageManifest",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "pack_id",
+    "schema_version",
+    "evidence",
+    "claims_complete_source_coverage",
+    "completeness",
+    "source_batch_count",
+    "rights_status",
+    "quality_grade",
+    "source_period",
+    "operating_days",
+    "selected_proxy_points",
+    "ancillary_service_price_families",
+    "ancillary_service_selection",
+    "gap_report",
+    "training_archive",
+    "source_products",
+    "settlement_revision_policy"
+  ],
+  "properties": {
+    "pack_id": { "type": "string" },
+    "schema_version": { "type": "string" },
+    "evidence": { "enum": ["SOURCE", "GAME", "PROXY", "GATE"] },
+    "claims_complete_source_coverage": { "type": "boolean" },
+    "completeness": { "enum": ["incomplete", "complete"] },
+    "source_batch_count": { "type": "integer", "minimum": 0 },
+    "rights_status": { "type": "string" },
+    "quality_grade": { "type": "string" },
+    "source_period": {
+      "type": "object",
+      "required": ["start", "end"],
+      "properties": {
+        "start": { "type": "string" },
+        "end": { "type": "string" }
+      }
+    },
+    "operating_days": { "type": "array", "items": { "type": "string" } },
+    "selected_proxy_points": { "type": "array" },
+    "ancillary_service_price_families": { "type": "array" },
+    "ancillary_service_selection": { "type": "object" },
+    "gap_report": { "type": "object" },
+    "training_archive": { "type": "object" },
+    "source_products": { "type": "array" },
+    "content_hash": { "type": ["string", "null"] },
+    "collection_time": { "type": ["string", "null"] },
+    "effective_rule_profiles": { "type": "array", "items": { "type": "string" } },
+    "point_manifest_hash": { "type": ["string", "null"] },
+    "proxy_mapping_hash": { "type": ["string", "null"] },
+    "available_features": { "type": "array", "items": { "type": "string" } },
+    "settlement_revision_policy": { "type": "string" },
+    "reconstructed_inputs": { "type": "array", "items": { "type": "string" } },
+    "training_cutoff": { "type": ["string", "null"] }
+  }
+}

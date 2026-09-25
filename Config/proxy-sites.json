@@ -1,0 +1,39 @@
+{
+  "config_version": "3.0.0",
+  "evidence": "PROXY",
+  "note": "Fictional sites (§6.1). No SOURCE settlement point ID is assigned. Hub fallback is unassigned until identities and histories are validated. Do not treat starter_price_family as an ERCOT point id.",
+  "sites": [
+    {
+      "site_id": "fictional.bayou-bend",
+      "display_name": "Bayou Bend Energy",
+      "approximate_setting": "Inland Gulf Coast near the Houston area",
+      "starter_price_family": "Houston-associated proxy",
+      "proxy_grade": "hub_fallback_unassigned",
+      "source_point_id": null
+    },
+    {
+      "site_id": "fictional.prairie-junction",
+      "display_name": "Prairie Junction Power",
+      "approximate_setting": "North Texas outside the Dallas area",
+      "starter_price_family": "North-associated proxy",
+      "proxy_grade": "hub_fallback_unassigned",
+      "source_point_id": null
+    },
+    {
+      "site_id": "fictional.mesquite-ridge",
+      "display_name": "Mesquite Ridge Generation",
+      "approximate_setting": "Inland South Texas",
+      "starter_price_family": "South-associated proxy",
+      "proxy_grade": "hub_fallback_unassigned",
+      "source_point_id": null
+    },
+    {
+      "site_id": "fictional.red-mesa",
+      "display_name": "Red Mesa Peaking",
+      "approximate_setting": "West Texas",
+      "starter_price_family": "West-associated proxy",
+      "proxy_grade": "hub_fallback_unassigned",
+      "source_point_id": null
+    }
+  ]
+}

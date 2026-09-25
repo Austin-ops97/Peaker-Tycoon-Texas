@@ -1,0 +1,23 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://peaker.tycoon.texas/schemas/phase0/bootstrap-archive.schema.json",
+  "title": "BootstrapArchive",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["archive_id", "label", "completeness", "source_batch_count", "claims_complete_source_coverage"],
+  "properties": {
+    "archive_id": { "const": "TX_TRAIN_2019_2020" },
+    "label": { "const": "training-only" },
+    "evidence": { "enum": ["SOURCE", "GAME", "PROXY", "GATE"] },
+    "schema_version": { "type": "string" },
+    "purpose": { "type": "string" },
+    "period_start": { "type": "string" },
+    "period_end": { "type": "string" },
+    "completeness": { "enum": ["incomplete", "complete"] },
+    "source_batch_count": { "type": "integer", "minimum": 0 },
+    "claims_complete_source_coverage": { "type": "boolean" },
+    "rows": { "type": "array" },
+    "rights_status": { "type": "string" },
+    "notes": { "type": "string" }
+  }
+}
