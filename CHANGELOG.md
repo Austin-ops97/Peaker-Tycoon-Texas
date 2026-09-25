@@ -199,6 +199,10 @@ Next up, Gas day, Plant, and Settlement use a muted teal bar and a title2 title.
 
 “Next, See gas day timeline.” scrolls to the four markers. “Next, View unit status.” scrolls to State, MW, and fuel flow. “Next, How settlement works.” opens the same explanation sheet. Visible sentences are unchanged. Desk is unchanged.
 
+### Batch 10 read path (not coverage)
+
+`RetainedSettlementArchive` now opens verified price zips in `batch10` as well as `batch2` through `batch9`. The path still checks the `.sha256` sidecar, inflates the CSV member, and parses it. It does not fetch and does not publish. The batch 10 NP6 zip posted 2021-03-15 11:45 has DeliveryDate 03/15/2021, hour 12 interval 3 (`HB_HOUSTON` 17.5). `claims_complete_source_coverage` stays false.
+
 ### Batch 10 retain (not coverage)
 
 Twenty-eight more price zips verified and landed in `Data/archives/ercot/2026-09-24/batch10/` (12 NP4 archive posts 2021-08-13 through 2024-07-14, and 16 NP6 intervals). `source_batch_count` moved from 171 to 199. No zip was excluded. Live From/To is empty for 2021-03-15 on both products. No NP4 zip in this drop has DeliveryDate 03/15/2021. Two NP6 intervals have DeliveryDate 2021-03-15 (hour 12, intervals 3 and 4). The NP4 zip posted 2024-07-14 covers DeliveryDate 07/15/2024. The NP6 filename stamp 2024-11-15 23:45 has DeliveryDate 11/15/2024, hour 24 interval 3. 2025-04-15 From/To pages have rows; only pages 1–3 were retained. Months 2024-12 and 2025-05, 2025-06, 2025-07, 2025-09, 2025-10, and 2025-11 were not recorded as live From/To empty in this drop. Each NP6 file is one interval. `claims_complete_source_coverage` stays false. ER products stay GATE. The read path still opens batch2 through batch9 only.

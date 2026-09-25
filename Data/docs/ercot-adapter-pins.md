@@ -241,7 +241,7 @@ GATE: live `deliveryDateFrom` / `deliveryDateTo` returned `totalRecords` 0 for 2
 
 ## Batch 10 retain
 
-Path: `Data/archives/ercot/2026-09-24/batch10/`. SHA-256 inventory: `RETENTION.md` in that folder. Twenty-eight verified price zips were added (12 NP4, 16 NP6). No zip failed its sidecar. Listings and artifact pages are not counted. `source_batch_count` is 199 (6 + 6 + 13 + 24 + 14 + 25 + 24 + 32 + 27 + 28). The read path still opens batch2 through batch9 only.
+Path: `Data/archives/ercot/2026-09-24/batch10/`. SHA-256 inventory: `RETENTION.md` in that folder. Twenty-eight verified price zips were added (12 NP4, 16 NP6). No zip failed its sidecar. Listings and artifact pages are not counted. `source_batch_count` is 199 (6 + 6 + 13 + 24 + 14 + 25 + 24 + 32 + 27 + 28). The read path opens batch2 through batch10.
 
 GATE: live `deliveryDateFrom` / `deliveryDateTo` returned `totalRecords` 0 for 2021-03-15 on both NP4-190-CD and NP6-905-CD. No NP4 zip in this drop has CSV DeliveryDate 03/15/2021. Two NP6 zips have DeliveryDate 03/15/2021 (hour 12, intervals 3 and 4, docIds 763403133 and 763404983). Those are archive samples, not a live From/To fill. The NP4 zip posted 2024-07-14 covers DeliveryDate 07/15/2024. The NP6 filename stamp 2024-11-15 23:45 has DeliveryDate 11/15/2024, hour 24 interval 3. The stamp 2024-02-28 20:30 has DeliveryDate 02/28/2024, hour 21 interval 2. The stamp 2024-11-15 21:30 has DeliveryDate 11/15/2024, hour 22 interval 2. 2025-04-15 From/To responses have rows. Only pages 1–3 were retained. That is not a full day. Months 2024-12 and 2025-05, 2025-06, 2025-07, 2025-09, 2025-10, and 2025-11 were not recorded as live From/To empty in this drop.
 
