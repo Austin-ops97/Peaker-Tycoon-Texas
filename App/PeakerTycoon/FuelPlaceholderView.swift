@@ -16,7 +16,12 @@ struct FuelPlaceholderView: View {
                             titleAccessibilityLabel: "Fuel tab. Nomination isn’t open yet. This tab is waiting.",
                             leadAccessibilityHint: "Closed gas day. Not a live nomination."
                         )
-                        CalmWaitingLine(text: "Next, See gas day timeline.")
+                        CalmWaitingLine(
+                            text: "Next, See gas day timeline.",
+                            accessibilityHint: "Scrolls to the four gas-day markers. Nomination isn’t open yet."
+                        ) {
+                            revealTimeline(with: proxy)
+                        }
                         timeline
                             .id(Self.timelineID)
                         Text("No result yet — nomination is still closed.")
@@ -33,16 +38,20 @@ struct FuelPlaceholderView: View {
                     title: "See gas day timeline",
                     accessibilityHint: "Scrolls to the four gas-day markers. Nomination isn’t open yet."
                 ) {
-                    var transaction = Transaction()
-                    transaction.disablesAnimations = reduceMotion
-                    withTransaction(transaction) {
-                        proxy.scrollTo(Self.timelineID, anchor: .top)
-                    }
+                    revealTimeline(with: proxy)
                 }
             }
         }
         .background(ControlGlass.surfaceBase(scheme).ignoresSafeArea())
         .instantWhenReduceMotion(reduceMotion)
+    }
+
+    private func revealTimeline(with proxy: ScrollViewProxy) {
+        var transaction = Transaction()
+        transaction.disablesAnimations = reduceMotion
+        withTransaction(transaction) {
+            proxy.scrollTo(Self.timelineID, anchor: .top)
+        }
     }
 
     private var timeline: some View {

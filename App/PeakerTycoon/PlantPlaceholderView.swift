@@ -17,7 +17,12 @@ struct PlantPlaceholderView: View {
                             titleAccessibilityLabel: "Plant tab. Waiting for a connected reading. Not a live dispatch.",
                             leadAccessibilityHint: "State, power, and fuel flow stay blank."
                         )
-                        CalmWaitingLine(text: "Next, View unit status.")
+                        CalmWaitingLine(
+                            text: "Next, View unit status.",
+                            accessibilityHint: "Scrolls to state, power, and fuel flow. Not a live dispatch."
+                        ) {
+                            revealStatus(with: proxy)
+                        }
                         statusCard
                             .id(Self.statusID)
                     }
@@ -28,16 +33,20 @@ struct PlantPlaceholderView: View {
                     title: "View unit status",
                     accessibilityHint: "Scrolls to state, power, and fuel flow. Not a live dispatch."
                 ) {
-                    var transaction = Transaction()
-                    transaction.disablesAnimations = reduceMotion
-                    withTransaction(transaction) {
-                        proxy.scrollTo(Self.statusID, anchor: .top)
-                    }
+                    revealStatus(with: proxy)
                 }
             }
         }
         .background(ControlGlass.surfaceBase(scheme).ignoresSafeArea())
         .instantWhenReduceMotion(reduceMotion)
+    }
+
+    private func revealStatus(with proxy: ScrollViewProxy) {
+        var transaction = Transaction()
+        transaction.disablesAnimations = reduceMotion
+        withTransaction(transaction) {
+            proxy.scrollTo(Self.statusID, anchor: .top)
+        }
     }
 
     private var statusCard: some View {

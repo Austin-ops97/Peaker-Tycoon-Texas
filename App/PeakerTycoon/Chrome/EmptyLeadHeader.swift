@@ -39,16 +39,25 @@ struct EmptyLeadHeader: View {
     }
 }
 
-/// Quiet pointer under an empty lead. Not a second coach and not a thumb button.
+/// Quiet pointer under an empty lead. Same action as that tab’s thumb button. Not a second coach.
 struct CalmWaitingLine: View {
     let text: String
+    var accessibilityHint: String? = nil
+    let action: () -> Void
     @Environment(\.colorScheme) private var scheme
 
     var body: some View {
-        Text(text)
-            .font(.subheadline)
-            .foregroundStyle(ControlGlass.textSecondary(scheme))
-            .fixedSize(horizontal: false, vertical: true)
+        Button(action: action) {
+            Text(text)
+                .font(.subheadline)
+                .foregroundStyle(ControlGlass.textSecondary(scheme))
+                .multilineTextAlignment(.leading)
+                .fixedSize(horizontal: false, vertical: true)
+                .frame(maxWidth: .infinity, minHeight: 44, alignment: .leading)
+                .contentShape(Rectangle())
+        }
+        .buttonStyle(.plain)
+        .accessibilityHint(accessibilityHint ?? text)
     }
 }
 

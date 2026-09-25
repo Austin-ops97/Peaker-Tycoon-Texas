@@ -16,7 +16,12 @@ struct SettlePlaceholderView: View {
                         titleAccessibilityLabel: "Settle tab. Statements aren’t ready yet. This isn’t a live settle.",
                         leadAccessibilityHint: "No statement is on this screen."
                     )
-                    CalmWaitingLine(text: "Next, How settlement works.")
+                    CalmWaitingLine(
+                        text: "Next, How settlement works.",
+                        accessibilityHint: "Opens a short explanation. Statements aren’t ready yet."
+                    ) {
+                        showSettlementExplainer()
+                    }
                     Text("No statements yet.")
                         .font(.body)
                         .foregroundStyle(ControlGlass.textSecondary(scheme))
@@ -29,17 +34,21 @@ struct SettlePlaceholderView: View {
                 title: "How settlement works",
                 accessibilityHint: "Opens a short explanation. Statements aren’t ready yet."
             ) {
-                var transaction = Transaction()
-                transaction.disablesAnimations = reduceMotion
-                withTransaction(transaction) {
-                    showExplainer = true
-                }
+                showSettlementExplainer()
             }
         }
         .background(ControlGlass.surfaceBase(scheme).ignoresSafeArea())
         .instantWhenReduceMotion(reduceMotion)
         .sheet(isPresented: $showExplainer) {
             SettlementExplainerSheet()
+        }
+    }
+
+    private func showSettlementExplainer() {
+        var transaction = Transaction()
+        transaction.disablesAnimations = reduceMotion
+        withTransaction(transaction) {
+            showExplainer = true
         }
     }
 }
