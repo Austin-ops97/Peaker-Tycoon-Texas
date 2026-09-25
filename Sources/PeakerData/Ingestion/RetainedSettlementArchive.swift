@@ -3,7 +3,7 @@ import PeakerZipInflate
 
 /// Read path for retained NP4-190-CD and NP6-905-CD price zips.
 ///
-/// Looks only in `batch2` through `batch8` under the 2026-09-24 retain root.
+/// Looks only in `batch2` through `batch9` under the 2026-09-24 retain root.
 /// Each zip must match its `.sha256` sidecar before the CSV member is parsed.
 /// This does not fetch, does not publish, and does not write coverage. `sourcePublishedAt` stays null.
 /// Proxy `source_point_id` and `covered_local_dates` are not filled.
@@ -13,10 +13,13 @@ import PeakerZipInflate
 /// retained sample, not a live From/To fill. Batch 7 recorded live From/To empty for 2023-10-15.
 /// Batch 8 did not re-query that live endpoint and recorded no new empty live day. Five batch 8
 /// NP6 zips have DeliveryDate 2023-10-15. The filename stamp 2023-10-15 00:00 has DeliveryDate
-/// 2023-10-14, hour 24 interval 4. NP6 files are one interval.
+/// 2023-10-14, hour 24 interval 4. Batch 9 live From/To is empty for 2023-06-15. No batch 9 zip
+/// has that CSV delivery date. Two batch 9 NP6 zips have DeliveryDate 2022-02-15 (hour 12,
+/// intervals 3 and 4). The batch 9 NP4 zip posted 2024-11-14 has DeliveryDate 2024-11-15.
+/// NP6 files are one interval.
 /// NP4-180-ER and NP6-785-ER are not opened here and have no path.
 public enum RetainedSettlementArchive {
-    public static let batchFolderNames = ["batch2", "batch3", "batch4", "batch5", "batch6", "batch7", "batch8"]
+    public static let batchFolderNames = ["batch2", "batch3", "batch4", "batch5", "batch6", "batch7", "batch8", "batch9"]
     public static let emptyLiveFromToDay = "2023-01-15"
     /// Uncompressed CSV members larger than this are refused.
     static let maxUncompressedBytes = 32 * 1024 * 1024
