@@ -18,42 +18,21 @@
     "2022-11-15",
     "2023-01-15",
     "2023-04-15",
+    "2023-06-15",
     "2023-10-15"
   ],
   "empty_live_from_to_gates" : [
     {
       "retained_hour_endings_by_product" : {
         "NP4-190-CD" : [
-          "01:00",
-          "02:00",
-          "03:00",
-          "04:00",
-          "05:00",
-          "06:00",
-          "07:00",
-          "08:00",
-          "09:00",
-          "10:00",
-          "11:00",
-          "12:00",
-          "13:00",
-          "14:00",
-          "15:00",
-          "16:00",
-          "17:00",
-          "18:00",
-          "19:00",
-          "20:00",
-          "21:00",
-          "22:00",
-          "23:00",
-          "24:00"
+
         ],
         "NP6-905-CD" : [
-
+          "12:3",
+          "12:4"
         ]
       },
-      "source_local_date" : "2023-06-15",
+      "source_local_date" : "2021-03-15",
       "status" : "empty_live_from_to"
     }
   ],
@@ -464,6 +443,74 @@
           ],
           "inside_campaign_era" : true,
           "observation_count" : 18024,
+          "source_local_date" : "2021-08-14",
+          "zip_file_names" : [
+            "batch10/np4-190-cd__inst6_20210813_789622913_DAMSPNP4190_csv.zip"
+          ]
+        },
+        {
+          "hour_endings" : [
+            "01:00",
+            "02:00",
+            "03:00",
+            "04:00",
+            "05:00",
+            "06:00",
+            "07:00",
+            "08:00",
+            "09:00",
+            "10:00",
+            "11:00",
+            "12:00",
+            "13:00",
+            "14:00",
+            "15:00",
+            "16:00",
+            "17:00",
+            "18:00",
+            "19:00",
+            "20:00",
+            "21:00",
+            "22:00",
+            "23:00",
+            "24:00"
+          ],
+          "inside_campaign_era" : true,
+          "observation_count" : 18024,
+          "source_local_date" : "2021-08-16",
+          "zip_file_names" : [
+            "batch10/np4-190-cd__inst1_20210815_789966340_DAMSPNP4190_csv.zip"
+          ]
+        },
+        {
+          "hour_endings" : [
+            "01:00",
+            "02:00",
+            "03:00",
+            "04:00",
+            "05:00",
+            "06:00",
+            "07:00",
+            "08:00",
+            "09:00",
+            "10:00",
+            "11:00",
+            "12:00",
+            "13:00",
+            "14:00",
+            "15:00",
+            "16:00",
+            "17:00",
+            "18:00",
+            "19:00",
+            "20:00",
+            "21:00",
+            "22:00",
+            "23:00",
+            "24:00"
+          ],
+          "inside_campaign_era" : true,
+          "observation_count" : 18024,
           "source_local_date" : "2021-08-17",
           "zip_file_names" : [
             "batch3/np4-190-cd__inst5_20210816_790144271_DAMSPNP4190_csv.zip"
@@ -600,9 +647,77 @@
           ],
           "inside_campaign_era" : true,
           "observation_count" : 18336,
+          "source_local_date" : "2021-11-14",
+          "zip_file_names" : [
+            "batch10/np4-190-cd__inst7_20211113_806112432_DAMSPNP4190_csv.zip"
+          ]
+        },
+        {
+          "hour_endings" : [
+            "01:00",
+            "02:00",
+            "03:00",
+            "04:00",
+            "05:00",
+            "06:00",
+            "07:00",
+            "08:00",
+            "09:00",
+            "10:00",
+            "11:00",
+            "12:00",
+            "13:00",
+            "14:00",
+            "15:00",
+            "16:00",
+            "17:00",
+            "18:00",
+            "19:00",
+            "20:00",
+            "21:00",
+            "22:00",
+            "23:00",
+            "24:00"
+          ],
+          "inside_campaign_era" : true,
+          "observation_count" : 18336,
           "source_local_date" : "2021-11-15",
           "zip_file_names" : [
             "batch6/np4-190-cd__inst7_20211114_806282994_DAMSPNP4190_csv.zip"
+          ]
+        },
+        {
+          "hour_endings" : [
+            "01:00",
+            "02:00",
+            "03:00",
+            "04:00",
+            "05:00",
+            "06:00",
+            "07:00",
+            "08:00",
+            "09:00",
+            "10:00",
+            "11:00",
+            "12:00",
+            "13:00",
+            "14:00",
+            "15:00",
+            "16:00",
+            "17:00",
+            "18:00",
+            "19:00",
+            "20:00",
+            "21:00",
+            "22:00",
+            "23:00",
+            "24:00"
+          ],
+          "inside_campaign_era" : true,
+          "observation_count" : 18336,
+          "source_local_date" : "2021-11-16",
+          "zip_file_names" : [
+            "batch10/np4-190-cd__inst2_20211115_806478424_DAMSPNP4190_csv.zip"
           ]
         },
         {
@@ -736,6 +851,74 @@
           ],
           "inside_campaign_era" : true,
           "observation_count" : 18600,
+          "source_local_date" : "2022-03-14",
+          "zip_file_names" : [
+            "batch10/np4-190-cd__inst8_20220313_827982088_DAMSPNP4190_csv.zip"
+          ]
+        },
+        {
+          "hour_endings" : [
+            "01:00",
+            "02:00",
+            "03:00",
+            "04:00",
+            "05:00",
+            "06:00",
+            "07:00",
+            "08:00",
+            "09:00",
+            "10:00",
+            "11:00",
+            "12:00",
+            "13:00",
+            "14:00",
+            "15:00",
+            "16:00",
+            "17:00",
+            "18:00",
+            "19:00",
+            "20:00",
+            "21:00",
+            "22:00",
+            "23:00",
+            "24:00"
+          ],
+          "inside_campaign_era" : true,
+          "observation_count" : 18600,
+          "source_local_date" : "2022-03-16",
+          "zip_file_names" : [
+            "batch10/np4-190-cd__inst3_20220315_828352459_DAMSPNP4190_csv.zip"
+          ]
+        },
+        {
+          "hour_endings" : [
+            "01:00",
+            "02:00",
+            "03:00",
+            "04:00",
+            "05:00",
+            "06:00",
+            "07:00",
+            "08:00",
+            "09:00",
+            "10:00",
+            "11:00",
+            "12:00",
+            "13:00",
+            "14:00",
+            "15:00",
+            "16:00",
+            "17:00",
+            "18:00",
+            "19:00",
+            "20:00",
+            "21:00",
+            "22:00",
+            "23:00",
+            "24:00"
+          ],
+          "inside_campaign_era" : true,
+          "observation_count" : 18600,
           "source_local_date" : "2022-03-17",
           "zip_file_names" : [
             "batch5/np4-190-cd__inst6_20220316_828536499_DAMSPNP4190_csv.zip"
@@ -770,9 +953,77 @@
           ],
           "inside_campaign_era" : true,
           "observation_count" : 18816,
+          "source_local_date" : "2022-04-14",
+          "zip_file_names" : [
+            "batch10/np4-190-cd__inst9_20220413_833716387_DAMSPNP4190_csv.zip"
+          ]
+        },
+        {
+          "hour_endings" : [
+            "01:00",
+            "02:00",
+            "03:00",
+            "04:00",
+            "05:00",
+            "06:00",
+            "07:00",
+            "08:00",
+            "09:00",
+            "10:00",
+            "11:00",
+            "12:00",
+            "13:00",
+            "14:00",
+            "15:00",
+            "16:00",
+            "17:00",
+            "18:00",
+            "19:00",
+            "20:00",
+            "21:00",
+            "22:00",
+            "23:00",
+            "24:00"
+          ],
+          "inside_campaign_era" : true,
+          "observation_count" : 18816,
           "source_local_date" : "2022-04-15",
           "zip_file_names" : [
             "batch6/np4-190-cd__inst8_20220414_833904939_DAMSPNP4190_csv.zip"
+          ]
+        },
+        {
+          "hour_endings" : [
+            "01:00",
+            "02:00",
+            "03:00",
+            "04:00",
+            "05:00",
+            "06:00",
+            "07:00",
+            "08:00",
+            "09:00",
+            "10:00",
+            "11:00",
+            "12:00",
+            "13:00",
+            "14:00",
+            "15:00",
+            "16:00",
+            "17:00",
+            "18:00",
+            "19:00",
+            "20:00",
+            "21:00",
+            "22:00",
+            "23:00",
+            "24:00"
+          ],
+          "inside_campaign_era" : true,
+          "observation_count" : 18816,
+          "source_local_date" : "2022-04-16",
+          "zip_file_names" : [
+            "batch10/np4-190-cd__inst4_20220415_834093772_DAMSPNP4190_csv.zip"
           ]
         },
         {
@@ -1075,6 +1326,40 @@
             "24:00"
           ],
           "inside_campaign_era" : true,
+          "observation_count" : 19272,
+          "source_local_date" : "2022-09-14",
+          "zip_file_names" : [
+            "batch10/np4-190-cd__inst10_20220913_863987055_DAMSPNP4190_csv.zip"
+          ]
+        },
+        {
+          "hour_endings" : [
+            "01:00",
+            "02:00",
+            "03:00",
+            "04:00",
+            "05:00",
+            "06:00",
+            "07:00",
+            "08:00",
+            "09:00",
+            "10:00",
+            "11:00",
+            "12:00",
+            "13:00",
+            "14:00",
+            "15:00",
+            "16:00",
+            "17:00",
+            "18:00",
+            "19:00",
+            "20:00",
+            "21:00",
+            "22:00",
+            "23:00",
+            "24:00"
+          ],
+          "inside_campaign_era" : true,
           "observation_count" : 19296,
           "source_local_date" : "2022-09-15",
           "zip_file_names" : [
@@ -1113,6 +1398,40 @@
           "source_local_date" : "2022-09-16",
           "zip_file_names" : [
             "batch4/np4-190-cd__inst4_20220915_864393539_DAMSPNP4190_csv.zip"
+          ]
+        },
+        {
+          "hour_endings" : [
+            "01:00",
+            "02:00",
+            "03:00",
+            "04:00",
+            "05:00",
+            "06:00",
+            "07:00",
+            "08:00",
+            "09:00",
+            "10:00",
+            "11:00",
+            "12:00",
+            "13:00",
+            "14:00",
+            "15:00",
+            "16:00",
+            "17:00",
+            "18:00",
+            "19:00",
+            "20:00",
+            "21:00",
+            "22:00",
+            "23:00",
+            "24:00"
+          ],
+          "inside_campaign_era" : true,
+          "observation_count" : 19296,
+          "source_local_date" : "2022-09-17",
+          "zip_file_names" : [
+            "batch10/np4-190-cd__inst5_20220916_864597486_DAMSPNP4190_csv.zip"
           ]
         },
         {
@@ -1925,6 +2244,40 @@
             "24:00"
           ],
           "inside_campaign_era" : true,
+          "observation_count" : 21312,
+          "source_local_date" : "2024-02-16",
+          "zip_file_names" : [
+            "batch10/np4-190-cd__inst11_20240215_981119077_DAMSPNP4190_csv.zip"
+          ]
+        },
+        {
+          "hour_endings" : [
+            "01:00",
+            "02:00",
+            "03:00",
+            "04:00",
+            "05:00",
+            "06:00",
+            "07:00",
+            "08:00",
+            "09:00",
+            "10:00",
+            "11:00",
+            "12:00",
+            "13:00",
+            "14:00",
+            "15:00",
+            "16:00",
+            "17:00",
+            "18:00",
+            "19:00",
+            "20:00",
+            "21:00",
+            "22:00",
+            "23:00",
+            "24:00"
+          ],
+          "inside_campaign_era" : true,
           "observation_count" : 21504,
           "source_local_date" : "2024-03-17",
           "zip_file_names" : [
@@ -2031,6 +2384,40 @@
           "source_local_date" : "2024-06-15",
           "zip_file_names" : [
             "batch7/np4-190-cd__inst11_20240614_1011809802_DAMSPNP4190_csv.zip"
+          ]
+        },
+        {
+          "hour_endings" : [
+            "01:00",
+            "02:00",
+            "03:00",
+            "04:00",
+            "05:00",
+            "06:00",
+            "07:00",
+            "08:00",
+            "09:00",
+            "10:00",
+            "11:00",
+            "12:00",
+            "13:00",
+            "14:00",
+            "15:00",
+            "16:00",
+            "17:00",
+            "18:00",
+            "19:00",
+            "20:00",
+            "21:00",
+            "22:00",
+            "23:00",
+            "24:00"
+          ],
+          "inside_campaign_era" : true,
+          "observation_count" : 21816,
+          "source_local_date" : "2024-07-15",
+          "zip_file_names" : [
+            "batch10/np4-190-cd__inst12_20240714_1019633370_DAMSPNP4190_csv.zip"
           ]
         },
         {
@@ -2682,7 +3069,7 @@
       ],
       "parse_error_count" : 0,
       "source_product_id" : "NP4-190-CD",
-      "zip_count" : 77
+      "zip_count" : 89
     },
     {
       "delivery_dates" : [
@@ -2762,6 +3149,19 @@
             "12:4"
           ],
           "inside_campaign_era" : true,
+          "observation_count" : 1458,
+          "source_local_date" : "2021-03-15",
+          "zip_file_names" : [
+            "batch10/np6-905-cd__inst13_20210315_763404983_SPPHLZNP6905_20210315_1200_csv.zip",
+            "batch10/np6-905-cd__inst1_20210315_763403133_SPPHLZNP6905_20210315_1145_csv.zip"
+          ]
+        },
+        {
+          "hour_endings" : [
+            "12:3",
+            "12:4"
+          ],
+          "inside_campaign_era" : true,
           "observation_count" : 1486,
           "source_local_date" : "2021-04-15",
           "zip_file_names" : [
@@ -2807,6 +3207,17 @@
             "12:3"
           ],
           "inside_campaign_era" : true,
+          "observation_count" : 764,
+          "source_local_date" : "2021-08-28",
+          "zip_file_names" : [
+            "batch10/np6-905-cd__inst7_20210828_792287108_SPPHLZNP6905_20210828_1145_csv.zip"
+          ]
+        },
+        {
+          "hour_endings" : [
+            "12:3"
+          ],
+          "inside_campaign_era" : true,
           "observation_count" : 767,
           "source_local_date" : "2021-09-01",
           "zip_file_names" : [
@@ -2822,6 +3233,19 @@
           "source_local_date" : "2021-10-11",
           "zip_file_names" : [
             "batch5/np6-905-cd__inst6_20211012_800246894_SPPHLZNP6905_20211012_0000_csv.zip"
+          ]
+        },
+        {
+          "hour_endings" : [
+            "12:3",
+            "12:4"
+          ],
+          "inside_campaign_era" : true,
+          "observation_count" : 1554,
+          "source_local_date" : "2021-11-15",
+          "zip_file_names" : [
+            "batch10/np6-905-cd__inst14_20211115_806460742_SPPHLZNP6905_20211115_1200_csv.zip",
+            "batch10/np6-905-cd__inst2_20211115_806458995_SPPHLZNP6905_20211115_1145_csv.zip"
           ]
         },
         {
@@ -2857,6 +3281,28 @@
           "zip_file_names" : [
             "batch9/np6-905-cd__inst16_20220215_823199982_SPPHLZNP6905_20220215_1200_csv.zip",
             "batch9/np6-905-cd__inst6_20220215_823198232_SPPHLZNP6905_20220215_1145_csv.zip"
+          ]
+        },
+        {
+          "hour_endings" : [
+            "12:3"
+          ],
+          "inside_campaign_era" : true,
+          "observation_count" : 788,
+          "source_local_date" : "2022-03-25",
+          "zip_file_names" : [
+            "batch10/np6-905-cd__inst8_20220325_830179341_SPPHLZNP6905_20220325_1145_csv.zip"
+          ]
+        },
+        {
+          "hour_endings" : [
+            "12:3"
+          ],
+          "inside_campaign_era" : true,
+          "observation_count" : 795,
+          "source_local_date" : "2022-04-01",
+          "zip_file_names" : [
+            "batch10/np6-905-cd__inst9_20220401_831479095_SPPHLZNP6905_20220401_1145_csv.zip"
           ]
         },
         {
@@ -2912,6 +3358,17 @@
           "source_local_date" : "2022-08-28",
           "zip_file_names" : [
             "batch6/np6-905-cd__inst5_20220828_860746717_SPPHLZNP6905_20220828_1145_csv.zip"
+          ]
+        },
+        {
+          "hour_endings" : [
+            "12:3"
+          ],
+          "inside_campaign_era" : true,
+          "observation_count" : 817,
+          "source_local_date" : "2022-09-28",
+          "zip_file_names" : [
+            "batch10/np6-905-cd__inst10_20220928_867041131_SPPHLZNP6905_20220928_1145_csv.zip"
           ]
         },
         {
@@ -3287,6 +3744,17 @@
         },
         {
           "hour_endings" : [
+            "21:2"
+          ],
+          "inside_campaign_era" : true,
+          "observation_count" : 900,
+          "source_local_date" : "2024-02-28",
+          "zip_file_names" : [
+            "batch10/np6-905-cd__inst11_20240228_984437037_SPPHLZNP6905_20240228_2030_csv.zip"
+          ]
+        },
+        {
+          "hour_endings" : [
             "12:3"
           ],
           "inside_campaign_era" : true,
@@ -3335,6 +3803,19 @@
         },
         {
           "hour_endings" : [
+            "12:3",
+            "12:4"
+          ],
+          "inside_campaign_era" : true,
+          "observation_count" : 1842,
+          "source_local_date" : "2024-07-15",
+          "zip_file_names" : [
+            "batch10/np6-905-cd__inst15_20240715_1019891638_SPPHLZNP6905_20240715_1200_csv.zip",
+            "batch10/np6-905-cd__inst3_20240715_1019888348_SPPHLZNP6905_20240715_1145_csv.zip"
+          ]
+        },
+        {
+          "hour_endings" : [
             "1:3",
             "1:4",
             "2:4"
@@ -3357,6 +3838,41 @@
           "source_local_date" : "2024-09-08",
           "zip_file_names" : [
             "batch9/np6-905-cd__inst14_20240908_1034394040_SPPHLZNP6905_20240908_1145_csv.zip"
+          ]
+        },
+        {
+          "hour_endings" : [
+            "12:3"
+          ],
+          "inside_campaign_era" : true,
+          "observation_count" : 942,
+          "source_local_date" : "2024-10-01",
+          "zip_file_names" : [
+            "batch10/np6-905-cd__inst12_20241001_1040595008_SPPHLZNP6905_20241001_1145_csv.zip"
+          ]
+        },
+        {
+          "hour_endings" : [
+            "22:2",
+            "24:3"
+          ],
+          "inside_campaign_era" : true,
+          "observation_count" : 1912,
+          "source_local_date" : "2024-11-15",
+          "zip_file_names" : [
+            "batch10/np6-905-cd__inst16_20241115_1052784376_SPPHLZNP6905_20241115_2130_csv.zip",
+            "batch10/np6-905-cd__inst4_20241115_1052807283_SPPHLZNP6905_20241115_2345_csv.zip"
+          ]
+        },
+        {
+          "hour_endings" : [
+            "12:3"
+          ],
+          "inside_campaign_era" : true,
+          "observation_count" : 980,
+          "source_local_date" : "2025-01-15",
+          "zip_file_names" : [
+            "batch10/np6-905-cd__inst5_20250115_1069383183_SPPHLZNP6905_20250115_1145_csv.zip"
           ]
         },
         {
@@ -3397,6 +3913,17 @@
             "12:3"
           ],
           "inside_campaign_era" : true,
+          "observation_count" : 1000,
+          "source_local_date" : "2025-04-15",
+          "zip_file_names" : [
+            "batch10/np6-905-cd__inst6_20250415_1094508425_SPPHLZNP6905_20250415_1145_csv.zip"
+          ]
+        },
+        {
+          "hour_endings" : [
+            "12:3"
+          ],
+          "inside_campaign_era" : true,
           "observation_count" : 1052,
           "source_local_date" : "2025-08-10",
           "zip_file_names" : [
@@ -3430,9 +3957,9 @@
           ]
         }
       ],
-      "parse_error_count" : 193,
+      "parse_error_count" : 218,
       "source_product_id" : "NP6-905-CD",
-      "zip_count" : 88
+      "zip_count" : 104
     }
   ],
   "retain_folders" : [
@@ -3443,7 +3970,8 @@
     "batch6",
     "batch7",
     "batch8",
-    "batch9"
+    "batch9",
+    "batch10"
   ],
-  "statement" : "Inventory of CSV DeliveryDate values in verified batch2-batch9 price zips. Not complete coverage. Dates are not proxy covered_local_dates."
+  "statement" : "Inventory of CSV DeliveryDate values in verified batch2-batch10 price zips. Not complete coverage. Dates are not proxy covered_local_dates."
 }

@@ -199,6 +199,10 @@ Next up, Gas day, Plant, and Settlement use a muted teal bar and a title2 title.
 
 “Next, See gas day timeline.” scrolls to the four markers. “Next, View unit status.” scrolls to State, MW, and fuel flow. “Next, How settlement works.” opens the same explanation sheet. Visible sentences are unchanged. Desk is unchanged.
 
+### Batch 10 sample inventory (not coverage)
+
+`RetainedSampleInventory` now scans batch10 with batch2–batch9. The JSON and markdown artifacts list 89 day-ahead files and 104 real-time files (89 and 75 delivery dates). Live From/To empty in this drop is 2021-03-15. No day-ahead hours are retained for that date. Two real-time intervals are (hour 12, intervals 3 and 4). 2023-06-15 moves to the earlier archive-sample list. Settings → Evidence reads the bundled copy. `claims_complete_source_coverage` stays false.
+
 ### Batch 10 read path (not coverage)
 
 `RetainedSettlementArchive` now opens verified price zips in `batch10` as well as `batch2` through `batch9`. The path still checks the `.sha256` sidecar, inflates the CSV member, and parses it. It does not fetch and does not publish. The batch 10 NP6 zip posted 2021-03-15 11:45 has DeliveryDate 03/15/2021, hour 12 interval 3 (`HB_HOUSTON` 17.5). `claims_complete_source_coverage` stays false.
