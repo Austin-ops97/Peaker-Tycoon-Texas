@@ -247,7 +247,7 @@ GATE: live `deliveryDateFrom` / `deliveryDateTo` returned `totalRecords` 0 for 2
 
 ## Batch 11 retain
 
-Path: `Data/archives/ercot/2026-09-24/batch11/`. SHA-256 inventory: `RETENTION.md` in that folder. Thirty verified price zips were added (14 NP4, 16 NP6). No zip failed its sidecar. Listings and artifact pages are not counted. `source_batch_count` is 229 (6 + 6 + 13 + 24 + 14 + 25 + 24 + 32 + 27 + 28 + 30). The read path still opens batch2 through batch10 only.
+Path: `Data/archives/ercot/2026-09-24/batch11/`. SHA-256 inventory: `RETENTION.md` in that folder. Thirty verified price zips were added (14 NP4, 16 NP6). No zip failed its sidecar. Listings and artifact pages are not counted. `source_batch_count` is 229 (6 + 6 + 13 + 24 + 14 + 25 + 24 + 32 + 27 + 28 + 30). The read path opens batch2 through batch11.
 
 GATE: this drop recorded no live `deliveryDateFrom` / `deliveryDateTo` day with `totalRecords` 0. 2024-12-15 and 2025-09-15 From/To responses have rows. Only pages 1–3 were retained. That is not a full day. The NP4 zip posted 2025-09-14 covers DeliveryDate 09/15/2025. The NP4 zip posted 2024-12-15 covers DeliveryDate 12/16/2024, not 12/15/2024. Two NP6 zips have DeliveryDate 12/17/2024 (hour 12 interval 3 and hour 13 interval 3, docIds 1061418502 and 1061432384). The NP6 filename stamp 2025-10-15 04:30 has DeliveryDate 10/15/2025, hour 5 interval 2. The stamp 2025-10-15 02:15 has DeliveryDate 10/15/2025, hour 3 interval 1. The stamp 2025-11-15 06:45 has DeliveryDate 11/15/2025, hour 7 interval 3. The stamp 2024-11-26 02:30 has DeliveryDate 11/26/2024, hour 3 interval 2. Archive samples now include days in 2024-12 and in 2025-05, 2025-06, 2025-07, 2025-09, 2025-10, and 2025-11. Each NP6 file is one interval.
 

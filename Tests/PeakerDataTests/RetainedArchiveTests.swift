@@ -7,7 +7,7 @@ private let retainedIngestedAt = "2026-09-24T00:00:00Z"
 @Test func retainedBatchesExposeOnlyVerifiedPriceZips() throws {
     let root = retainRoot()
     let zips = try RetainedSettlementArchive.priceZipURLs(in: root)
-    #expect(zips.count == 193)
+    #expect(zips.count == 223)
     #expect(zips.allSatisfy { $0.pathExtension == "zip" })
     #expect(zips.filter { $0.path.contains("/batch2/") }.count == 6)
     #expect(zips.filter { $0.path.contains("/batch3/") }.count == 13)
@@ -18,6 +18,7 @@ private let retainedIngestedAt = "2026-09-24T00:00:00Z"
     #expect(zips.filter { $0.path.contains("/batch8/") }.count == 32)
     #expect(zips.filter { $0.path.contains("/batch9/") }.count == 27)
     #expect(zips.filter { $0.path.contains("/batch10/") }.count == 28)
+    #expect(zips.filter { $0.path.contains("/batch11/") }.count == 30)
     #expect(zips.allSatisfy {
         RetainedSettlementArchive.product(forZipFileName: $0.lastPathComponent) != nil
     })
@@ -164,6 +165,23 @@ private let retainedIngestedAt = "2026-09-24T00:00:00Z"
     #expect(houston.sourceLocalDate == "2021-03-15")
     #expect(houston.sourcePublishedAt == nil)
     #expect(read.verifiedSHA256 == "feda0ffd680afe682990ce657717f84b364d43565a823286b8dc5e723cbcbd4d")
+}
+
+@Test func retainedBatch11NP4ZipParsesSeptemberFifteenthAfterSidecarCheck() throws {
+    let url = retainRoot().appendingPathComponent(
+        "batch11/np4-190-cd__inst5_20250914_1140481884_DAMSPNP4190_csv.zip"
+    )
+    let read = try RetainedSettlementArchive.readZip(at: url, ingestedAt: retainedIngestedAt)
+    #expect(read.product == .dayAheadNP4190CD)
+    #expect(read.result.errors.isEmpty)
+    let houston = try #require(read.result.observations.first {
+        $0.sourcePointId == "HB_HOUSTON" && $0.hourEndingRaw == "01:00"
+    })
+    #expect(houston.pointType == "hub_spp")
+    #expect(houston.valueDecimal == "30.92")
+    #expect(houston.sourceLocalDate == "2025-09-15")
+    #expect(houston.sourcePublishedAt == nil)
+    #expect(read.verifiedSHA256 == "ae8dc4672320ee1e4d40426c3fd933b16b6baa67fa0e3530709ba1d8c29516ca")
 }
 
 @Test func januaryFifteenthStaysAnEmptyGateOnTheReadPath() throws {
